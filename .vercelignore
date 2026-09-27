@@ -1,0 +1,13 @@
+# Só vai pro ar o que o site usa
+_backup
+proposta-*.html
+*.md
+.DS_Store
+public/logo.png
+public/logo_escuro.png
+public/perfil_assistente.png
+public/quem_sou.png
+.env*
+.vercel
+.gitignore
+public/logo-footer.webp
