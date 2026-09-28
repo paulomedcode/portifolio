@@ -11,3 +11,4 @@ public/quem_sou.png
 .vercel
 .gitignore
 public/logo-footer.webp
+*.docx
