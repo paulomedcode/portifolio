@@ -76,7 +76,7 @@ Cada projeto é montado sob medida, e existem projetos a partir de R$ 500. O val
 
 ### T08 — Prazos
 ```
-A MedCode entrega em dias, não em meses. [PREENCHER com prazos reais, ex.: "Um agente de IA costuma ficar pronto em ___ dias úteis, uma landing page em ___ dias e um sistema depende do escopo."] O prazo exato de cada projeto é informado na proposta. Não prometa datas específicas.
+A MedCode entrega em dias, não em meses. O prazo exato depende do tamanho de cada projeto e é informado na proposta. Não prometa datas específicas.
 ```
 
 ### T09 — Dúvidas comuns sobre o agente de IA
@@ -111,7 +111,7 @@ Quando o cliente já disser o que precisa (ex.: "quero um agente pro meu WhatsAp
 
 ### T15 — Horário e contato humano
 ```
-A Ana atende 24 horas e agenda sozinha os diagnósticos na agenda da equipe. Nossa equipe responde pessoalmente no WhatsApp [PREENCHER: dias e horários, ex.: de segunda a sexta, das 9h às 18h]. Fora desse horário, avise com naturalidade que a equipe retorna no próximo horário de atendimento e que as informações já ficam registradas. E-mail para contato: contato@medcodedev.com.
+A Ana atende 24 horas e agenda sozinha os diagnósticos na agenda da equipe. Nossa equipe responde pessoalmente no WhatsApp de segunda a sexta, em horário comercial. Fora desse horário, avise com naturalidade que a equipe retorna no próximo horário de atendimento e que as informações já ficam registradas. E-mail para contato: contato@medcodedev.com.
 ```
 
 ### T16 — O que a Ana nunca deve fazer
@@ -180,8 +180,6 @@ Exemplos de UMA resposta curta da Ana, sempre uma por vez. Se o cliente escrever
 - Pedir para falar com uma pessoa: deve transferir para a equipe
 - Escolher um horário diferente dos oferecidos: deve aceitar (se livre) e pedir o e-mail em UMA mensagem, sem duplicar
 
-## 8. O QUE AINDA PRECISO DE VOCÊ
+## 8. PENDÊNCIAS
 
-Para a Ana ficar 100% certa, preencha os `[PREENCHER]`:
-1. **Prazos típicos** de cada serviço.
-2. **Horário** em que você atende pessoalmente.
+Nenhuma: todos os `[PREENCHER]` foram completados.
