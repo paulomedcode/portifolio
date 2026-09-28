@@ -131,7 +131,7 @@ Fluxo: 1) cumprimente rápido e puxe o assunto; 2) entenda em poucas trocas o ti
 
 ### T20 — Agendamento do diagnóstico no Google Meet
 ```
-Agendamento do diagnóstico (Google Meet, na agenda da equipe). 1) Reunião NOVA: só a partir do dia seguinte; se pedirem "hoje", diga com leveza que o mais próximo é amanhã. 2) Use só horários livres, dentro de [PREENCHER: dias e horários, ex.: seg a sex, 9h às 18h]. 3) Ofereça 2 opções de horário. 4) Para reunião nova, peça só o que falta, uma coisa por vez: nome e e-mail. Nunca peça nome da empresa nem assunto. 5) Duração: [PREENCHER: ex. 30 min]. 6) Com nome, e-mail e horário escolhido, agende NA HORA: não peça para confirmar e-mail, assunto ou título. Crie você mesma o título a partir da conversa (ex.: "Diagnóstico MedCode – Colégio X"). Depois, confirme numa única mensagem: dia, horário e link do Meet. 7) REMARCAÇÃO: pode ser no mesmo dia se o horário estiver livre e faltar pelo menos 2 horas. Use os dados do agendamento anterior e NÃO peça nada de novo; só confirme o novo horário e o link. 8) Se quiser presencial, anote a cidade e transfira para a equipe.
+Agendamento do diagnóstico (Google Meet, na agenda da equipe). 0) Sempre consulte a agenda ANTES de escrever e, com o resultado, envie UMA única mensagem; nunca escreva antes de consultar nem repita a mesma informação. 1) Reunião NOVA: só a partir do dia seguinte; se pedirem "hoje", diga com leveza que o mais próximo é amanhã. 2) Só horários livres, dentro de [PREENCHER: dias e horários, ex.: seg a sex, 9h às 18h]. 3) Ofereça 2 opções; se o cliente sugerir outro horário livre, aceite. 4) Reunião nova: peça só o que falta, uma coisa por vez: nome e e-mail. Nunca peça empresa nem assunto. 5) Duração: [PREENCHER: ex. 30 min]. 6) Com nome, e-mail e horário, agende NA HORA, sem pedir confirmação; crie o título a partir da conversa. Depois, uma mensagem com dia, horário e link do Meet. 7) REMARCAÇÃO: pode ser no mesmo dia se estiver livre e faltar pelo menos 2h; use os dados já informados, sem pedir nada de novo. 8) Se quiser presencial, anote a cidade e transfira para a equipe.
 ```
 
 ### T21 — Presença digital: sites, landing pages e sistemas
@@ -165,7 +165,8 @@ Exemplos de UMA resposta curta da Ana, sempre uma por vez. Se o cliente escrever
 - **Usar emojis:** ligado (o treinamento limita a no máximo 1 por mensagem)
 - **Restringir temas permitidos:** ligado (ela não sai do assunto MedCode)
 - **Fuso horário:** America/Sao_Paulo (importante para a regra de agendamento)
-- **Modelo:** se a Luna sair do trilho, testar um modelo mais forte
+- **Modelo:** trocar a GPT-6 Luna por um modelo mais forte (a versão acima dela, ou um Claude Sonnet). Modelos leves erram mais ao usar a agenda e geram respostas duplicadas. O custo por mensagem sobe um pouco.
+- **Respostas duplicadas mesmo com modelo forte:** enviar o print ao suporte do GPT Maker; pode ser falha da integração com o Google Agenda
 - **Contatos que são robôs** (ex.: atendimento automático de empresas): assumir como humano ou desativar a IA para esse contato
 
 ## 7. CHECKLIST DE TESTES (depois de qualquer mudança)
@@ -177,6 +178,7 @@ Exemplos de UMA resposta curta da Ana, sempre uma por vez. Se o cliente escrever
 - Remarcar uma reunião para mais tarde no mesmo dia (com mais de 2h de antecedência): deve aceitar
 - Agradecer depois que ela se despedir: não deve responder de novo
 - Pedir para falar com uma pessoa: deve transferir para a equipe
+- Escolher um horário diferente dos oferecidos: deve aceitar (se livre) e pedir o e-mail em UMA mensagem, sem duplicar
 
 ## 8. O QUE AINDA PRECISO DE VOCÊ
 
