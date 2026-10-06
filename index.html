@@ -526,7 +526,7 @@
     <nav class="nav" aria-label="Principal">
       <a href="#servicos" class="link">Serviços</a>
       <a href="#precos" class="link">Preços</a>
-      <a href="#clientes" class="link">Clientes</a>
+      <!-- <a href="#clientes" class="link">Clientes</a>  (volta junto com a seção de clientes) -->
       <a href="#quem-somos" class="link">Quem somos</a>
       <a href="#duvidas" class="link">Dúvidas</a>
       <a class="btn-wa-sm" href="https://wa.me/5511991649612?text=Oi!%20Vi%20o%20site%20da%20MedCode%20e%20queria%20saber%20mais." target="_blank" rel="noopener" data-origem="header"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg> WhatsApp</a>
@@ -772,13 +772,17 @@
   </div>
 </section>
 
-<!-- PROVA SOCIAL
+<!-- PROVA SOCIAL: DESATIVADA POR ENQUANTO (atributo hidden). Para reativar:
+     1. tire o "hidden" da <section> abaixo;
+     2. descomente o link "Clientes" no menu do topo;
+     3. volte a alternância de fundo: "como-funciona" ganha sec-alt de novo,
+        "quem-somos" também, e "duvidas" perde o sec-alt.
      PREENCHER: troque os cards abaixo pelos materiais de /public/provas/.
      Cada card: foto ou logo (WebP, com width/height), nome e negócio, segmento e cidade,
      depoimento de 1 a 3 linhas e, se houver, um resultado em número.
      Com mais de 3 cards, no celular a grade vira carrossel com swipe sozinha.
      Prints de conversa: borre os dados dos clientes finais antes de publicar. -->
-<section class="sec" id="clientes">
+<section class="sec" id="clientes" hidden>
   <div class="wrap">
     <div class="center reveal" style="max-width: 640px;">
       <span class="kicker">Clientes</span>
@@ -808,7 +812,7 @@
 </section>
 
 <!-- COMO FUNCIONA -->
-<section class="sec sec-alt" id="como-funciona">
+<section class="sec" id="como-funciona">
   <div class="wrap">
     <div class="reveal" style="max-width: 640px;">
       <span class="kicker">Como funciona</span>
@@ -835,7 +839,7 @@
 </section>
 
 <!-- QUEM SOMOS (com a consultoria embutida) -->
-<section class="sec" id="quem-somos">
+<section class="sec sec-alt" id="quem-somos">
   <span id="quem-sou" class="anchor-alias"></span><!-- mantém funcionando o link antigo #quem-sou -->
   <div class="wrap about">
     <div class="about-photo reveal">
@@ -877,7 +881,7 @@
 </section>
 
 <!-- PERGUNTAS FREQUENTES (o JSON-LD logo abaixo traz todas as perguntas) -->
-<section class="sec sec-alt" id="duvidas">
+<section class="sec" id="duvidas">
   <div class="wrap">
     <div class="center reveal" style="max-width: 640px;">
       <span class="kicker">Perguntas frequentes</span>
