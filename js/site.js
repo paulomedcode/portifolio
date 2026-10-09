@@ -52,6 +52,24 @@
     watch.forEach(function (el) { fo.observe(el); });
   }
 
+  // Telefone: máscara e validação (formulário de contato e chat da Ana)
+  function maskPhone(v) {
+    var d = v.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d.length ? '(' + d : '';
+    if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+  }
+  function validPhone(v) {
+    var d = v.replace(/\D/g, '');
+    // DDD válido (11 a 99) e celular com 9 na frente (11 dígitos) ou fixo (10 dígitos)
+    return /^[1-9][1-9]/.test(d) && (d.length === 11 ? d[2] === '9' : d.length === 10);
+  }
+  function setErr(input, errId, bad) {
+    input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    document.getElementById(errId).hidden = !bad;
+  }
+
   // ---------- Formulário "Prefere que a gente te chame?" ----------
   var form = document.getElementById('leadForm');
   if (form) {
@@ -59,22 +77,6 @@
     var status = document.getElementById('formStatus');
     var submit = form.querySelector('.btn-submit');
 
-    function maskPhone(v) {
-      var d = v.replace(/\D/g, '').slice(0, 11);
-      if (d.length <= 2) return d.length ? '(' + d : '';
-      if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
-      if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
-      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
-    }
-    function validPhone(v) {
-      var d = v.replace(/\D/g, '');
-      // DDD válido (11 a 99) e celular com 9 na frente (11 dígitos) ou fixo (10 dígitos)
-      return /^[1-9][1-9]/.test(d) && (d.length === 11 ? d[2] === '9' : d.length === 10);
-    }
-    function setErr(input, errId, bad) {
-      input.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      document.getElementById(errId).hidden = !bad;
-    }
 
     phone.addEventListener('input', function () { phone.value = maskPhone(phone.value); });
     phone.addEventListener('blur', function () { if (phone.value) setErr(phone, 'lf-whats-err', !validPhone(phone.value)); });
@@ -127,17 +129,108 @@
     });
   }
 
+  // ---------- Chat com a Ana (Web Chat do GPT Maker num popup) ----------
+  // Antes do primeiro oi a pessoa deixa nome e WhatsApp: vão por e-mail pra equipe (/api/lead)
+  // e seguem pra Ana pelo mesmo protocolo de postMessage do float.js oficial do GPT Maker.
+  var ANA_TOKEN = '3FA66368059223AF10886EB5C8FCB84B';
+  var ANA_ORIGIN = 'https://app.gptmaker.ai';
+  var anaDialog = document.getElementById('anaChat');
+  if (anaDialog && typeof anaDialog.showModal === 'function') {
+    var anaForm = document.getElementById('anaForm');
+    var anaFrameBox = document.getElementById('anaFrame');
+    var anaPhone = anaForm.elements.whatsapp;
+    var anaUser = null, anaIframe = null, anaLoaded = false;
+    try { anaUser = JSON.parse(sessionStorage.getItem('anaUser')); } catch (e) { /* sem storage, pede de novo */ }
+
+    var anaPost = function (msg) {
+      if (anaIframe && anaIframe.contentWindow) anaIframe.contentWindow.postMessage(msg, ANA_ORIGIN);
+    };
+    var startChat = function () {
+      anaForm.hidden = true;
+      anaFrameBox.hidden = false;
+      if (!anaIframe) {
+        anaIframe = document.createElement('iframe');
+        anaIframe.src = ANA_ORIGIN + '/widget/' + ANA_TOKEN + '/iframe?floating=true';
+        anaIframe.title = 'Conversa com a Ana, agente de IA da MedCode';
+        anaIframe.allow = 'microphone';
+        anaFrameBox.appendChild(anaIframe);
+      } else if (anaLoaded) {
+        anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
+      }
+    };
+    var openAna = function () {
+      anaDialog.showModal();
+      track('ana_chat_open', {});
+      if (anaUser) startChat();
+      else anaForm.elements.nome.focus();
+    };
+    var closeAna = function () {
+      if (anaLoaded && !anaFrameBox.hidden) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
+      anaDialog.close();
+    };
+
+    document.querySelectorAll('[data-open-ana]').forEach(function (b) { b.addEventListener('click', openAna); });
+    anaDialog.querySelector('[data-close-ana]').addEventListener('click', closeAna);
+    anaDialog.addEventListener('cancel', function (e) { e.preventDefault(); closeAna(); });
+    anaDialog.addEventListener('click', function (e) { if (e.target === anaDialog) closeAna(); });
+
+    anaPhone.addEventListener('input', function () { anaPhone.value = maskPhone(anaPhone.value); });
+    anaForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = anaForm.elements.nome, ok = anaForm.elements.consentimento;
+      var badNome = !nome.value.trim(), badPhone = !validPhone(anaPhone.value), badOk = !ok.checked;
+      setErr(nome, 'af-nome-err', badNome);
+      setErr(anaPhone, 'af-whats-err', badPhone);
+      setErr(ok, 'af-ok-err', badOk);
+      if (badNome || badPhone || badOk) { (badNome ? nome : badPhone ? anaPhone : ok).focus(); return; }
+
+      anaUser = { nome: nome.value.trim(), whatsapp: anaPhone.value };
+      try { sessionStorage.setItem('anaUser', JSON.stringify(anaUser)); } catch (err) { /* segue sem lembrar */ }
+      // O aviso por e-mail não segura a conversa: se falhar, a pessoa conversa do mesmo jeito
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: anaUser.nome, whatsapp: anaUser.whatsapp, origem: 'chat-ana', consentimento: true, site: anaForm.elements.site.value })
+      }).catch(function () {});
+      track('ana_chat_start', {});
+      startChat();
+    });
+
+    window.addEventListener('message', function (e) {
+      if (e.origin !== ANA_ORIGIN || !e.data || !anaIframe || e.source !== anaIframe.contentWindow) return;
+      var t = e.data.type;
+      if (t === 'gpt-maker-on-load') {
+        anaLoaded = true;
+        if (anaDialog.open) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
+      } else if (t === 'gpt-maker-button-close') {
+        closeAna();
+      } else if (t === 'gpt-maker-request-context' && anaUser) {
+        var d = anaUser.whatsapp.replace(/\D/g, '');
+        anaPost({
+          type: 'gpt-maker-context-response',
+          userMetadata: { id: '55' + d, name: anaUser.nome, phone: '55' + d },
+          additionalContext: 'Visitante do site da MedCode, conversando pelo chat do site. Nome e WhatsApp já informados no formulário; não peça de novo.'
+        });
+      }
+    });
+  }
+
   // ---------- Animações do hero ----------
   if (reduce) return;
 
   // Palavra que se digita e apaga (a frase fixa para leitores de tela fica no .sr-only)
-  var words = ['velocidade', 'folga', 'resposta 24h', 'mais vendas'];
+  // Cada página pode trocar as palavras e as mensagens pelos atributos data-* (separadas por |)
+  function list(node, attr, fallback) {
+    var v = node && node.getAttribute(attr);
+    return v ? v.split('|') : fallback;
+  }
   var el = document.getElementById('typed');
+  var words = list(el, 'data-words', ['velocidade', 'folga', 'resposta 24h', 'mais vendas']);
   if (el) {
     var w = 0, i = words[0].length, deleting = true;
 
     // Reserva a altura da maior palavra pra a digitação não empurrar a foto e o resto da página
-    var sub = el.closest('.hero-sub');
+    var sub = el.closest('[data-typed-box]') || el.closest('.hero-sub');
     var reserveHeight = function () {
       var current = el.textContent, max = 0;
       sub.style.minHeight = '';
@@ -161,12 +254,12 @@
   }
 
   // Mensagens do agente alternando, com "digitando..."
-  var msgs = [
+  var chat = document.getElementById('chatMsg'), m = 0;
+  var msgs = list(chat, 'data-msgs', [
     'Oi! Antes de seguirmos, pode me dizer seu nome? Assim personalizo seu atendimento 😊',
     'Temos horário amanhã às 9h ou às 15h. Qual fica melhor pra você?',
     'Prontinho! Te mando um lembrete 1h antes. Posso ajudar em algo mais?'
-  ];
-  var chat = document.getElementById('chatMsg'), m = 0;
+  ]);
   if (chat) setInterval(function () {
     m = (m + 1) % msgs.length;
     chat.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
@@ -174,8 +267,8 @@
   }, 4200);
 
   // Pílula de ação alternando
-  var pills = ['Horário agendado para 15h', 'Orçamento enviado', 'Transferido para humano', 'Lembrete enviado'];
   var pill = document.getElementById('pill'), pillText = document.getElementById('pillText'), p = 0;
+  var pills = list(pill, 'data-pills', ['Horário agendado para 15h', 'Orçamento enviado', 'Transferido para humano', 'Lembrete enviado']);
   if (pill) setInterval(function () {
     pill.style.opacity = 0;
     setTimeout(function () { p = (p + 1) % pills.length; pillText.textContent = pills[p]; pill.style.opacity = 1; }, 350);
