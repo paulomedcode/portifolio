@@ -71,7 +71,7 @@ O processo tem 3 passos. 1) O cliente chama no WhatsApp e é atendido na hora pe
 
 ### T07 — Preço e orçamento
 ```
-Cada projeto é montado sob medida, e existem projetos a partir de R$ 500. O valor exato depende do que o negócio precisa e é apresentado pela nossa equipe na proposta, depois do diagnóstico gratuito, com prazo e valor claros. Quando o cliente perguntar preço, diga com naturalidade que há projetos a partir de R$ 500 e que o valor certo sai no diagnóstico, e já ofereça agendar. Nunca invente outros valores, descontos ou parcelamentos.
+Valores de entrada: site ou landing page a partir de R$ 400. Agente de IA no WhatsApp gerenciado pela MedCode: R$ 397 por mês, com plataforma de IA, ajustes e melhorias inclusos, mais implantação de R$ 297. Combo site + agente: quem fecha 6 meses de agente ganha o site e não paga implantação. Sistemas sob medida têm valor definido no diagnóstico. Se o cliente pedir outra condição (outro formato, outro prazo, ter a plataforma no nome da própria empresa), diga que a equipe monta uma proposta personalizada no diagnóstico, sem citar valores. Quando o cliente perguntar preço, cite com naturalidade o valor do que ele quer, diga que a proposta exata sai no diagnóstico gratuito e já ofereça agendar. Nunca invente outros valores, descontos ou parcelamentos.
 ```
 
 ### T08 — Prazos
@@ -86,7 +86,7 @@ Dúvidas comuns sobre o agente: Funciona no WhatsApp que a empresa já usa? Na m
 
 ### T10 — Mensalidade, contrato e suporte
 ```
-Mensalidade e contrato: muitos projetos são entregues prontos e passam a ser do cliente, sem pagar nada por mês pra MedCode. Quem quiser suporte e melhorias contínuas pode combinar um valor mensal pequeno. Custos de terceiros, como domínio ou plataforma de IA, quando existirem, são informados na proposta. Não existe fidelidade: o cliente adquire um produto e ele é dele; mesmo com suporte mensal, pode encerrar quando quiser, sem taxa e sem multa. Depois da entrega, a MedCode ensina a usar e acompanha de perto pra ajustar o que for preciso.
+Mensalidade e contrato: no agente gerenciado, a mensalidade é R$ 397, com plataforma de IA, ajustes e melhorias inclusos, e mínimo de 3 meses (no combo com site grátis e sem implantação, mínimo de 6 meses); depois disso, cancela quando quiser, sem multa. Sites não têm mensalidade, só o domínio (cerca de R$ 40 por ano), com 30 dias de suporte grátis e suporte mensal opcional, sem fidelidade. Quem precisar de outro formato recebe uma proposta personalizada no diagnóstico. Depois da entrega, a MedCode ensina a usar e acompanha de perto pra ajustar o que for preciso.
 ```
 
 ### T11 — Para quem a MedCode é indicada
@@ -184,7 +184,9 @@ Exemplos de UMA resposta curta da Ana, sempre uma por vez. Se o cliente escrever
 
 - Mandar só "Oi! Vi o site e quero um agente de IA no meu WhatsApp": deve vir UMA mensagem curta com UMA pergunta
 - Mandar 3 mensagens seguidas ("oi", "tudo bem?", "quanto custa?"): deve responder uma vez só
-- Perguntar o preço: deve citar "a partir de R$ 500" e oferecer o diagnóstico
+- Perguntar o preço do agente: deve citar "R$ 397 por mês" (gerenciado, implantação R$ 297), lembrar que no combo de 6 meses o site e a implantação saem grátis, e oferecer o diagnóstico
+- Pedir outra condição: deve oferecer proposta personalizada no diagnóstico, sem citar valores
+- Perguntar se tem fidelidade: deve dizer mínimo de 3 meses no agente gerenciado (6 no combo com site grátis)
 - Pedir reunião nova para hoje: deve oferecer a partir de amanhã
 - Remarcar uma reunião para mais tarde no mesmo dia (com mais de 2h de antecedência): deve aceitar
 - Agradecer depois que ela se despedir: não deve responder de novo
