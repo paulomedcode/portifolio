@@ -254,7 +254,10 @@
   .ac-close:hover { background: var(--line); }
   .ac-form { display: grid; gap: 14px; padding: 20px; overflow-y: auto; align-content: start; }
   .ac-intro { margin: 0; padding: 12px 14px; border-radius: 4px 14px 14px 14px; background: var(--bg-2); font-size: 15px; line-height: 1.5; }
+  .ac-form[hidden], .ac-frame[hidden] { display: none; }
   .ac-frame { flex: 1; min-height: 0; }
+  /* Na conversa, o cabeçalho é o do próprio Web Chat (a seta dele fecha o popup) */
+  .ana-chat.is-chatting .ac-head { display: none; }
   .ac-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
   @media (max-width: 480px) {
     .ana-chat { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; }
@@ -827,7 +830,7 @@
   <div class="footer-bottom"><div class="wrap">© MedCode Assessoria · CNPJ 68.955.873/0001-98</div></div>
 </footer>
 
-<!-- CHAT COM A ANA: primeiro nome e WhatsApp (vão por e-mail pra equipe), depois o Web Chat do GPT Maker -->
+<!-- CHAT COM A ANA: primeiro nome e WhatsApp, depois o Web Chat do GPT Maker (os dados seguem pra Ana) -->
 <dialog class="ana-chat" id="anaChat" aria-labelledby="anaChatTitle">
   <div class="ac-head">
     <div class="avatar"><img src="public/perfil_assistente.webp" alt="" width="36" height="36"></div>
@@ -845,10 +848,6 @@
       <label for="af-whats">WhatsApp</label>
       <input id="af-whats" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
       <small class="field-err" id="af-whats-err" hidden>Digite o número com DDD, ex.: (11) 99999-9999.</small>
-    </div>
-    <div class="hp" aria-hidden="true">
-      <label for="af-site">Deixe este campo em branco</label>
-      <input id="af-site" name="site" type="text" tabindex="-1" autocomplete="off">
     </div>
     <label class="consent">
       <input type="checkbox" name="consentimento" id="af-ok" required>

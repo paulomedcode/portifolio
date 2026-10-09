@@ -130,8 +130,8 @@
   }
 
   // ---------- Chat com a Ana (Web Chat do GPT Maker num popup) ----------
-  // Antes do primeiro oi a pessoa deixa nome e WhatsApp: vão por e-mail pra equipe (/api/lead)
-  // e seguem pra Ana pelo mesmo protocolo de postMessage do float.js oficial do GPT Maker.
+  // Antes do primeiro oi a pessoa deixa nome e WhatsApp, que seguem pra Ana pelo mesmo protocolo
+  // de postMessage do float.js oficial do GPT Maker (a conversa e o contato ficam no GPT Maker).
   var ANA_TOKEN = '3FA66368059223AF10886EB5C8FCB84B';
   var ANA_ORIGIN = 'https://app.gptmaker.ai';
   var anaDialog = document.getElementById('anaChat');
@@ -148,6 +148,7 @@
     var startChat = function () {
       anaForm.hidden = true;
       anaFrameBox.hidden = false;
+      anaDialog.classList.add('is-chatting');
       if (!anaIframe) {
         anaIframe = document.createElement('iframe');
         anaIframe.src = ANA_ORIGIN + '/widget/' + ANA_TOKEN + '/iframe?floating=true';
@@ -186,12 +187,6 @@
 
       anaUser = { nome: nome.value.trim(), whatsapp: anaPhone.value };
       try { sessionStorage.setItem('anaUser', JSON.stringify(anaUser)); } catch (err) { /* segue sem lembrar */ }
-      // O aviso por e-mail não segura a conversa: se falhar, a pessoa conversa do mesmo jeito
-      fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: anaUser.nome, whatsapp: anaUser.whatsapp, origem: 'chat-ana', consentimento: true, site: anaForm.elements.site.value })
-      }).catch(function () {});
       track('ana_chat_start', {});
       startChat();
     });

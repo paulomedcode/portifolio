@@ -1,5 +1,4 @@
-// POST /api/lead: recebe o formulário "Prefere que a gente te chame?" e o cadastro antes do
-// chat com a Ana (origem "chat-ana") e manda por e-mail.
+// POST /api/lead: recebe o formulário "Prefere que a gente te chame?" e manda por e-mail.
 // Envio pelo Resend (https://resend.com), só com fetch, sem dependências.
 // Variáveis de ambiente na Vercel (Settings > Environment Variables):
 //   RESEND_API_KEY  chave da API do Resend (obrigatória, nunca vai pro front-end)
@@ -36,7 +35,6 @@ module.exports = async (req, res) => {
   const digits = whatsapp.replace(/\D/g, '');
   const negocio = clean(body.negocio, 80);
   const interesse = INTERESSES.includes(body.interesse) ? body.interesse : 'Ainda não sei';
-  const chatAna = body.origem === 'chat-ana';
 
   if (!nome || !/^[1-9][1-9]\d{8,9}$/.test(digits) || body.consentimento !== true) {
     return res.status(400).json({ ok: false, error: 'invalid' });
@@ -53,27 +51,17 @@ module.exports = async (req, res) => {
   const quando = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
   const waLink = 'https://wa.me/55' + digits;
 
-  const linhas = chatAna
-    ? [
-        ['Nome', nome],
-        ['WhatsApp', whatsapp],
-        ['Onde', 'Chat com a Ana no site (a conversa fica no GPT Maker, canal "Site MedCode")'],
-        ['Consentimento LGPD', 'Sim, aceitou a Política de Privacidade'],
-        ['Recebido em', quando],
-      ]
-    : [
-        ['Nome', nome],
-        ['WhatsApp', whatsapp],
-        ['Tipo de negócio', negocio || '(não informado)'],
-        ['Interesse', interesse],
-        ['Consentimento LGPD', 'Sim, aceitou a Política de Privacidade'],
-        ['Recebido em', quando],
-      ];
-  const titulo = chatAna ? 'Uma pessoa começou a conversar com a Ana no site' : 'Novo contato pelo site';
-  const assunto = chatAna ? `Chat com a Ana no site: ${nome}` : `Novo contato pelo site: ${nome} (${interesse})`;
+  const linhas = [
+    ['Nome', nome],
+    ['WhatsApp', whatsapp],
+    ['Tipo de negócio', negocio || '(não informado)'],
+    ['Interesse', interesse],
+    ['Consentimento LGPD', 'Sim, aceitou a Política de Privacidade'],
+    ['Recebido em', quando],
+  ];
 
   const html =
-    `<h2 style="font-family:sans-serif">${titulo}</h2>` +
+    '<h2 style="font-family:sans-serif">Novo contato pelo site</h2>' +
     '<table style="font-family:sans-serif;font-size:15px;border-collapse:collapse">' +
     linhas.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td style="padding:4px 0"><b>${esc(v)}</b></td></tr>`).join('') +
     '</table>' +
@@ -84,7 +72,7 @@ module.exports = async (req, res) => {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, to: [to], subject: assunto, html, text }),
+      body: JSON.stringify({ from, to: [to], subject: `Novo contato pelo site: ${nome} (${interesse})`, html, text }),
     });
     if (!r.ok) {
       console.error('lead: Resend respondeu', r.status, await r.text());
