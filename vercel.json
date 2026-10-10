@@ -4,6 +4,10 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "contato.medcodedev.com" }], "destination": "https://medcodedev.com/:path*", "permanent": false },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.medcodedev.com" }], "destination": "https://medcodedev.com/:path*", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
