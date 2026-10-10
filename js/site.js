@@ -149,6 +149,7 @@
       anaForm.hidden = true;
       anaFrameBox.hidden = false;
       anaDialog.classList.add('is-chatting');
+      fitAna();
       if (!anaIframe) {
         anaIframe = document.createElement('iframe');
         anaIframe.src = ANA_ORIGIN + '/widget/' + ANA_TOKEN + '/iframe?floating=true';
@@ -169,11 +170,24 @@
     var closeAna = function () {
       if (anaLoaded && !anaFrameBox.hidden) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       anaDialog.close();
+      anaDialog.style.height = anaDialog.style.top = '';
       document.documentElement.classList.remove('ana-open');
     };
 
     document.querySelectorAll('[data-open-ana]').forEach(function (b) { b.addEventListener('click', openAna); });
-    anaDialog.querySelector('[data-close-ana]').addEventListener('click', closeAna);
+    anaDialog.querySelectorAll('[data-close-ana]').forEach(function (b) { b.addEventListener('click', closeAna); });
+
+    // Celular: quando o teclado abre, a janela encolhe pro espaço visível e o topo não some
+    var vv = window.visualViewport;
+    var fitAna = function () {
+      if (!vv || !anaDialog.open || window.innerWidth > 480 || !anaDialog.classList.contains('is-chatting')) {
+        anaDialog.style.height = anaDialog.style.top = '';
+        return;
+      }
+      anaDialog.style.top = vv.offsetTop + 'px';
+      anaDialog.style.height = vv.height + 'px';
+    };
+    if (vv) { vv.addEventListener('resize', fitAna); vv.addEventListener('scroll', fitAna); }
     anaDialog.addEventListener('cancel', function (e) { e.preventDefault(); closeAna(); });
     anaDialog.addEventListener('click', function (e) { if (e.target === anaDialog) closeAna(); });
 
