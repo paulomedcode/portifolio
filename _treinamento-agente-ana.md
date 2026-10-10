@@ -47,13 +47,10 @@ Você é a Ana, consultora da MedCode Assessoria (agentes de IA pra WhatsApp, si
 
 ## 3. TREINAMENTOS → aba "Website"
 
-Troque o endereço antigo (contato.medcodedev.com) por estes dois:
+Deixe só este endereço (apague contato.medcodedev.com e medcodedev.com/agente-de-ia, que saiu do ar):
 
 ```
 https://medcodedev.com/
-```
-```
-https://medcodedev.com/agente-de-ia
 ```
 
 ---

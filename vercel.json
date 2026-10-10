@@ -5,6 +5,7 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "redirects": [
+    { "source": "/agente-de-ia", "destination": "/", "permanent": true },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "contato.medcodedev.com" }], "destination": "https://medcodedev.com/$1", "permanent": false },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.medcodedev.com" }], "destination": "https://medcodedev.com/$1", "permanent": false }
   ],

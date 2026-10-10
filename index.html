@@ -2,7 +2,6 @@
 <!--
   SITE INSTITUCIONAL - MedCode Assessoria (medcodedev.com)
   Ordem: hero > serviços (+ consultoria) > teste a Ana > como trabalhamos > sobre > dúvidas > contato.
-  Cada serviço tem a sua página: /agente-de-ia (a antiga landing), /sites e /sistemas.
   O JS fica em js/site.js (a CSP do vercel.json bloqueia JS inline sem hash).
 -->
 <html lang="pt-BR">
@@ -165,8 +164,7 @@
   .svc-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 9px; }
   .svc-list li { display: flex; gap: 10px; font-size: 15px; line-height: 1.45; }
   .svc-list li::before { content: "✓"; color: var(--verde); font-weight: 800; flex: none; }
-  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
-  .svc-more { color: var(--muted); font-size: 14px; font-weight: 700; }
+  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); }
   .svc-body .svc-list { margin-bottom: 22px; }
   .mock-badge { position: absolute; top: 10px; right: 12px; z-index: 3; background: #fff; color: var(--muted-2); border: 1px solid var(--line); font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
 
@@ -577,7 +575,6 @@
           </ul>
           <div class="svc-foot">
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20agente%20de%20IA%20no%20WhatsApp." target="_blank" rel="noopener" data-origem="servico-agente">Quero um agente <span aria-hidden="true">→</span></a>
-            <a class="link-arrow svc-more" href="/agente-de-ia">Saiba mais</a>
           </div>
         </div>
       </article>
@@ -869,7 +866,7 @@
     <div class="footer-cols">
       <div>
         <h2 class="footer-h">Serviços</h2>
-        <a href="/agente-de-ia">Agente de IA no WhatsApp</a>
+        <a href="#servicos">Agente de IA no WhatsApp</a>
         <a href="#servicos">Sites e landing pages</a>
         <a href="#servicos">Sistemas sob medida</a>
         <a href="#consultoria">Consultoria de gestão</a>
