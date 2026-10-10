@@ -161,6 +161,7 @@
     };
     var openAna = function () {
       anaDialog.showModal();
+      document.documentElement.classList.add('ana-open');
       track('ana_chat_open', {});
       if (anaUser) startChat();
       else anaForm.elements.nome.focus();
@@ -168,6 +169,7 @@
     var closeAna = function () {
       if (anaLoaded && !anaFrameBox.hidden) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       anaDialog.close();
+      document.documentElement.classList.remove('ana-open');
     };
 
     document.querySelectorAll('[data-open-ana]').forEach(function (b) { b.addEventListener('click', openAna); });
