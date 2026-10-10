@@ -52,6 +52,15 @@
     watch.forEach(function (el) { fo.observe(el); });
   }
 
+  // Botão do topo some enquanto o botão principal do hero está na tela (evita dois botões iguais)
+  var topBtn = document.querySelector('.nav .btn-wa-sm');
+  var heroCta = document.querySelector('.hero .ctas');
+  if (topBtn && heroCta && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      topBtn.classList.toggle('is-hidden', entries[0].isIntersecting);
+    }).observe(heroCta);
+  }
+
   // Telefone: máscara e validação (formulário de contato e chat da Ana)
   function maskPhone(v) {
     var d = v.replace(/\D/g, '').slice(0, 11);
