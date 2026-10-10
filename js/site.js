@@ -124,7 +124,7 @@
         status.className = 'form-status err';
         status.innerHTML = 'Não conseguimos enviar agora. Tente de novo ou fale direto com a gente:<br>' +
           '<a class="btn-wa-sm" data-origem="form-erro" target="_blank" rel="noopener" ' +
-          'href="https://wa.me/5515988041307?text=' + encodeURIComponent('Oi! Tentei deixar meu contato no site, mas não foi.') + '">WhatsApp</a>';
+          'href="https://wa.me/5511991649612?text=' + encodeURIComponent('Oi! Tentei deixar meu contato no site, mas não foi.') + '">WhatsApp</a>';
       });
     });
   }
