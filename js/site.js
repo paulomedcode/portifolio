@@ -160,9 +160,23 @@
         anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       }
     };
+    // iPhone ignora overflow:hidden no body; prender o body no lugar é o que realmente trava a rolagem
+    var lockY = 0;
+    var lockPage = function () {
+      lockY = window.scrollY;
+      document.documentElement.classList.add('ana-open');
+      document.body.style.position = 'fixed';
+      document.body.style.top = -lockY + 'px';
+      document.body.style.width = '100%';
+    };
+    var unlockPage = function () {
+      document.documentElement.classList.remove('ana-open');
+      document.body.style.position = document.body.style.top = document.body.style.width = '';
+      window.scrollTo({ top: lockY, behavior: 'instant' });
+    };
     var openAna = function () {
       anaDialog.showModal();
-      document.documentElement.classList.add('ana-open');
+      lockPage();
       track('ana_chat_open', {});
       if (anaUser) startChat();
       else anaForm.elements.nome.focus();
@@ -171,7 +185,7 @@
       if (anaLoaded && !anaFrameBox.hidden) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       anaDialog.close();
       anaDialog.style.height = anaDialog.style.top = '';
-      document.documentElement.classList.remove('ana-open');
+      unlockPage();
     };
 
     document.querySelectorAll('[data-open-ana]').forEach(function (b) { b.addEventListener('click', openAna); });

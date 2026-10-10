@@ -283,6 +283,8 @@
     .ana-chat { width: calc(100vw - 16px); max-width: none; height: calc(100dvh - 64px); max-height: none; margin: auto auto 8px; border-radius: 20px; }
     /* Conversando, a janela vira a tela toda (o JS acompanha o teclado pelo visualViewport) */
     .ana-chat.is-chatting { width: 100vw; height: 100dvh; margin: 0; inset: 0 auto auto 0; border-radius: 0; }
+    /* Fundo sólido: nada do site aparece atrás do teclado do iPhone */
+    .ana-chat.is-chatting::backdrop { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
 
   /* COMO TRABALHAMOS */
