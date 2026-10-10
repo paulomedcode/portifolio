@@ -165,7 +165,8 @@
   .svc-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 9px; }
   .svc-list li { display: flex; gap: 10px; font-size: 15px; line-height: 1.45; }
   .svc-list li::before { content: "✓"; color: var(--verde); font-weight: 800; flex: none; }
-  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); }
+  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .svc-more { color: var(--muted); font-size: 14px; font-weight: 700; }
   .svc-body .svc-list { margin-bottom: 22px; }
   .mock-badge { position: absolute; top: 10px; right: 12px; z-index: 3; background: #fff; color: var(--muted-2); border: 1px solid var(--line); font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
 
@@ -377,9 +378,10 @@
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); }
   .footer-bottom div { padding-top: 18px; padding-bottom: 18px; font-size: 13px; color: #8f88a8; }
 
-  /* WhatsApp flutuante */
-  .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 9px; background: var(--wa); color: #04210f; font-weight: 800; font-size: 15px; padding: 13px 18px; border-radius: 999px; box-shadow: 0 14px 30px -12px rgba(37,211,102,.8); transition: transform .2s, opacity .25s; }
+  /* Botão flutuante da Ana */
+  .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 9px; background: var(--roxo); color: #fff; border: 0; font-family: inherit; cursor: pointer; font-weight: 800; font-size: 15px; padding: 13px 18px; border-radius: 999px; box-shadow: 0 14px 30px -12px rgba(109,74,255,.8); transition: transform .2s, opacity .25s; }
   .wa-float:hover { transform: translateY(-2px); }
+  button.btn-primary, button.btn-wa-sm { border: 0; font-family: inherit; cursor: pointer; }
   .wa-float.is-hidden { opacity: 0; transform: translateY(16px); pointer-events: none; }
 
   .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
@@ -483,7 +485,7 @@
       <a href="#como-trabalhamos" class="link">Como trabalhamos</a>
       <a href="#sobre" class="link">Sobre</a>
       <a href="#duvidas" class="link">Dúvidas</a>
-      <a class="btn-wa-sm" href="#contato">Fale com a gente</a>
+      <button class="btn-wa-sm" type="button" data-open-ana>Fale com a gente</button>
     </nav>
   </div>
 </header>
@@ -498,7 +500,7 @@
       <h1 data-typed-box><span class="sr-only">Tecnologia pra sua empresa atender, vender e se organizar melhor.</span><span aria-hidden="true">Tecnologia pra <span class="typed-line"><span class="grad" id="typed" data-words="atender no WhatsApp|aparecer no Google|organizar a agenda|vender mais">atender no WhatsApp</span><span class="caret"></span></span></span></h1>
       <p class="lead">Criamos <strong>agentes de IA para WhatsApp, sites e sistemas sob medida</strong> para empresas de todo o Brasil. Você cuida do seu negócio, e a parte técnica fica com a gente.</p>
       <div class="ctas">
-        <a class="btn-primary" href="https://wa.me/5511991649612?text=Oi!%20Vi%20o%20site%20da%20MedCode%20e%20queria%20conversar." target="_blank" rel="noopener" data-origem="hero"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg> Fale com a gente</a>
+        <button class="btn-primary" type="button" data-open-ana><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> Converse com a nossa agente</button>
         <a class="btn-ghost" href="#servicos">Conheça os serviços</a>
       </div>
       <div class="founder">
@@ -574,7 +576,8 @@
             <li>Treinado com as informações do seu negócio</li>
           </ul>
           <div class="svc-foot">
-            <a class="link-arrow" href="/agente-de-ia">Saiba mais <span aria-hidden="true">→</span></a>
+            <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20agente%20de%20IA%20no%20WhatsApp." target="_blank" rel="noopener" data-origem="servico-agente">Quero um agente <span aria-hidden="true">→</span></a>
+            <a class="link-arrow svc-more" href="/agente-de-ia">Saiba mais</a>
           </div>
         </div>
       </article>
@@ -803,7 +806,7 @@
       <h2 class="h2">Vamos conversar sobre o seu negócio?</h2>
       <p class="sub">A conversa é rápida e sem compromisso. Você sai com um caminho claro do que dá pra melhorar.</p>
       <div class="ctas">
-        <a class="btn-primary" href="https://wa.me/5511991649612?text=Oi!%20Vi%20o%20site%20da%20MedCode%20e%20queria%20conversar." target="_blank" rel="noopener" data-origem="contato"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg> Chamar no WhatsApp</a>
+        <button class="btn-primary" type="button" data-open-ana><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> Conversar com a Ana</button>
       </div>
       <ul class="contact-list">
         <li><a href="mailto:contato@medcodedev.com"><i aria-hidden="true">✉</i> contato@medcodedev.com</a></li>
@@ -917,7 +920,7 @@
   <button class="ac-x" type="button" data-close-ana aria-label="Fechar conversa">×</button>
 </dialog>
 
-<a class="wa-float" href="https://wa.me/5511991649612?text=Oi!%20Vi%20o%20site%20da%20MedCode%20e%20queria%20conversar." target="_blank" rel="noopener" data-origem="flutuante" aria-label="Falar no WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg><span>WhatsApp</span></a>
+<button class="wa-float" type="button" data-open-ana aria-label="Conversar com a Ana, nossa agente de IA"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span>Fale com a Ana</span></button>
 
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "Organization", "name": "MedCode Assessoria", "url": "https://medcodedev.com/", "logo": "https://medcodedev.com/public/logo.png", "email": "contato@medcodedev.com", "telephone": "+55-11-99164-9612", "taxID": "68.955.873/0001-98", "founder": {"@type": "Person", "name": "Paulo Nogueira"}, "areaServed": "BR"}

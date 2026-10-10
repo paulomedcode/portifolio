@@ -40,9 +40,9 @@
     });
   }
 
-  // Botão flutuante de WhatsApp some quando já há um botão de WhatsApp na tela
+  // Botão flutuante da Ana: fica escondido na primeira tela e quando já há um botão da Ana à vista
   var float = document.querySelector('.wa-float');
-  var watch = document.querySelectorAll('.hero .ctas, #contato');
+  var watch = document.querySelectorAll('.hero, section.ana, #contato');
   if (float && watch.length && 'IntersectionObserver' in window) {
     var visible = new Set();
     var fo = new IntersectionObserver(function (entries) {
