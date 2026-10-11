@@ -138,24 +138,42 @@
     });
   }
 
-  // ---------- Calculadora "Quanto você perde sem responder?" ----------
-  var calcMsgs = document.getElementById('calc-msgs');
-  if (calcMsgs) {
-    var calcConv = document.getElementById('calc-conv'), calcTicket = document.getElementById('calc-ticket');
-    var calcRes = document.getElementById('calc-res'), calcDet = document.getElementById('calc-det');
-    var num = function (el, max) { var v = parseFloat(String(el.value).replace(',', '.')); return isFinite(v) && v > 0 ? Math.min(v, max) : 0; };
-    var brl = function (v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); };
-    var calcular = function () {
-      var clientes = num(calcMsgs, 500) * 30 * (num(calcConv, 100) / 100);
-      var valor = clientes * num(calcTicket, 100000);
-      calcRes.textContent = brl(valor) + ' por mês';
-      calcDet.textContent = 'São cerca de ' + Math.round(clientes).toLocaleString('pt-BR') + (Math.round(clientes) === 1 ? ' cliente' : ' clientes') + ' por mês. O agente de IA custa R$ 397/mês.';
+  // ---------- Teste rápido "Seu WhatsApp está perdendo clientes?" ----------
+  var quiz = document.getElementById('quiz');
+  if (quiz) {
+    var respostas = {};
+    var itens = quiz.querySelectorAll('.quiz-list li');
+    var out = document.getElementById('quiz-out'), hint = document.getElementById('quiz-hint');
+    var RESULT = [
+      { k: 'Resultado', t: 'Seu WhatsApp está em dia 👏', x: 'Parabéns, pouca gente consegue. Se um dia o volume crescer, um agente de IA segura o atendimento sem você precisar contratar.', ok: true },
+      { k: 'Resultado', t: 'Tem cliente escapando de vez em quando', x: 'Não é um problema grande, mas cada mensagem sem resposta rápida é uma venda em risco. Um agente de IA cobre exatamente esses buracos.' },
+      { k: 'Resultado', t: 'Tem cliente escapando de vez em quando', x: 'Não é um problema grande, mas cada mensagem sem resposta rápida é uma venda em risco. Um agente de IA cobre exatamente esses buracos.' },
+      { k: 'Atenção', t: 'Seu WhatsApp está perdendo clientes', x: 'Quem não recebe resposta rápida costuma chamar o concorrente. Um agente de IA responde em segundos, a qualquer hora, e passa pra você só o que precisa de você.' },
+      { k: 'Atenção', t: 'Seu WhatsApp está perdendo clientes', x: 'Quem não recebe resposta rápida costuma chamar o concorrente. Um agente de IA responde em segundos, a qualquer hora, e passa pra você só o que precisa de você.' }
+    ];
+    var atualizar = function () {
+      var n = Object.keys(respostas).length;
+      if (n < itens.length) { hint.textContent = 'Faltam ' + (itens.length - n) + (itens.length - n === 1 ? ' pergunta.' : ' perguntas.'); return; }
+      var sim = 0; for (var k in respostas) sim += respostas[k];
+      var r = RESULT[sim];
+      document.getElementById('quiz-kicker').textContent = r.k + ' · ' + sim + ' de ' + itens.length + ' sinais';
+      document.getElementById('quiz-title').textContent = r.t;
+      document.getElementById('quiz-text').textContent = r.x;
+      out.classList.toggle('ok', !!r.ok);
+      out.hidden = false;
+      hint.hidden = true;
+      track('teste_whatsapp', { sinais: sim });
     };
-    [calcMsgs, calcConv, calcTicket].forEach(function (el) { el.addEventListener('input', calcular); });
-    calcular();
-    var calcUsada = false;
-    [calcMsgs, calcConv, calcTicket].forEach(function (el) {
-      el.addEventListener('change', function () { if (!calcUsada) { calcUsada = true; track('calculadora_usada', {}); } });
+    itens.forEach(function (li, i) {
+      li.querySelectorAll('button').forEach(function (b) {
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () {
+          li.querySelectorAll('button').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+          li.classList.add('answered');
+          respostas[i] = Number(b.getAttribute('data-v'));
+          atualizar();
+        });
+      });
     });
   }
 

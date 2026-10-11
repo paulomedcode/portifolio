@@ -175,6 +175,9 @@
   .svc-guarantee svg { flex: none; margin-top: 1px; }
   .svc .svc-guarantee { color: #14532d; font-size: 13.5px; margin: 0 0 14px; }
   .svc .svc-price { margin: 0 0 14px; font-size: 14.5px; }
+  .svc .svc-free { margin: -4px 0 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 10px 12px; border-radius: 12px; background: #ecfdf3; color: #14532d; font-size: 14.5px; font-weight: 700; line-height: 1.35; }
+  .svc .svc-free b { background: var(--verde); color: #fff; font-size: 13px; letter-spacing: .06em; padding: 3px 9px; border-radius: 999px; }
+  .svc .svc-free small { font-weight: 500; font-size: 13px; color: #166534; }
   /* Calculadora + Raio-X */
   .calc-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 22px; margin-top: 44px; align-items: stretch; }
   .calc, .raiox { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
@@ -183,6 +186,21 @@
   .calc-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .calc-fields .field label { font-size: 13.5px; line-height: 1.35; }
   .calc-fields .field { display: flex; flex-direction: column; justify-content: space-between; gap: 6px; }
+  .quiz-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: q; }
+  .quiz-list li { counter-increment: q; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; font-size: 15.5px; line-height: 1.45; }
+  .quiz-list li > span { min-width: 0; }
+  .quiz-list li > span::before { content: counter(q) ". "; font-weight: 800; color: var(--roxo); }
+  .quiz-list li.answered { border-color: #d8cffd; background: #faf8ff; }
+  .quiz-ans { display: flex; gap: 6px; flex: none; }
+  .quiz-ans button { font: inherit; font-size: 14.5px; font-weight: 700; min-width: 58px; padding: 9px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; transition: border-color .15s, background .15s; }
+  .quiz-ans button:hover { border-color: var(--roxo); }
+  .quiz-ans button:focus-visible { outline: 3px solid rgba(109,74,255,.35); outline-offset: 2px; }
+  .quiz-ans button[aria-pressed="true"] { background: var(--roxo); border-color: var(--roxo); color: #fff; }
+  .quiz-out { border-radius: 18px; padding: 18px 20px; display: grid; gap: 6px; color: #fff; background: linear-gradient(135deg, #3b2bb8 0%, #6d4aff 70%); }
+  .quiz-out.ok { background: linear-gradient(135deg, #15803d 0%, #16a34a 80%); }
+  .quiz-out small { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .quiz-out b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; letter-spacing: -.02em; line-height: 1.15; }
+  .quiz-out span { font-size: 15px; line-height: 1.5; opacity: .95; }
   .calc-out { border-radius: 18px; padding: 20px 22px; background: linear-gradient(135deg, #3b2bb8 0%, #6d4aff 70%); color: #fff; display: grid; gap: 6px; }
   .calc-out small { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #d9d2ff; }
   .calc-out b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; letter-spacing: -.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
@@ -439,6 +457,8 @@
     .nav a.link { display: none; }
     .svc-grid, .steps, .about, .contact-grid, .faq-wrap, .calc-grid { grid-template-columns: 1fr; }
     .calc-fields { grid-template-columns: 1fr; }
+    .quiz-list li { flex-direction: column; align-items: stretch; }
+    .quiz-ans button { flex: 1; }
     .calc, .raiox { padding: 22px; }
     .faq-wrap { gap: 28px; }
     .faq-side { position: static; }
@@ -605,7 +625,7 @@
             <li>Agenda, confirma e manda lembrete</li>
             <li>Treinado com as informações do seu negócio</li>
           </ul>
-          <p class="svc-price">a partir de <b>R$ 397/mês</b><small>+ R$ 297 de implantação, uma vez só</small></p>
+          <p class="svc-price">plataforma a partir de <b>R$ 147/mês</b><small>+ implantação, com valor no diagnóstico gratuito</small></p>
           <p class="svc-guarantee"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Garantia de 30 dias:</b> se no primeiro mês o agente não fizer sentido pro seu negócio, devolvemos a primeira mensalidade.</span></p>
           <div class="svc-foot">
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20agente%20de%20IA%20no%20WhatsApp." target="_blank" rel="noopener" data-origem="servico-agente">Quero um agente <span aria-hidden="true">→</span></a>
@@ -652,7 +672,8 @@
             <li>Estrutura otimizada para o Google</li>
             <li>Domínio sempre no nome da sua empresa</li>
           </ul>
-          <p class="svc-price">a partir de <b>R$ 400</b><small>ou grátis no combo com 6 meses de agente de IA</small></p>
+          <p class="svc-price">a partir de <b>R$ 400</b></p>
+          <p class="svc-free"><b>GRÁTIS</b> no combo com o agente de IA <small>(fechando 6 meses de agente)</small></p>
           <div class="svc-foot">
             <!-- TEMPORÁRIO: volta para /sites quando a página existir -->
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20um%20site%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener" data-origem="servico-site">Quero um site <span aria-hidden="true">→</span></a>
@@ -740,34 +761,27 @@
 <section class="sec sec-alt" id="quanto-perde">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="kicker">Faça a conta</span>
-      <h2 class="h2">Quanto você perde sem responder?</h2>
-      <p class="sub">Cliente que manda mensagem e espera demais costuma ir pro próximo da lista. Coloque os números do seu negócio e veja o tamanho disso.</p>
+      <span class="kicker">Descubra em 30 segundos</span>
+      <h2 class="h2">Seu WhatsApp está perdendo clientes?</h2>
+      <p class="sub">Cliente que manda mensagem e espera demais costuma ir pro próximo da lista. Responda 4 perguntas e veja como está o seu atendimento.</p>
     </div>
     <div class="calc-grid">
-      <div class="calc reveal">
-        <h3>Calculadora</h3>
-        <div class="calc-fields">
-          <div class="field">
-            <label for="calc-msgs">Mensagens por dia que ficam sem resposta rápida</label>
-            <input id="calc-msgs" type="number" inputmode="numeric" min="0" max="500" step="1" value="5">
-          </div>
-          <div class="field">
-            <label for="calc-conv">Quantas viram cliente quando você responde na hora (%)</label>
-            <input id="calc-conv" type="number" inputmode="numeric" min="0" max="100" step="1" value="20">
-          </div>
-          <div class="field">
-            <label for="calc-ticket">Valor médio de uma venda ou atendimento (R$)</label>
-            <input id="calc-ticket" type="number" inputmode="numeric" min="0" max="100000" step="10" value="150">
-          </div>
+      <div class="calc quiz reveal" id="quiz">
+        <h3>Teste rápido · 30 segundos</h3>
+        <p>Responda com sinceridade, ninguém está vendo 😉</p>
+        <ol class="quiz-list">
+          <li><span>Chegam mensagens depois que você fecha ou no fim de semana?</span><div class="quiz-ans" role="group" aria-label="Pergunta 1"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></div></li>
+          <li><span>Às vezes o cliente espera horas por uma resposta?</span><div class="quiz-ans" role="group" aria-label="Pergunta 2"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></div></li>
+          <li><span>Você responde as mesmas perguntas (preço, horário, endereço) várias vezes por dia?</span><div class="quiz-ans" role="group" aria-label="Pergunta 3"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></div></li>
+          <li><span>Já perdeu cliente porque demorou a responder, ou desconfia que sim?</span><div class="quiz-ans" role="group" aria-label="Pergunta 4"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></div></li>
+        </ol>
+        <div class="quiz-out" id="quiz-out" aria-live="polite" hidden>
+          <small id="quiz-kicker"></small>
+          <b id="quiz-title"></b>
+          <span id="quiz-text"></span>
         </div>
-        <div class="calc-out" aria-live="polite">
-          <small>Pode estar indo pro concorrente</small>
-          <b id="calc-res">R$ 4.500 por mês</b>
-          <span id="calc-det">São cerca de 30 clientes por mês. O agente de IA custa R$ 397/mês.</span>
-        </div>
-        <p class="calc-note">Estimativa simples: mensagens × 30 dias × % que viraria cliente × valor médio. Serve pra dar a ideia do tamanho, não é promessa de resultado.</p>
-        <button class="btn-primary" type="button" data-open-ana data-origem="calculadora">Quero parar de perder esses clientes</button>
+        <p class="calc-note" id="quiz-hint">Responda as 4 perguntas pra ver o resultado.</p>
+        <button class="btn-primary" type="button" data-open-ana data-origem="teste-whatsapp">Quero parar de perder clientes</button>
       </div>
       <aside class="raiox reveal" aria-labelledby="raiox-title">
         <span class="kicker">Grátis e sem compromisso</span>
@@ -855,7 +869,7 @@
     <div class="faq reveal">
       <details class="faq-item" name="faq">
         <summary>Quanto custa?</summary>
-        <p>Agente de IA no WhatsApp a partir de R$ 397/mês + R$ 297 de implantação, com garantia de 30 dias. Sites a partir de R$ 400, ou grátis no combo com 6 meses de agente. Sistemas sob medida e consultoria têm o valor definido no diagnóstico gratuito, e você recebe a proposta exata antes de fechar qualquer coisa.</p>
+        <p>Agente de IA no WhatsApp: plataforma a partir de R$ 147/mês, mais a implantação, com valor definido no diagnóstico e garantia de 30 dias. Sites a partir de R$ 400, ou grátis no combo com 6 meses de agente. Sistemas sob medida e consultoria têm o valor definido no diagnóstico gratuito, e você recebe a proposta exata antes de fechar qualquer coisa.</p>
       </details>
       <details class="faq-item" name="faq">
         <summary>Tem garantia?</summary>
