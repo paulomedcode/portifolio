@@ -138,24 +138,49 @@
     });
   }
 
+  // ---------- Calculadora "Quanto você perde sem responder?" ----------
+  var calcMsgs = document.getElementById('calc-msgs');
+  if (calcMsgs) {
+    var calcConv = document.getElementById('calc-conv'), calcTicket = document.getElementById('calc-ticket');
+    var calcRes = document.getElementById('calc-res'), calcDet = document.getElementById('calc-det');
+    var num = function (el, max) { var v = parseFloat(String(el.value).replace(',', '.')); return isFinite(v) && v > 0 ? Math.min(v, max) : 0; };
+    var brl = function (v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); };
+    var calcular = function () {
+      var clientes = num(calcMsgs, 500) * 30 * (num(calcConv, 100) / 100);
+      var valor = clientes * num(calcTicket, 100000);
+      calcRes.textContent = brl(valor) + ' por mês';
+      calcDet.textContent = 'São cerca de ' + Math.round(clientes).toLocaleString('pt-BR') + (Math.round(clientes) === 1 ? ' cliente' : ' clientes') + ' por mês. O agente de IA custa R$ 397/mês.';
+    };
+    [calcMsgs, calcConv, calcTicket].forEach(function (el) { el.addEventListener('input', calcular); });
+    calcular();
+    var calcUsada = false;
+    [calcMsgs, calcConv, calcTicket].forEach(function (el) {
+      el.addEventListener('change', function () { if (!calcUsada) { calcUsada = true; track('calculadora_usada', {}); } });
+    });
+  }
+
   // ---------- Chat com a Ana (Web Chat do GPT Maker num popup) ----------
-  // Antes do primeiro oi a pessoa deixa nome e WhatsApp, que seguem pra Ana pelo mesmo protocolo
-  // de postMessage do float.js oficial do GPT Maker (a conversa e o contato ficam no GPT Maker).
+  // A conversa abre direto, sem formulário: a própria Ana pede nome e WhatsApp quando a conversa
+  // engata (instrução no additionalContext e no treinamento A14). O contexto segue pelo mesmo
+  // protocolo de postMessage do float.js oficial do GPT Maker.
   var ANA_TOKEN = '3FA66368059223AF10886EB5C8FCB84B';
   var ANA_ORIGIN = 'https://app.gptmaker.ai';
   var anaDialog = document.getElementById('anaChat');
   if (anaDialog && typeof anaDialog.showModal === 'function') {
-    var anaForm = document.getElementById('anaForm');
     var anaFrameBox = document.getElementById('anaFrame');
-    var anaPhone = anaForm.elements.whatsapp;
-    var anaUser = null, anaIframe = null, anaLoaded = false;
-    try { anaUser = JSON.parse(sessionStorage.getItem('anaUser')); } catch (e) { /* sem storage, pede de novo */ }
+    var anaUser = null, anaIframe = null, anaLoaded = false, anaVisitante = null;
+    try { anaUser = JSON.parse(sessionStorage.getItem('anaUser')); } catch (e) { /* sem storage */ }
+    // id anônimo pra conversa continuar a mesma se a pessoa fechar e abrir de novo
+    try { anaVisitante = sessionStorage.getItem('anaVisitante'); } catch (e) { /* sem storage */ }
+    if (!anaVisitante) {
+      anaVisitante = 'site-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      try { sessionStorage.setItem('anaVisitante', anaVisitante); } catch (e) { /* segue */ }
+    }
 
     var anaPost = function (msg) {
       if (anaIframe && anaIframe.contentWindow) anaIframe.contentWindow.postMessage(msg, ANA_ORIGIN);
     };
     var startChat = function () {
-      anaForm.hidden = true;
       anaFrameBox.hidden = false;
       anaDialog.classList.add('is-chatting');
       fitAna();
@@ -183,12 +208,12 @@
       document.body.style.position = document.body.style.top = document.body.style.width = '';
       window.scrollTo({ top: lockY, behavior: 'instant' });
     };
-    var openAna = function () {
+    var openAna = function (e) {
       anaDialog.showModal();
       lockPage();
-      track('ana_chat_open', {});
-      if (anaUser) startChat();
-      else anaForm.elements.nome.focus();
+      var origem = e && e.currentTarget && e.currentTarget.getAttribute('data-origem');
+      track('ana_chat_open', origem ? { origem: origem } : {});
+      startChat();
     };
     var closeAna = function () {
       if (anaLoaded && !anaFrameBox.hidden) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
@@ -214,21 +239,6 @@
     anaDialog.addEventListener('cancel', function (e) { e.preventDefault(); closeAna(); });
     anaDialog.addEventListener('click', function (e) { if (e.target === anaDialog) closeAna(); });
 
-    anaPhone.addEventListener('input', function () { anaPhone.value = maskPhone(anaPhone.value); });
-    anaForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var nome = anaForm.elements.nome, ok = anaForm.elements.consentimento;
-      var badNome = !nome.value.trim(), badPhone = !validPhone(anaPhone.value), badOk = !ok.checked;
-      setErr(nome, 'af-nome-err', badNome);
-      setErr(anaPhone, 'af-whats-err', badPhone);
-      setErr(ok, 'af-ok-err', badOk);
-      if (badNome || badPhone || badOk) { (badNome ? nome : badPhone ? anaPhone : ok).focus(); return; }
-
-      anaUser = { nome: nome.value.trim(), whatsapp: anaPhone.value };
-      try { sessionStorage.setItem('anaUser', JSON.stringify(anaUser)); } catch (err) { /* segue sem lembrar */ }
-      track('ana_chat_start', {});
-      startChat();
-    });
 
     window.addEventListener('message', function (e) {
       if (e.origin !== ANA_ORIGIN || !e.data || !anaIframe || e.source !== anaIframe.contentWindow) return;
@@ -238,13 +248,21 @@
         if (anaDialog.open) anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       } else if (t === 'gpt-maker-button-close') {
         closeAna();
-      } else if (t === 'gpt-maker-request-context' && anaUser) {
-        var d = anaUser.whatsapp.replace(/\D/g, '');
-        anaPost({
-          type: 'gpt-maker-context-response',
-          userMetadata: { id: '55' + d, name: anaUser.nome, phone: '55' + d },
-          additionalContext: 'Visitante do site da MedCode, conversando pelo chat do site. Nome e WhatsApp já informados no formulário; não peça de novo.'
-        });
+      } else if (t === 'gpt-maker-request-context') {
+        if (anaUser && anaUser.whatsapp) {
+          var d = anaUser.whatsapp.replace(/\D/g, '');
+          anaPost({
+            type: 'gpt-maker-context-response',
+            userMetadata: { id: '55' + d, name: anaUser.nome, phone: '55' + d },
+            additionalContext: 'Visitante do site da MedCode, conversando pelo chat do site. Nome e WhatsApp já informados; não peça de novo.'
+          });
+        } else {
+          anaPost({
+            type: 'gpt-maker-context-response',
+            userMetadata: { id: anaVisitante, name: 'Visitante do site' },
+            additionalContext: 'Visitante do site da MedCode, conversando pelo chat do site. Ainda não informou nome nem WhatsApp. Converse primeiro; depois de 2 ou 3 trocas, quando a conversa engatar ou quando a pessoa pedir proposta, valores detalhados ou diagnóstico, peça o nome e o WhatsApp de forma natural, numa mensagem só, explicando que é pra equipe continuar com ela se a conversa cair.'
+          });
+        }
       }
     });
   }

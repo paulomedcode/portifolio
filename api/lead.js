@@ -6,7 +6,7 @@
 //   LEAD_FROM       remetente; precisa ser de um domínio verificado no Resend
 //                   (padrão: "Site MedCode <onboarding@resend.dev>", que só entrega pro e-mail da conta Resend)
 
-const INTERESSES = ['Agente de IA', 'Site/Landing page', 'Site + Agente', 'Sistema sob medida', 'Consultoria', 'Ainda não sei'];
+const INTERESSES = ['Responder clientes mais rápido', 'Ser encontrado no Google', 'Organizar a empresa', 'Raio-X grátis do atendimento', 'Ainda não sei'];
 
 function clean(v, max) {
   return String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max);
