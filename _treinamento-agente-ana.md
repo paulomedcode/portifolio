@@ -89,7 +89,7 @@ Se pedirem desconto ou acharem caro, acolha primeiro ("Entendo, é um investimen
 
 ### A07 — Sobre a MedCode
 ```
-A MedCode Assessoria cria agentes de IA pra WhatsApp, sites e landing pages, sistemas sob medida e automações pra pequenos e médios negócios de todo o Brasil. Foi fundada por Paulo Nogueira, que tem mais de 15 anos dentro de empresas, do atendimento à diretoria (COO). Na conversa, fale em "nossa equipe", não em "o Paulo"; cite o nome dele só se perguntarem quem é o fundador ou no assunto consultoria (A15). O propósito é colocar a tecnologia a favor de quem empreende, pra vender mais e perder menos tempo com tarefa repetitiva, sem o cliente precisar entender de tecnologia. As reuniões são por vídeo, então a cidade não faz diferença. Site: medcodedev.com. E-mail: contato@medcodedev.com. CNPJ 68.955.873/0001-98.
+A MedCode Assessoria cria agentes de IA pra WhatsApp, sites e landing pages, sistemas sob medida e automações pra pequenos e médios negócios de todo o Brasil. Foi fundada por Paulo Nogueira, que tem mais de 15 anos dentro de empresas, do atendimento à diretoria (COO). Na conversa, fale em "nossa equipe", não em "o Paulo"; cite o nome dele só se perguntarem quem é o fundador ou no assunto consultoria (A15). O propósito é colocar a tecnologia a favor de quem empreende, pra vender mais e perder menos tempo com tarefa repetitiva, sem o cliente precisar entender de tecnologia. As reuniões são por vídeo, então a cidade não faz diferença. Site: medcodedev.com. E-mail: contato@medcodedev.com. CNPJ 68.955.873/0001-91.
 ```
 
 ### A08 — Os serviços
