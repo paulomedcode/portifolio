@@ -650,6 +650,13 @@ def pagina_servico(s):
 
 REGIOES = ["Interior de São Paulo", "Norte", "Nordeste"]
 
+# Abertura das páginas de cidade: a história do fundador, adaptada pela região.
+LEAD_FUNDADOR = {
+    "Interior de São Paulo": "O fundador da MedCode, Paulo Nogueira, nasceu e cresceu em Porto Velho, Rondônia, e veio pra São Paulo, o maior mercado do Brasil, onde aproveitou tudo o que o estado tem a ensinar sobre gestão, tecnologia e vendas. Hoje atende de perto as empresas de {nome} e região, com esse know-how e o olhar de quem já viveu o dia a dia do outro lado do balcão.",
+    "Norte": "A MedCode tem raízes no Norte. O fundador, Paulo Nogueira, nasceu e cresceu em Porto Velho, Rondônia, e conhece de perto o jeito de fazer negócio das capitais da região. Depois foi pra São Paulo, a maior cidade do Brasil, onde aproveitou tudo o que essa cidade tem a ensinar sobre gestão, tecnologia e vendas. Agora traz essa experiência e esse know-how pros negócios de {nome}.",
+    "Nordeste": "O fundador da MedCode, Paulo Nogueira, nasceu e cresceu em Porto Velho, Rondônia, e sabe o que é empreender longe do eixo Rio–São Paulo. Depois foi pra São Paulo, a maior cidade do Brasil, onde aproveitou tudo o que essa cidade tem a ensinar sobre gestão, tecnologia e vendas. Agora traz essa experiência e esse know-how pros negócios de {nome}.",
+}
+
 
 def lista_cidades(atual=None):
     blocos = []
@@ -714,7 +721,9 @@ def pagina_cidade(c):
         "consultoria-de-gestao": f"Consultoria de gestão em {nome}",
     }
     oferta = "\n".join(f'          <li><a href="/{s["slug"]}">{html.escape(s["curto"])}</a></li>' for s in SERVICOS)
-    mercado = "\n".join(f'      <p class="sub">{html.escape(p)}</p>' for p in c["mercado"])
+    lead = c.get("lead_fundador") or LEAD_FUNDADOR[c["regiao"]].format(nome=nome)
+    paragrafos = ([c["lead"]] if c.get("lead") else []) + c["mercado"]
+    mercado = "\n".join(f'      <p class="sub">{html.escape(p)}</p>' for p in paragrafos)
     raiz = ""
     if c.get("raiz"):
         raiz = f"""
@@ -751,7 +760,7 @@ def pagina_cidade(c):
     <div>
       <span class="eyebrow"><i aria-hidden="true"></i> {html.escape(nome)} · {c["uf"]}</span>
       <h1>Sites, agentes de IA e automação para empresas de {html.escape(nome)}</h1>
-      <p class="lead">{html.escape(c["lead"])}</p>
+      <p class="lead">{html.escape(lead)}</p>
       <div class="ctas">
         <a class="btn-primary" {wa(f"Oi! Tenho uma empresa em {nome} e queria conversar.", origem)}>{ICO_CHAT} Falar no WhatsApp</a>
         <button class="btn-ghost" type="button" data-open-ana>Tirar dúvidas com a Ana</button>

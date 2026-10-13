@@ -2,6 +2,8 @@
 
 Cada cidade precisa de texto próprio: página igual trocando só o nome o Google ignora.
 grupo: "sp" (atendimento presencial possível na região) ou "longe" (por vídeo e WhatsApp).
+lead: texto sobre a cidade (abre a seção do comércio local). A abertura da página é a história do fundador,
+adaptada pela região em gerar.py (LEAD_FUNDADOR), ou "lead_fundador" quando a cidade tem a sua própria.
 fuso: diferença em horas para Brasília, quando houver (aparece nas dúvidas).
 """
 
@@ -100,7 +102,7 @@ CIDADES = [
     # ------------------------------------------------------------ Norte
     {
         "slug": "porto-velho", "nome": "Porto Velho", "uf": "RO", "estado": "Rondônia", "grupo": "longe", "regiao": "Norte", "fuso": 1,
-        "lead": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, nasceu e cresceu aqui. Depois foi pra São Paulo, a maior cidade do Brasil, onde aproveitou tudo o que essa cidade tem a ensinar sobre gestão, tecnologia e vendas. Agora traz essa experiência e esse know-how pros negócios de Porto Velho.",
+        "lead_fundador": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, nasceu e cresceu aqui. Depois foi pra São Paulo, a maior cidade do Brasil, onde aproveitou tudo o que essa cidade tem a ensinar sobre gestão, tecnologia e vendas. Agora traz essa experiência e esse know-how pros negócios de Porto Velho.",
         "mercado": [
             "Porto Velho é cidade de comércio. Da Sete de Setembro, no Centro, aos centros comerciais da Zona Sul e da Zona Leste, são lojas, clínicas médicas, consultórios de dentista e prestadores de serviço disputando o mesmo cliente, muitas vezes na mesma rua.",
             "E por aqui quase tudo se resolve pelo WhatsApp: o cliente chama, pergunta o preço e quer resposta na hora. Quem responde rápido e aparece bem no Google sai na frente, porque muita gente ainda atende do jeito antigo.",
