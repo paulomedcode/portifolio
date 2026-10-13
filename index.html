@@ -165,7 +165,10 @@
   .svc-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 9px; }
   .svc-list li { display: flex; gap: 10px; font-size: 15px; line-height: 1.45; }
   .svc-list li::before { content: "✓"; color: var(--verde); font-weight: 800; flex: none; }
-  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); }
+  .svc-more { display: inline-block; font-size: 14px; font-weight: 700; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .svc-more:hover { color: var(--roxo); }
+  .consult p .svc-more { margin-left: 4px; }
+  .svc-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
   .svc-body .svc-list { margin-bottom: 22px; }
   .svc-label { display: inline-block; margin-top: 16px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--roxo); }
   .svc .svc-dor { margin-top: 6px; font-size: 22px; line-height: 1.2; text-wrap: balance; }
@@ -634,6 +637,7 @@
           <p class="svc-guarantee"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Garantia de 30 dias:</b> se no primeiro mês o agente não fizer sentido pro seu negócio, devolvemos o valor da implantação.</span></p>
           <div class="svc-foot">
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20agente%20de%20IA%20no%20WhatsApp." target="_blank" rel="noopener" data-origem="servico-agente">Quero um agente <span aria-hidden="true">→</span></a>
+            <a class="svc-more" href="/agente-de-ia-para-whatsapp">Ver detalhes sobre agente de IA</a>
           </div>
         </div>
       </article>
@@ -682,8 +686,8 @@
           <p class="svc-price">a partir de <b>R$ 400</b></p>
           <p class="svc-free"><b>GRÁTIS</b> no combo com o agente de IA <small>(fechando 6 meses de agente gerenciado pela MedCode)</small></p>
           <div class="svc-foot">
-            <!-- TEMPORÁRIO: volta para /sites quando a página existir -->
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20um%20site%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener" data-origem="servico-site">Quero um site <span aria-hidden="true">→</span></a>
+            <a class="svc-more" href="/criacao-de-sites">Ver detalhes sobre sites</a>
           </div>
         </div>
       </article>
@@ -725,8 +729,8 @@
           </ul>
           <p class="svc-price"><b>Valor no diagnóstico gratuito</b><small>depende do tamanho da operação</small></p>
           <div class="svc-foot">
-            <!-- TEMPORÁRIO: volta para /sistemas quando a página existir -->
             <a class="link-arrow" href="https://wa.me/5511991649612?text=Oi!%20Quero%20saber%20mais%20sobre%20um%20sistema%20sob%20medida." target="_blank" rel="noopener" data-origem="servico-sistema">Quero um sistema <span aria-hidden="true">→</span></a>
+            <a class="svc-more" href="/sistemas-personalizados">Ver detalhes sobre sistemas</a>
           </div>
         </div>
       </article>
@@ -737,7 +741,7 @@
       <div class="consult-text">
         <span class="consult-tag">Pra organizar a empresa, junto com o sistema</span>
         <h3 id="consult-title">Consultoria de gestão com o fundador</h3>
-        <p>Para estruturar um negócio que está começando ou reorganizar um que cresceu sem processo. Acompanhamento individual com o Paulo Nogueira, que já passou por todas as cadeiras de uma empresa, do atendimento a COO.</p>
+        <p>Para estruturar um negócio que está começando ou reorganizar um que cresceu sem processo. Acompanhamento individual com o Paulo Nogueira, que já passou por todas as cadeiras de uma empresa, do atendimento a COO. <a class="svc-more" href="/consultoria-de-gestao">Ver detalhes da consultoria</a></p>
         <ul class="consult-topics">
           <li>Processos e rotina</li>
           <li>Gestão de equipe</li>
@@ -936,10 +940,11 @@
     <div class="footer-cols">
       <div>
         <h2 class="footer-h">Serviços</h2>
-        <a href="#servicos">Agente de IA no WhatsApp</a>
-        <a href="#servicos">Sites e landing pages</a>
-        <a href="#servicos">Sistemas sob medida</a>
-        <a href="#consultoria">Consultoria de gestão</a>
+        <a href="/agente-de-ia-para-whatsapp">Agente de IA para WhatsApp</a>
+        <a href="/criacao-de-sites">Sites e landing pages</a>
+        <a href="/automacao-para-empresas">Automação para empresas</a>
+        <a href="/sistemas-personalizados">Sistemas personalizados</a>
+        <a href="/consultoria-de-gestao">Consultoria de gestão</a>
       </div>
       <div>
         <h2 class="footer-h">Empresa</h2>
@@ -972,7 +977,7 @@
 <button class="wa-float" type="button" data-open-ana aria-label="Conversar com a Ana, nossa agente de IA"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span>Fale com a Ana</span></button>
 
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "name": "MedCode Assessoria", "legalName": "68.955.873 PAULO NOGUEIRA JANUARIO", "url": "https://medcodedev.com/", "address": {"@type": "PostalAddress", "streetAddress": "Av. Brigadeiro Faria Lima, 1811", "addressLocality": "São Paulo", "addressRegion": "SP", "postalCode": "01452-001", "addressCountry": "BR"}, "logo": "https://medcodedev.com/public/icon-512.png", "email": "contato@medcodedev.com", "telephone": "+55-11-99164-9612", "taxID": "68.955.873/0001-91", "founder": {"@type": "Person", "name": "Paulo Nogueira"}, "areaServed": [{"@type": "Country", "name": "Brasil"}, {"@type": "City", "name": "Tatuí, SP"}, {"@type": "City", "name": "Sorocaba, SP"}, {"@type": "City", "name": "Itapetininga, SP"}, {"@type": "City", "name": "Votorantim, SP"}, {"@type": "City", "name": "Itu, SP"}, {"@type": "City", "name": "Botucatu, SP"}, {"@type": "City", "name": "Porto Velho, RO"}, {"@type": "City", "name": "Rio Branco, AC"}, {"@type": "City", "name": "Macapá, AP"}, {"@type": "City", "name": "Boa Vista, RR"}, {"@type": "City", "name": "Palmas, TO"}, {"@type": "City", "name": "Teresina, PI"}, {"@type": "City", "name": "São Luís, MA"}, {"@type": "City", "name": "Aracaju, SE"}], "image": "https://medcodedev.com/public/og-medcode.jpg", "description": "Criação de sites e landing pages, agentes de IA para WhatsApp, Instagram e site, automação de atendimento e processos, sistemas personalizados e consultoria de gestão para pequenas e médias empresas.", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Serviços MedCode", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Criação de sites e landing pages"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Agentes de IA para WhatsApp, Instagram e site"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automação de atendimento e processos"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sistemas personalizados"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Consultoria de gestão para pequenas e médias empresas"}}]}}
+{"@context": "https://schema.org", "@id": "https://medcodedev.com/#org", "@type": ["Organization", "ProfessionalService"], "name": "MedCode Assessoria", "legalName": "68.955.873 PAULO NOGUEIRA JANUARIO", "url": "https://medcodedev.com/", "address": {"@type": "PostalAddress", "streetAddress": "Av. Brigadeiro Faria Lima, 1811", "addressLocality": "São Paulo", "addressRegion": "SP", "postalCode": "01452-001", "addressCountry": "BR"}, "logo": "https://medcodedev.com/public/icon-512.png", "email": "contato@medcodedev.com", "telephone": "+55-11-99164-9612", "taxID": "68.955.873/0001-91", "founder": {"@type": "Person", "name": "Paulo Nogueira"}, "areaServed": [{"@type": "Country", "name": "Brasil"}, {"@type": "City", "name": "Tatuí, SP"}, {"@type": "City", "name": "Sorocaba, SP"}, {"@type": "City", "name": "Itapetininga, SP"}, {"@type": "City", "name": "Votorantim, SP"}, {"@type": "City", "name": "Itu, SP"}, {"@type": "City", "name": "Botucatu, SP"}, {"@type": "City", "name": "Porto Velho, RO"}, {"@type": "City", "name": "Rio Branco, AC"}, {"@type": "City", "name": "Macapá, AP"}, {"@type": "City", "name": "Boa Vista, RR"}, {"@type": "City", "name": "Palmas, TO"}, {"@type": "City", "name": "Teresina, PI"}, {"@type": "City", "name": "São Luís, MA"}, {"@type": "City", "name": "Aracaju, SE"}], "image": "https://medcodedev.com/public/og-medcode.jpg", "description": "Criação de sites e landing pages, agentes de IA para WhatsApp, Instagram e site, automação de atendimento e processos, sistemas personalizados e consultoria de gestão para pequenas e médias empresas.", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Serviços MedCode", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Criação de sites e landing pages"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Agentes de IA para WhatsApp, Instagram e site"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automação de atendimento e processos"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sistemas personalizados"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Consultoria de gestão para pequenas e médias empresas"}}]}}
 </script>
 <script src="js/site.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
