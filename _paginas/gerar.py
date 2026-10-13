@@ -650,6 +650,20 @@ def pagina_servico(s):
 
 REGIOES = ["Interior de São Paulo", "Norte", "Nordeste"]
 
+# "Como ajudamos" nas cidades: um card por serviço; "Ideal pra" vem de nichos em cidades.py.
+AJUDA = [
+    ("agente", "agente-de-ia-para-whatsapp", "Agente de IA no WhatsApp",
+     "Seus clientes respondidos em segundos, de dia, de noite e no fim de semana: ninguém fica sem resposta. O agente conversa de verdade, entende até áudio, tira dúvidas e agenda, e passa pra você quando precisa. A sua atendente foca só nos clientes quentes, e a equipe toda atende no mesmo número."),
+    ("site", "criacao-de-sites", "Sites e landing pages",
+     "Quem pesquisa no Google em {nome} encontra a sua empresa, vê um site profissional e rápido no celular e chama no WhatsApp com um toque. É uma vitrine aberta 24 horas, com o domínio no nome da sua empresa."),
+    ("automacao", "automacao-para-empresas", "Automação de atendimento e processos",
+     "Lembrete na véspera, confirmação de horário, retorno pra quem pediu orçamento e sumiu, aviso pra equipe quando chega pedido: tudo acontece sozinho. Menos falta, menos esquecimento e mais tempo pra atender bem."),
+    ("sistemas", "sistemas-personalizados", "Sistemas personalizados",
+     "Vendas, estoque, agenda e financeiro num painel só, feito do jeito que a sua empresa trabalha. Chega de caderno e planilha: você sabe o que vende, o que parou e como está o caixa, no computador ou no celular."),
+    ("consultoria", "consultoria-de-gestao", "Consultoria de gestão",
+     "Se tudo depende de você, o acompanhamento individual com o Paulo organiza processos, equipe, financeiro e vendas. Plano prático, sem teoria, e acompanhamento de perto até a empresa andar com as próprias pernas."),
+]
+
 # Abertura das páginas de cidade: a história do fundador, adaptada pela região.
 LEAD_FUNDADOR = {
     "Interior de São Paulo": "O fundador da MedCode, Paulo Nogueira, nasceu e cresceu em Porto Velho, Rondônia, e veio pra São Paulo, o maior mercado do Brasil, onde aproveitou tudo o que o estado tem a ensinar sobre gestão, tecnologia e vendas. Hoje atende de perto as empresas de {nome} e região, com esse know-how e o olhar de quem já viveu o dia a dia do outro lado do balcão.",
@@ -713,13 +727,6 @@ def pagina_cidade(c):
         ],
     }
 
-    nomes_serv = {
-        "criacao-de-sites": f"Criação de sites em {nome}",
-        "agente-de-ia-para-whatsapp": f"Agente de IA para WhatsApp em {nome}",
-        "automacao-para-empresas": f"Automação para empresas em {nome}",
-        "sistemas-personalizados": f"Sistemas personalizados em {nome}",
-        "consultoria-de-gestao": f"Consultoria de gestão em {nome}",
-    }
     oferta = "\n".join(f'          <li><a href="/{s["slug"]}">{html.escape(s["curto"])}</a></li>' for s in SERVICOS)
     lead = c.get("lead_fundador") or LEAD_FUNDADOR[c["regiao"]].format(nome=nome)
     paragrafos = ([c["lead"]] if c.get("lead") else []) + c["mercado"]
@@ -732,9 +739,13 @@ def pagina_cidade(c):
       <p><b>{html.escape(c.get("raiz_titulo", "Daqui de " + nome))}</b>{html.escape(c["raiz"])}</p>
     </div>"""
     segs = "\n".join(
-        f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in c["segmentos"])
-    atalhos = "\n".join(
-        f'        <li><a href="/{x["slug"]}">{html.escape(nomes_serv[x["slug"]])}</a></li>' for x in SERVICOS)
+        f'      <article class="svc-c reveal{" destaque" if i == 0 else ""}">\n'
+        f'        <h3>{html.escape(titulo)}</h3>\n'
+        f'        <p class="ideal"><b>Ideal pra</b> {html.escape(c["nichos"][chave])}</p>\n'
+        f'        <p>{html.escape(texto.format(nome=nome))}</p>\n'
+        f'        <a class="link-arrow" href="/{sl}">Ver detalhes <span aria-hidden="true">→</span></a>\n'
+        f'      </article>'
+        for i, (chave, sl, titulo, texto) in enumerate(AJUDA))
     if perto:
         passos = [("Conversa inicial", "Você chama no WhatsApp e a gente entende o que o seu negócio precisa."),
                   ("Diagnóstico no seu negócio", f"Vamos até a sua empresa em {nome} (ou fazemos por vídeo, se preferir), sem custo."),
@@ -797,14 +808,8 @@ def pagina_cidade(c):
       <span class="kicker">Na prática</span>
       <h2 class="h2">Como ajudamos os negócios de {html.escape(nome)}</h2>
     </div>
-    <div class="pains">
+    <div class="svc-cards">
 {segs}
-    </div>
-    <div class="svc-links reveal">
-      <p>Conheça cada serviço em detalhes:</p>
-      <ul class="chips">
-{atalhos}
-      </ul>
     </div>
   </div>
 </section>
