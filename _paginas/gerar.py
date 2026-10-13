@@ -37,6 +37,8 @@ def attr(s):
 SERVICOS = [
     {
         "slug": "criacao-de-sites",
+        "pitch": 'Um site profissional, feito primeiro pro celular e preparado pro Google, pra quem pesquisa o seu serviço na cidade encontrar você. Cada botão leva direto pro seu WhatsApp, e o visitante pode tirar dúvidas ali mesmo com o seu agente de IA.',
+        "beneficios": ['Aparece no Google pra quem busca na sua cidade', 'Visual profissional que passa confiança', 'Domínio sempre no nome da sua empresa'],
         "nome": "Criação de sites e landing pages",
         "curto": "Sites e landing pages",
         "resumo": "Site profissional, rápido no celular e pronto pro Google, levando o cliente pro WhatsApp.",
@@ -93,14 +95,16 @@ SERVICOS = [
     },
     {
         "slug": "agente-de-ia-para-whatsapp",
+        "pitch": 'Não é aquele chatbot de “digite 1, digite 2”. É como uma secretária inteligente: conversa de forma natural, entende o que o cliente escreve do jeito dele e até ouve os áudios. Responde na hora, de dia, de noite e no fim de semana, e passa a conversa pra você quando precisa.',
+        "beneficios": ['Entende texto e áudio, sem menu de opções', 'Agenda, confirma e manda lembrete sozinho', 'Atende no WhatsApp, no Instagram e no site'],
         "nome": "Agente de IA para WhatsApp, Instagram e site",
         "curto": "Agente de IA para WhatsApp",
         "resumo": "Atende seus clientes 24 horas no WhatsApp, Instagram e site: tira dúvidas, agenda e passa pra você.",
         "title": "Agente de IA para WhatsApp, Instagram e Site | MedCode",
         "desc": "Agente de IA que atende seus clientes no WhatsApp, Instagram e site 24 horas: tira dúvidas, agenda e passa pra você quando precisa. A partir de R$ 147/mês, com garantia.",
         "h1": "Agente de IA para WhatsApp que atende seus clientes 24 horas",
-        "lead": "Não é aquele robô do “digite 1”. É uma <strong>secretária inteligente</strong> que conversa de verdade, entende o que o cliente escreve e resolve na hora, no WhatsApp, no Instagram e no seu site. Quando precisa de você, passa a conversa.",
-        "oferta": ["Conversa natural, sem menu de opções", "Tira dúvidas, agenda, confirma e lembra", "Atende no WhatsApp, no Instagram e no site",
+        "lead": "Não é aquele robô do “digite 1”. É uma <strong>secretária inteligente</strong> que conversa de verdade, entende o que o cliente escreve (e até os áudios) e resolve na hora, no WhatsApp, no Instagram e no seu site. Quando precisa de você, passa a conversa.",
+        "oferta": ["Conversa natural e entende até áudio", "Tira dúvidas, agenda, confirma e lembra", "Atende no WhatsApp, no Instagram e no site",
                    "Treinado com as informações do seu negócio", "A equipe toda atende junto, no mesmo número"],
         "preco": "plataforma a partir de <b>R$ 147/mês</b>",
         "preco_nota": "+ implantação, com valor no diagnóstico gratuito",
@@ -119,7 +123,7 @@ SERVICOS = [
             "a": ("Robô de menu", "O que a maioria das empresas usa hoje.",
                   ["“Digite 1 para agendamento, 2 para…”", "Não entende quando o cliente escreve diferente", "Trava, e o cliente desiste no meio", "Respostas engessadas, sempre iguais"]),
             "b": ("Agente de IA da MedCode", "Uma conversa de verdade, do jeito que o cliente escreve.",
-                  ["Conversa natural, sem menu", "Entende o que o cliente quer, mesmo escrito do jeito dele", "Tira dúvida, agenda, confirma e manda lembrete", "Passa pra você quando o assunto pede uma pessoa"]),
+                  ["Conversa natural, sem menu", "Entende o que o cliente quer, por texto ou por áudio", "Tira dúvida, agenda, confirma e manda lembrete", "Passa pra você quando o assunto pede uma pessoa"]),
             "ruim": True,
             "nota": "<b>Quer sentir a diferença?</b> Converse com a Ana, a nossa agente, do jeito que os seus clientes conversariam com o seu.",
         },
@@ -141,6 +145,7 @@ SERVICOS = [
         "faq": [
             ("Quanto custa um agente de IA?", "A plataforma custa a partir de R$ 147 por mês, mais a implantação, que tem o valor definido no diagnóstico gratuito. E tem garantia: se no primeiro mês o agente não fizer sentido pro seu negócio, devolvemos o valor da implantação."),
             ("Funciona no meu número de WhatsApp atual?", "Na maioria dos casos, sim. No diagnóstico avaliamos o seu número e indicamos a forma de conexão mais segura pro seu caso."),
+            ("O agente entende áudio?", "Entende. O cliente pode mandar áudio, do jeito que já está acostumado no WhatsApp, e o agente compreende e responde normalmente, sem pedir pra ele digitar."),
             ("Atende também no Instagram e no site?", "Sim. O mesmo agente pode responder no WhatsApp, nas mensagens do Instagram e num chat dentro do seu site, com as mesmas informações."),
             ("E se o cliente quiser falar com uma pessoa?", "O agente passa a conversa pra você ou pra sua equipe. Ele também é configurado pra encaminhar quando não sabe a resposta, em vez de chutar."),
             ("O agente pode errar?", "Ele responde com base nas informações que você aprovou. No primeiro mês acompanhamos as conversas de perto justamente pra corrigir o que não estiver do jeito certo."),
@@ -149,6 +154,8 @@ SERVICOS = [
     },
     {
         "slug": "automacao-para-empresas",
+        "pitch": 'As tarefas que se repetem todo dia passam a acontecer sozinhas: lembrete na véspera, retorno pra quem pediu orçamento, contato salvo sem ninguém digitar, aviso pra equipe na hora. Menos erro, menos esquecimento e mais tempo pro que importa.',
+        "beneficios": ['Lembretes e confirmações automáticos', 'Nenhum orçamento esquecido', 'Ferramentas que você já usa trabalhando juntas'],
         "nome": "Automação de atendimento e processos",
         "curto": "Automação para empresas",
         "resumo": "Lembretes, retornos, cadastros e tarefas repetitivas rodando sozinhos, sem erro e sem esquecer ninguém.",
@@ -204,6 +211,8 @@ SERVICOS = [
     },
     {
         "slug": "sistemas-personalizados",
+        "pitch": 'Sistema pronto é sapato de numeração; o nosso é luva. A gente entende como a sua empresa trabalha e desenha o sistema a partir disso: vendas, estoque, agenda e financeiro num painel só, no computador e no celular.',
+        "beneficios": ['Feito do jeito que a sua empresa trabalha', 'Sai do caderno e das planilhas', 'Mostra o que vende e como está o caixa'],
         "nome": "Sistemas personalizados",
         "curto": "Sistemas personalizados",
         "resumo": "Vendas, estoque, agenda e financeiro num painel só, feito do jeito que a sua empresa trabalha.",
@@ -259,6 +268,8 @@ SERVICOS = [
     },
     {
         "slug": "consultoria-de-gestao",
+        "pitch": 'Acompanhamento individual com o Paulo Nogueira, que passou por todas as cadeiras de uma empresa, do atendimento a COO. Pra organizar processos, equipe, financeiro e vendas, com um plano prático e acompanhamento de perto.',
+        "beneficios": ['Visão de quem já foi do atendimento à diretoria', 'Plano de ação prático, não teoria', 'Processos, equipe, financeiro e vendas'],
         "nome": "Consultoria de gestão para pequenas e médias empresas",
         "curto": "Consultoria de gestão",
         "resumo": "Acompanhamento individual com o fundador pra organizar processos, equipe, financeiro e vendas.",
@@ -713,9 +724,17 @@ def pagina_cidade(c):
     </div>"""
     segs = "\n".join(
         f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in c["segmentos"])
+    ordem = ["agente-de-ia-para-whatsapp", "criacao-de-sites", "automacao-para-empresas", "sistemas-personalizados", "consultoria-de-gestao"]
+    por_slug = {x["slug"]: x for x in SERVICOS}
     servs = "\n".join(
-        f'      <a class="reveal" href="/{s["slug"]}"><b>{html.escape(nomes_serv[s["slug"]])}</b><span>{html.escape(s["resumo"])}</span><em>Saiba mais →</em></a>'
-        for s in SERVICOS)
+        f'      <article class="svc-c reveal{" destaque" if sl == ordem[0] else ""}">\n'
+        f'        <span class="svc-c-label">{html.escape(por_slug[sl]["curto"])}</span>\n'
+        f'        <h3>{html.escape(nomes_serv[sl])}</h3>\n'
+        f'        <p>{html.escape(por_slug[sl]["pitch"])}</p>\n'
+        f'        <ul class="check">' + "".join(f"<li>{html.escape(b)}</li>" for b in por_slug[sl]["beneficios"]) + '</ul>\n'
+        f'        <a class="link-arrow" href="/{sl}">Ver detalhes <span aria-hidden="true">→</span></a>\n'
+        f'      </article>'
+        for sl in ordem)
     if perto:
         passos = [("Conversa inicial", "Você chama no WhatsApp e a gente entende o que o seu negócio precisa."),
                   ("Diagnóstico no seu negócio", f"Vamos até a sua empresa em {nome} (ou fazemos por vídeo, se preferir), sem custo."),
@@ -791,7 +810,7 @@ def pagina_cidade(c):
       <h2 class="h2">Tudo o que a sua empresa em {html.escape(nome)} precisa</h2>
       <p class="sub">O site atrai, o agente atende, a automação e o sistema organizam. Comece pelo que mais dói hoje.</p>
     </div>
-    <div class="more">
+    <div class="svc-cards">
 {servs}
     </div>
   </div>
