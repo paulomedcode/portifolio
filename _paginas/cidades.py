@@ -113,8 +113,6 @@ CIDADES = [
             "Porto Velho é cidade de comércio. Da Sete de Setembro, no Centro, aos centros comerciais da Zona Sul e da Zona Leste, são lojas, clínicas médicas, consultórios de dentista e prestadores de serviço disputando o mesmo cliente, muitas vezes na mesma rua.",
             "E por aqui quase tudo se resolve pelo WhatsApp: o cliente chama, pergunta o preço e quer resposta na hora. Quem responde rápido e aparece bem no Google sai na frente, porque muita gente ainda atende do jeito antigo.",
         ],
-        "raiz_titulo": "Por que isso faz diferença pra você",
-        "raiz": "Agência de fora não sabe que aqui o cliente chama no WhatsApp antes de pisar na loja, que indicação vale ouro e que demorar pra responder é perder a venda pro vizinho. O Paulo sabe, porque viveu isso do outro lado do balcão. A diferença é que agora ele chega com as ferramentas que as empresas de São Paulo usam pra crescer: atendimento com IA, automação e gestão de verdade.",
         "nichos": {
             "agente": "clínicas médicas, dentistas, pastelarias, pet shops e lojas",
             "site": "lojas do Centro, da Zona Sul e da Zona Leste, clínicas e prestadores de serviço",
