@@ -100,13 +100,13 @@ CIDADES = [
     # ------------------------------------------------------------ Norte
     {
         "slug": "porto-velho", "nome": "Porto Velho", "uf": "RO", "estado": "Rondônia", "grupo": "longe", "regiao": "Norte", "fuso": 1,
-        "lead": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, cresceu aqui, foi pra São Paulo, a maior cidade do Brasil, e agora traz pros negócios de Porto Velho o que aprendeu por lá.",
+        "lead": "Quem atende Porto Velho precisa conhecer Porto Velho. O Paulo Nogueira, fundador da MedCode, cresceu aqui e fez carreira dentro de empresas da cidade, do balcão de atendimento à diretoria. Hoje, em São Paulo, trabalha com o que há de mais moderno em IA, automação e gestão, e traz tudo isso de volta pro comércio, pras clínicas e pros consultórios de Porto Velho.",
         "mercado": [
             "Porto Velho é cidade de comércio. Da Sete de Setembro, no Centro, aos centros comerciais da Zona Sul e da Zona Leste, são lojas, clínicas médicas, consultórios de dentista e prestadores de serviço disputando o mesmo cliente, muitas vezes na mesma rua.",
             "E por aqui quase tudo se resolve pelo WhatsApp: o cliente chama, pergunta o preço e quer resposta na hora. Quem responde rápido e aparece bem no Google sai na frente, porque muita gente ainda atende do jeito antigo.",
         ],
-        "raiz_titulo": "De Porto Velho pra São Paulo, e de volta",
-        "raiz": "O Paulo cresceu em Porto Velho e conhece o cliente daqui: valoriza atenção, resposta rápida e indicação de quem conhece. Em São Paulo, o maior mercado do país, aprendeu na prática as técnicas de gestão, tecnologia e vendas que as empresas de lá usam pra crescer. A MedCode junta as duas coisas: o que funciona em São Paulo, aplicado por quem entende Porto Velho.",
+        "raiz_titulo": "Por que isso faz diferença pra você",
+        "raiz": "Agência de fora não sabe que aqui o cliente chama no WhatsApp antes de pisar na loja, que indicação vale ouro e que demorar pra responder é perder a venda pro vizinho. O Paulo sabe, porque viveu isso do outro lado do balcão. A diferença é que agora ele chega com as ferramentas que as empresas de São Paulo usam pra crescer: atendimento com IA, automação e gestão de verdade.",
         "segmentos": [
             ("Clínicas médicas", "Clínica é o que não falta em Porto Velho, e o paciente fica com quem responde primeiro. O agente de IA conversa como uma recepcionista, entende até os áudios, agenda, confirma e manda lembrete, inclusive pra quem vem do interior do estado."),
             ("Consultórios de dentista", "Avaliação, orçamento de tratamento, retorno: o agente responde na hora e já agenda, e a automação lembra o paciente da consulta e de voltar pra manutenção."),
