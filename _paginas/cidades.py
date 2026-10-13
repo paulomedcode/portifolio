@@ -100,7 +100,7 @@ CIDADES = [
     # ------------------------------------------------------------ Norte
     {
         "slug": "porto-velho", "nome": "Porto Velho", "uf": "RO", "estado": "Rondônia", "grupo": "longe", "regiao": "Norte", "fuso": 1,
-        "lead": "Quem atende Porto Velho precisa conhecer Porto Velho. O Paulo Nogueira, fundador da MedCode, cresceu aqui e fez carreira dentro de empresas da cidade, do balcão de atendimento à diretoria. Hoje, em São Paulo, trabalha com o que há de mais moderno em IA, automação e gestão, e traz tudo isso de volta pro comércio, pras clínicas e pros consultórios de Porto Velho.",
+        "lead": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, nasceu e cresceu aqui. Depois foi pra São Paulo, a maior cidade do Brasil, onde aproveitou tudo o que essa cidade tem a ensinar sobre gestão, tecnologia e vendas. Agora traz essa experiência e esse know-how pros negócios de Porto Velho.",
         "mercado": [
             "Porto Velho é cidade de comércio. Da Sete de Setembro, no Centro, aos centros comerciais da Zona Sul e da Zona Leste, são lojas, clínicas médicas, consultórios de dentista e prestadores de serviço disputando o mesmo cliente, muitas vezes na mesma rua.",
             "E por aqui quase tudo se resolve pelo WhatsApp: o cliente chama, pergunta o preço e quer resposta na hora. Quem responde rápido e aparece bem no Google sai na frente, porque muita gente ainda atende do jeito antigo.",
@@ -113,7 +113,7 @@ CIDADES = [
             ("Lojas do Centro, da Zona Sul e da Zona Leste", "Site com os seus produtos no Google e um agente respondendo preço, estoque e entrega no WhatsApp e no Instagram, pra loja continuar vendendo depois que fecha as portas."),
             ("Prestadores de serviço", "Orçamento rápido, agenda de visitas organizada e retorno automático pra quem pediu e sumiu. Nenhuma venda fica pelo caminho."),
         ],
-        "faq_extra": ("A MedCode é de Porto Velho?", "O fundador é. Paulo Nogueira cresceu e viveu a vida toda em Porto Velho e hoje está em São Paulo. O atendimento é por vídeo e WhatsApp, feito por quem conhece a cidade e o jeito de vender daqui."),
+        "faq_extra": ("A MedCode é de Porto Velho?", "O fundador é. Paulo Nogueira nasceu e cresceu em Porto Velho e hoje está em São Paulo. O atendimento é por vídeo e WhatsApp, feito por quem conhece a cidade e o jeito de vender daqui."),
     },
     {
         "slug": "rio-branco", "nome": "Rio Branco", "uf": "AC", "estado": "Acre", "grupo": "longe", "regiao": "Norte", "fuso": 2,
