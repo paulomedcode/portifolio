@@ -664,6 +664,9 @@ AJUDA = [
      "Se tudo depende de você, o acompanhamento individual com o Paulo organiza processos, equipe, financeiro e vendas. Plano prático, sem teoria, e acompanhamento de perto até a empresa andar com as próprias pernas."),
 ]
 
+# "estado do Acre", mas "estado de São Paulo"
+DO_ESTADO = {"Acre": "do", "Amapá": "do", "Tocantins": "do", "Piauí": "do", "Maranhão": "do", "Ceará": "do"}
+
 # Abertura das páginas de cidade: a história do fundador, adaptada pela região.
 LEAD_FUNDADOR = {
     "Interior de São Paulo": "O fundador da MedCode, Paulo Nogueira, nasceu e cresceu em Porto Velho, Rondônia, e veio pra São Paulo, o maior mercado do Brasil, onde aproveitou tudo o que o estado tem a ensinar sobre gestão, tecnologia e vendas. Hoje atende de perto as empresas de {nome} e região, com esse know-how e o olhar de quem já viveu o dia a dia do outro lado do balcão.",
@@ -696,7 +699,7 @@ def pagina_cidade(c):
 
     faq = [
         (f"Vocês atendem empresas de {nome}?",
-         f"Sim. A MedCode atende pequenas e médias empresas de {nome} e de todo o estado de {c['estado']}, "
+         f"Sim. A MedCode atende pequenas e médias empresas de {nome} e de todo o estado {DO_ESTADO.get(c['estado'], 'de')} {c['estado']}, "
          + ("com diagnóstico e visitas presenciais quando fizer sentido." if perto
             else "com reuniões por vídeo e acompanhamento pelo WhatsApp.")),
         (f"Quanto custa um site ou um agente de IA em {nome}?",

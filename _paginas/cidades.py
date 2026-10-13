@@ -222,4 +222,19 @@ CIDADES = [
         },
         "faq_extra": ("Vocês atendem outras cidades de Sergipe?", "Sim. O atendimento é por vídeo e WhatsApp, então atendemos empresas de Aracaju e de qualquer cidade do estado."),
     },
+    {
+        "slug": "jericoacoara", "nome": "Jericoacoara", "uf": "CE", "estado": "Ceará", "grupo": "longe", "regiao": "Nordeste",
+        "mercado": [
+            "Em Jeri, quase tudo gira em torno do turista: pousadas, restaurantes, agências de passeio, buggueiros, escolas de kite e lojinhas da vila disputam um visitante que fica poucos dias e decide rápido.",
+            "E esse turista resolve tudo pelo celular, muitas vezes antes de chegar: manda mensagem no WhatsApp e no Instagram perguntando disponibilidade, preço e como chegar. Quem responde primeiro, mesmo de madrugada, fecha a reserva.",
+        ],
+        "nichos": {
+            "agente": "pousadas, restaurantes, agências de passeio e escolas de kite",
+            "site": "pousadas, restaurantes, passeios e lojas da vila",
+            "automacao": "pousadas, agências de passeio e restaurantes",
+            "sistemas": "pousadas, agências e restaurantes",
+            "consultoria": "pousadas e negócios de turismo que querem crescer com organização",
+        },
+        "faq_extra": ("Funciona pra pousada e agência de passeio em Jeri?", "Muito bem. O turista manda mensagem a qualquer hora, de qualquer lugar do Brasil. O agente responde sobre disponibilidade, valores e passeios na hora, e passa pra você a reserva quase pronta."),
+    },
 ]
