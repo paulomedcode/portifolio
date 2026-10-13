@@ -720,7 +720,7 @@ def pagina_cidade(c):
         raiz = f"""
     <div class="callout reveal">
       <img src="/public/quem_sou-avatar.webp" alt="Paulo Nogueira" width="64" height="64" loading="lazy">
-      <p><b>Daqui de Porto Velho</b>{html.escape(c["raiz"])}</p>
+      <p><b>{html.escape(c.get("raiz_titulo", "Daqui de " + nome))}</b>{html.escape(c["raiz"])}</p>
     </div>"""
     segs = "\n".join(
         f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in c["segmentos"])

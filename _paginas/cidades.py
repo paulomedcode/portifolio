@@ -100,19 +100,20 @@ CIDADES = [
     # ------------------------------------------------------------ Norte
     {
         "slug": "porto-velho", "nome": "Porto Velho", "uf": "RO", "estado": "Rondônia", "grupo": "longe", "regiao": "Norte", "fuso": 1,
-        "lead": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, cresceu e viveu a vida toda aqui antes de ir pra São Paulo, e conhece de perto o jeito de fazer negócio da cidade.",
+        "lead": "A MedCode tem raízes em Porto Velho. O fundador, Paulo Nogueira, cresceu aqui, foi pra São Paulo, a maior cidade do Brasil, e agora traz pros negócios de Porto Velho o que aprendeu por lá.",
         "mercado": [
-            "Capital de Rondônia, Porto Velho cresceu muito com as usinas do Rio Madeira e com o agronegócio do estado. Chegou gente, chegaram empresas, e o comércio e os serviços cresceram junto.",
-            "Por aqui, quase tudo se resolve pelo WhatsApp. A empresa que responde rápido e aparece bem no Google ainda se destaca, porque muita gente continua atendendo do jeito antigo.",
+            "Porto Velho é cidade de comércio. Da Sete de Setembro, no Centro, aos centros comerciais da Zona Sul e da Zona Leste, são lojas, clínicas médicas, consultórios de dentista e prestadores de serviço disputando o mesmo cliente, muitas vezes na mesma rua.",
+            "E por aqui quase tudo se resolve pelo WhatsApp: o cliente chama, pergunta o preço e quer resposta na hora. Quem responde rápido e aparece bem no Google sai na frente, porque muita gente ainda atende do jeito antigo.",
         ],
-        "raiz": "Quem cresceu em Porto Velho sabe como o cliente daqui pensa: valoriza atenção, resposta rápida e indicação de quem conhece. É isso que a MedCode traz pra cada projeto: tecnologia de ponta, feita por alguém que entende a cidade.",
+        "raiz_titulo": "De Porto Velho pra São Paulo, e de volta",
+        "raiz": "O Paulo cresceu em Porto Velho e conhece o cliente daqui: valoriza atenção, resposta rápida e indicação de quem conhece. Em São Paulo, o maior mercado do país, aprendeu na prática as técnicas de gestão, tecnologia e vendas que as empresas de lá usam pra crescer. A MedCode junta as duas coisas: o que funciona em São Paulo, aplicado por quem entende Porto Velho.",
         "segmentos": [
-            ("Clínicas e saúde", "Pacientes de todo o estado vêm se tratar na capital. O agente de IA conversa como uma recepcionista, entende até os áudios, agenda, confirma e tira dúvidas antes da viagem."),
-            ("Comércio e distribuidoras", "Pedidos que chegam pelo WhatsApp organizados num sistema sob medida, com estoque e entregas sob controle, e um agente que responde preço e prazo na hora."),
+            ("Clínicas médicas", "Clínica é o que não falta em Porto Velho, e o paciente fica com quem responde primeiro. O agente de IA conversa como uma recepcionista, entende até os áudios, agenda, confirma e manda lembrete, inclusive pra quem vem do interior do estado."),
+            ("Consultórios de dentista", "Avaliação, orçamento de tratamento, retorno: o agente responde na hora e já agenda, e a automação lembra o paciente da consulta e de voltar pra manutenção."),
+            ("Lojas do Centro, da Zona Sul e da Zona Leste", "Site com os seus produtos no Google e um agente respondendo preço, estoque e entrega no WhatsApp e no Instagram, pra loja continuar vendendo depois que fecha as portas."),
             ("Prestadores de serviço", "Orçamento rápido, agenda de visitas organizada e retorno automático pra quem pediu e sumiu. Nenhuma venda fica pelo caminho."),
-            ("Agro e fornecedores", "Site institucional que passa credibilidade e atendimento organizado pra quem vende pro campo, com o agente respondendo o produtor a qualquer hora."),
         ],
-        "faq_extra": ("A MedCode é de Porto Velho?", "O fundador é. Paulo Nogueira cresceu e viveu a vida toda em Porto Velho e hoje está em São Paulo. O atendimento é por vídeo e WhatsApp, feito por quem conhece a cidade."),
+        "faq_extra": ("A MedCode é de Porto Velho?", "O fundador é. Paulo Nogueira cresceu e viveu a vida toda em Porto Velho e hoje está em São Paulo. O atendimento é por vídeo e WhatsApp, feito por quem conhece a cidade e o jeito de vender daqui."),
     },
     {
         "slug": "rio-branco", "nome": "Rio Branco", "uf": "AC", "estado": "Acre", "grupo": "longe", "regiao": "Norte", "fuso": 2,
