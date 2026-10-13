@@ -2,7 +2,7 @@
 
 Cada cidade precisa de texto próprio: página igual trocando só o nome o Google ignora.
 grupo: "sp" (atendimento presencial possível na região) ou "longe" (por vídeo e WhatsApp).
-lead: texto sobre a cidade (abre a seção do comércio local). A abertura da página é a história do fundador,
+mercado: dois parágrafos sobre o comércio e o cliente da cidade (do dia a dia, não de enciclopédia). A abertura da página é a história do fundador,
 adaptada pela região em gerar.py (LEAD_FUNDADOR), ou "lead_fundador" quando a cidade tem a sua própria.
 fuso: diferença em horas para Brasília, quando houver (aparece nas dúvidas).
 """
@@ -11,10 +11,9 @@ CIDADES = [
     # ------------------------------------------------------------ interior de São Paulo
     {
         "slug": "tatui", "nome": "Tatuí", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Tatuí é conhecida como a Capital da Música, mas também tem um comércio e um setor de serviços que crescem junto com a região de Sorocaba. A MedCode ajuda as empresas daqui a aparecer no Google, responder rápido no WhatsApp e organizar a rotina.",
         "mercado": [
-            "Com comércio forte no centro, clínicas, escolas e muitos prestadores de serviço, Tatuí ainda é uma cidade em que o cliente chega por indicação. Mas, antes de fechar, ele quase sempre confere no Google e chama no WhatsApp.",
-            "O Conservatório traz estudantes e famílias de toda a região, e isso movimenta escolas, cursos, aluguel e comércio. Quem aparece bem na busca e responde primeiro sai na frente.",
+            "Tatuí é cidade de comércio de rua e de indicação. No centro e nos bairros, são lojas, clínicas, escolas, salões e prestadores de serviço disputando o cliente da cidade e das cidades vizinhas.",
+            "O cliente de Tatuí pode até chegar por indicação, mas antes de fechar ele pesquisa no Google e chama no WhatsApp. Quem aparece bem e responde rápido sai na frente de quem ainda atende do jeito antigo.",
         ],
         "nichos": {
             "agente": "escolas de música, clínicas, salões de beleza e pet shops",
@@ -27,10 +26,9 @@ CIDADES = [
     },
     {
         "slug": "sorocaba", "nome": "Sorocaba", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Sorocaba é um dos maiores polos de indústria e comércio do interior paulista, e por isso a concorrência também é grande: quem procura um serviço aqui tem muitas opções. A MedCode ajuda a sua empresa a ser encontrada primeiro e a responder antes do concorrente.",
         "mercado": [
-            "Indústrias, um parque tecnológico, universidades, uma rede de saúde grande e um comércio que atende toda a região metropolitana. Sorocaba tem empresas de todos os tamanhos disputando o mesmo cliente.",
-            "Nesse cenário, o que decide é velocidade e presença: aparecer quando alguém pesquisa o seu serviço na cidade e responder na hora, inclusive fora do horário comercial.",
+            "Sorocaba é cidade grande, com indústria, shoppings, universidades e um comércio que atende toda a região. Pra quem empreende aqui, a concorrência é pesada: o cliente encontra várias opções na mesma busca.",
+            "Ganha quem aparece primeiro no Google e responde antes, inclusive à noite e no fim de semana, quando a concorrência está fechada.",
         ],
         "nichos": {
             "agente": "clínicas, imobiliárias, academias e pet shops",
@@ -43,10 +41,9 @@ CIDADES = [
     },
     {
         "slug": "itapetininga", "nome": "Itapetininga", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Itapetininga é referência no sudoeste paulista, com agronegócio forte e um comércio que atende cidades de toda a região. A MedCode leva pras empresas daqui as mesmas ferramentas que as grandes usam: site, agente de IA no WhatsApp, automação e sistemas sob medida.",
         "mercado": [
-            "Boa parte dos clientes de Itapetininga vem das cidades vizinhas e do campo. Pra esse cliente, o WhatsApp é o principal canal: ele pergunta preço, disponibilidade e prazo antes de pegar a estrada.",
-            "Responder rápido e com informação certa é o que garante a venda, e é exatamente onde um agente de IA e uma boa organização interna fazem diferença.",
+            "Itapetininga é o centro de compras de uma região inteira. Revendas agrícolas, lojas, clínicas e oficinas atendem gente da cidade, das cidades vizinhas e da zona rural.",
+            "Esse cliente não quer pegar a estrada à toa: ele pergunta preço, estoque e prazo pelo WhatsApp antes de sair de casa. Quem responde rápido e com informação certa fica com a venda.",
         ],
         "nichos": {
             "agente": "revendas agrícolas, clínicas, lojas e oficinas",
@@ -59,10 +56,9 @@ CIDADES = [
     },
     {
         "slug": "votorantim", "nome": "Votorantim", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Vizinha de Sorocaba, Votorantim tem tradição industrial e um comércio local que disputa cliente com a cidade ao lado. Pra quem empreende aqui, aparecer no Google na hora da busca e responder rápido no WhatsApp faz toda a diferença.",
         "mercado": [
-            "Berço de um dos maiores grupos industriais do país, Votorantim cresceu junto com Sorocaba, e muita gente mora em uma cidade e consome na outra.",
-            "Por isso, a empresa daqui precisa aparecer nas buscas das duas cidades. A represa de Itupararanga ainda movimenta turismo, gastronomia e lazer no fim de semana.",
+            "Votorantim vive colada em Sorocaba: muita gente mora numa cidade e compra na outra. Comércio de bairro, salões, clínicas e restaurantes disputam esse cliente o tempo todo, e a represa enche pousadas e restaurantes no fim de semana.",
+            "Por isso, aparecer no Google pra quem pesquisa nas duas cidades e responder rápido no WhatsApp faz toda a diferença.",
         ],
         "nichos": {
             "agente": "pousadas, restaurantes, salões de beleza e pet shops",
@@ -75,10 +71,9 @@ CIDADES = [
     },
     {
         "slug": "itu", "nome": "Itu", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Itu une centro histórico, turismo, eventos e uma indústria forte. É uma cidade em que o cliente pesquisa bastante antes de escolher, e acaba fechando com quem aparece bem e responde primeiro.",
         "mercado": [
-            "Turistas que vêm conhecer a cidade, noivos procurando espaço pra casamento, moradores dos condomínios buscando serviços: em Itu, muita venda começa numa pesquisa no Google e numa mensagem no WhatsApp.",
-            "Muitas dessas mensagens chegam à noite e no fim de semana, justamente quando ninguém está pra responder.",
+            "Itu tem um movimento que pouca cidade do interior tem: turista no fim de semana, casamento e evento o ano todo, condomínio cheio de morador procurando serviço e um comércio forte no centro.",
+            "Muita venda aqui começa numa pesquisa no Google e numa mensagem no WhatsApp, e boa parte chega à noite e no fim de semana, justamente quando ninguém está pra responder.",
         ],
         "nichos": {
             "agente": "espaços de eventos, buffets, restaurantes e clínicas de estética",
@@ -91,10 +86,9 @@ CIDADES = [
     },
     {
         "slug": "botucatu", "nome": "Botucatu", "uf": "SP", "estado": "São Paulo", "grupo": "sp", "regiao": "Interior de São Paulo",
-        "lead": "Botucatu é polo universitário e de saúde do interior paulista, com uma economia que vai da indústria aeronáutica ao turismo da Cuesta. Chega muita gente de fora, e quem vem de fora pesquisa no Google.",
         "mercado": [
-            "A universidade e o hospital universitário atraem estudantes, profissionais e pacientes de toda a região. Isso movimenta clínicas, moradia, alimentação e serviços o ano inteiro.",
-            "Pra quem chega na cidade, o primeiro contato com o seu negócio é quase sempre uma busca no celular, seguida de uma mensagem no WhatsApp.",
+            "Botucatu recebe gente de fora o tempo todo: estudantes, pacientes da região que vêm se tratar na cidade e turistas atrás das trilhas e cachoeiras. Isso movimenta clínicas, imobiliárias, cursos, pousadas e o comércio o ano inteiro.",
+            "Pra quem chega, o primeiro contato com o seu negócio é quase sempre uma busca no celular, seguida de uma mensagem no WhatsApp.",
         ],
         "nichos": {
             "agente": "clínicas, imobiliárias, cursos e pousadas",
@@ -124,10 +118,9 @@ CIDADES = [
     },
     {
         "slug": "rio-branco", "nome": "Rio Branco", "uf": "AC", "estado": "Acre", "grupo": "longe", "regiao": "Norte", "fuso": 2,
-        "lead": "Rio Branco concentra boa parte do comércio, dos serviços e da saúde do Acre. A MedCode ajuda as empresas daqui a atender mais rápido no WhatsApp, aparecer no Google e organizar a rotina, com atendimento por vídeo, no seu horário.",
         "mercado": [
-            "Capital e principal centro econômico do Acre, Rio Branco atende clientes de todo o estado. A ligação por estrada com o Peru ainda abre espaço pra comércio e serviços voltados à fronteira.",
-            "Com clientes espalhados e distância grande entre as cidades, o WhatsApp vira o balcão da empresa. Quem atende bem por ele ganha o cliente antes da viagem.",
+            "Rio Branco concentra o comércio, as clínicas e os serviços do Acre. Quem mora no interior resolve muita coisa na capital, e quem mora na capital compra de tudo pelo WhatsApp.",
+            "Com clientes espalhados e distância grande entre as cidades, o WhatsApp vira o balcão da empresa. Quem atende bem por ele ganha o cliente antes mesmo da viagem.",
         ],
         "nichos": {
             "agente": "clínicas, lojas, restaurantes e pet shops",
@@ -140,10 +133,9 @@ CIDADES = [
     },
     {
         "slug": "macapa", "nome": "Macapá", "uf": "AP", "estado": "Amapá", "grupo": "longe", "regiao": "Norte",
-        "lead": "Macapá, a capital do meio do mundo, tem um comércio movimentado e um setor de serviços que cresce junto com o Amapá. A MedCode ajuda as empresas daqui a vender e atender melhor pelo WhatsApp e pelo Google.",
         "mercado": [
-            "Cortada pela Linha do Equador, Macapá é o centro econômico do Amapá. Com Santana ao lado e a área de livre comércio, o varejo é forte e a disputa por cliente também.",
-            "Turismo, gastronomia e serviços completam a economia. Em todos eles, o cliente pesquisa no celular e espera resposta rápida.",
+            "Macapá é cidade de comércio forte: lojas, clínicas, restaurantes e prestadores de serviço disputam o cliente da capital e de Santana, ali do lado.",
+            "E o cliente daqui pesquisa no celular e espera resposta rápida no WhatsApp e no Instagram. Quem demora perde a venda pra loja ao lado.",
         ],
         "nichos": {
             "agente": "lojas, clínicas, restaurantes e pet shops",
@@ -156,10 +148,9 @@ CIDADES = [
     },
     {
         "slug": "boa-vista", "nome": "Boa Vista", "uf": "RR", "estado": "Roraima", "grupo": "longe", "regiao": "Norte", "fuso": 1,
-        "lead": "Boa Vista é uma capital que cresceu rápido nos últimos anos, com agronegócio em expansão e comércio forte. A MedCode ajuda as empresas daqui a acompanhar esse crescimento com site, agente de IA no WhatsApp, automação e sistemas.",
         "mercado": [
-            "Capital planejada de Roraima, Boa Vista concentra o comércio e os serviços do estado. A expansão das lavouras e a posição na fronteira com a Venezuela e a Guiana trouxeram mais gente e mais negócios.",
-            "Cidade crescendo rápido significa cliente novo chegando todo dia, e esse cliente procura no Google e chama no WhatsApp antes de escolher.",
+            "Boa Vista cresceu rápido nos últimos anos e não para: chegou gente nova, abriram lojas, clínicas e empresas de serviço, e o agro do estado puxa o comércio junto.",
+            "Cidade crescendo significa cliente novo todo dia, e esse cliente ainda não tem indicação: ele procura no Google e chama no WhatsApp antes de escolher.",
         ],
         "nichos": {
             "agente": "revendas agrícolas, clínicas, lojas e pet shops",
@@ -172,10 +163,9 @@ CIDADES = [
     },
     {
         "slug": "palmas", "nome": "Palmas", "uf": "TO", "estado": "Tocantins", "grupo": "longe", "regiao": "Norte",
-        "lead": "Palmas é a capital mais nova do Brasil: uma cidade planejada, jovem e conectada. A MedCode ajuda as empresas daqui a aparecer no Google, atender no WhatsApp com agente de IA e organizar a gestão.",
         "mercado": [
-            "Fundada no fim dos anos 1980, Palmas tem economia puxada pelo serviço público, pelo agronegócio do Tocantins e por um comércio que atende o estado todo.",
-            "É uma cidade de população jovem, que resolve tudo pelo celular. Pra quem empreende aqui, presença digital bem feita já é o básico.",
+            "Palmas é uma capital jovem, com muito escritório, clínica, restaurante e comércio atendendo uma população que resolve tudo pelo celular.",
+            "Aqui, presença digital bem feita já é o básico: quem não aparece no Google e demora no WhatsApp nem entra na disputa.",
         ],
         "nichos": {
             "agente": "escritórios de advocacia, clínicas, restaurantes e pet shops",
@@ -189,10 +179,9 @@ CIDADES = [
     # ------------------------------------------------------------ Nordeste
     {
         "slug": "teresina", "nome": "Teresina", "uf": "PI", "estado": "Piauí", "grupo": "longe", "regiao": "Nordeste",
-        "lead": "Teresina é referência em saúde e educação no Nordeste e recebe pacientes e estudantes de vários estados. A MedCode ajuda as empresas daqui a atender esse volume com agente de IA no WhatsApp, site, automação e sistemas.",
         "mercado": [
-            "Entre os rios Poti e Parnaíba, a capital do Piauí virou polo regional: hospitais, clínicas e faculdades atraem gente do interior do estado e dos estados vizinhos.",
-            "Isso significa muita mensagem chegando de quem ainda não conhece a cidade, com dúvidas sobre agenda, preços e como chegar. Quem responde rápido e bem fica com o cliente.",
+            "Teresina é referência em saúde e educação: chegam pacientes e estudantes do interior do Piauí e dos estados vizinhos, e isso movimenta clínicas, laboratórios, cursos e o comércio da cidade.",
+            "Quem vem de fora manda mensagem antes de viajar, com dúvidas sobre agenda, preço e como chegar. Quem responde rápido e bem fica com o cliente.",
         ],
         "nichos": {
             "agente": "clínicas, laboratórios, cursos e pet shops",
@@ -205,10 +194,9 @@ CIDADES = [
     },
     {
         "slug": "sao-luis", "nome": "São Luís", "uf": "MA", "estado": "Maranhão", "grupo": "longe", "regiao": "Nordeste",
-        "lead": "São Luís junta patrimônio histórico, turismo, porto e um comércio que atende todo o Maranhão. A MedCode ajuda as empresas daqui a aparecer no Google, atender mais rápido no WhatsApp e organizar a operação.",
         "mercado": [
-            "Capital construída numa ilha e com centro histórico reconhecido como patrimônio mundial, São Luís recebe turistas o ano todo e é a porta de entrada pra outros destinos do estado.",
-            "O complexo portuário e a força do comércio completam uma economia variada, com espaço pra empresas de todos os tamanhos.",
+            "São Luís concentra o comércio e os serviços do Maranhão e recebe turista o ano todo. Pousadas, agências, restaurantes, clínicas e lojas disputam um cliente que pesquisa tudo no celular.",
+            "O turista manda mensagem a qualquer hora, e o morador também. A empresa que responde na hora e aparece bem no Google sai na frente.",
         ],
         "nichos": {
             "agente": "pousadas, agências de turismo, clínicas e pet shops",
@@ -221,9 +209,8 @@ CIDADES = [
     },
     {
         "slug": "aracaju", "nome": "Aracaju", "uf": "SE", "estado": "Sergipe", "grupo": "longe", "regiao": "Nordeste",
-        "lead": "Aracaju é uma capital com qualidade de vida, turismo na orla e um setor de serviços forte. A MedCode ajuda as empresas daqui a ser encontradas no Google e a atender pelo WhatsApp com agente de IA, automação e sistemas.",
         "mercado": [
-            "Com a orla de Atalaia, a gastronomia e o turismo, Aracaju recebe visitantes o ano todo. Ao mesmo tempo, é o centro de comércio, saúde e serviços de Sergipe.",
+            "Aracaju junta turismo na orla e um comércio forte de clínicas, lojas, escritórios e restaurantes, que atende a capital e o interior de Sergipe.",
             "Seja o turista procurando onde comer, seja o morador procurando uma clínica, a busca começa no celular. Aparecer bem e responder rápido é o que transforma busca em cliente.",
         ],
         "nichos": {
