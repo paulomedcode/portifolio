@@ -330,3 +330,7 @@ html.ana-open, html.ana-open body { overflow: hidden; }
   .svc-c { padding: 22px; }
   .svc-c h3 { font-size: 21px; }
 }
+.svc-links { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+.svc-links p { margin: 0 0 14px; font-weight: 700; font-size: 15.5px; }
+.sec:not(.sec-alt) .chips a { background: var(--bg-2); border-color: transparent; }
+.sec:not(.sec-alt) .chips a:hover { border-color: var(--roxo); }

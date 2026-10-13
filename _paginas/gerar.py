@@ -724,17 +724,8 @@ def pagina_cidade(c):
     </div>"""
     segs = "\n".join(
         f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in c["segmentos"])
-    ordem = ["agente-de-ia-para-whatsapp", "criacao-de-sites", "automacao-para-empresas", "sistemas-personalizados", "consultoria-de-gestao"]
-    por_slug = {x["slug"]: x for x in SERVICOS}
-    servs = "\n".join(
-        f'      <article class="svc-c reveal{" destaque" if sl == ordem[0] else ""}">\n'
-        f'        <span class="svc-c-label">{html.escape(por_slug[sl]["curto"])}</span>\n'
-        f'        <h3>{html.escape(nomes_serv[sl])}</h3>\n'
-        f'        <p>{html.escape(por_slug[sl]["pitch"])}</p>\n'
-        f'        <ul class="check">' + "".join(f"<li>{html.escape(b)}</li>" for b in por_slug[sl]["beneficios"]) + '</ul>\n'
-        f'        <a class="link-arrow" href="/{sl}">Ver detalhes <span aria-hidden="true">→</span></a>\n'
-        f'      </article>'
-        for sl in ordem)
+    atalhos = "\n".join(
+        f'        <li><a href="/{x["slug"]}">{html.escape(nomes_serv[x["slug"]])}</a></li>' for x in SERVICOS)
     if perto:
         passos = [("Conversa inicial", "Você chama no WhatsApp e a gente entende o que o seu negócio precisa."),
                   ("Diagnóstico no seu negócio", f"Vamos até a sua empresa em {nome} (ou fazemos por vídeo, se preferir), sem custo."),
@@ -800,23 +791,17 @@ def pagina_cidade(c):
     <div class="pains">
 {segs}
     </div>
-  </div>
-</section>
-
-<section class="sec sec-alt">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="kicker">Serviços</span>
-      <h2 class="h2">Tudo o que a sua empresa em {html.escape(nome)} precisa</h2>
-      <p class="sub">O site atrai, o agente atende, a automação e o sistema organizam. Comece pelo que mais dói hoje.</p>
-    </div>
-    <div class="svc-cards">
-{servs}
+    <div class="svc-links reveal">
+      <p>Conheça cada serviço em detalhes:</p>
+      <ul class="chips">
+{atalhos}
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="sec" id="como-funciona">
+
+<section class="sec sec-alt" id="como-funciona">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Como atendemos {html.escape(nome)}</span>
