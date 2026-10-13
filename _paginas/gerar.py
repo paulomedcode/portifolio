@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Gera as páginas internas do site (serviços, e depois as cidades) a partir do conteúdo deste arquivo.
+"""Gera as páginas internas do site (serviços, cidades e "onde atendemos") a partir do conteúdo deste arquivo.
 
 Uso:  python3 _paginas/gerar.py
 Cada página vira um .html na raiz do projeto (a Vercel serve /criacao-de-sites a partir de criacao-de-sites.html)
-e o sitemap.xml é refeito com todas elas. Edite o texto aqui, nunca direto no .html gerado.
+as cidades vão pra cidades/<slug>.html, e o sitemap.xml é refeito com todas elas.
+O texto das cidades fica em _paginas/cidades.py. Edite o texto aqui, nunca direto no .html gerado.
 A pasta _paginas não vai pro ar (está no .vercelignore).
 """
 import html
@@ -11,6 +12,8 @@ import json
 from datetime import date
 from pathlib import Path
 from urllib.parse import quote
+
+from cidades import CIDADES
 
 RAIZ = Path(__file__).resolve().parent.parent
 SITE = "https://medcodedev.com"
@@ -361,6 +364,7 @@ def head(title, desc, caminho, jsonld):
 
 def footer():
     servicos = "\n".join(f'        <a href="/{s["slug"]}">{html.escape(s["curto"])}</a>' for s in SERVICOS)
+    cidades = " · ".join(f'<a href="/cidades/{c["slug"]}">{html.escape(c["nome"])}</a>' for c in CIDADES)
     return f"""
 <footer class="footer">
   <div class="wrap footer-top">
@@ -385,6 +389,10 @@ def footer():
         <a href="mailto:contato@medcodedev.com">contato@medcodedev.com</a>
       </div>
     </div>
+  </div>
+  <div class="wrap footer-cities">
+    <h2 class="footer-h"><a href="/onde-atendemos">Onde atendemos</a></h2>
+    <p>{cidades} · <a href="/onde-atendemos">e todo o Brasil</a></p>
   </div>
   <div class="footer-bottom"><div class="wrap">© MedCode Assessoria · 68.955.873 Paulo Nogueira Januario · CNPJ 68.955.873/0001-91</div></div>
 </footer>
@@ -627,6 +635,246 @@ def pagina_servico(s):
     return head(s["title"], s["desc"], s["slug"], jsonld) + corpo + footer()
 
 
+# ---------------------------------------------------------------- páginas de cidade
+
+REGIOES = ["Interior de São Paulo", "Norte", "Nordeste"]
+
+
+def lista_cidades(atual=None):
+    blocos = []
+    for r in REGIOES:
+        atual_attr = ' aria-current="page"'
+        links = "\n".join(
+            f'        <li><a href="/cidades/{c["slug"]}"{atual_attr if c["slug"] == atual else ""}>{html.escape(c["nome"])} <small>{c["uf"]}</small></a></li>'
+            for c in CIDADES if c["regiao"] == r)
+        blocos.append(f'    <div class="reveal">\n      <h3 class="chips-h">{r}</h3>\n      <ul class="chips">\n{links}\n      </ul>\n    </div>')
+    return "\n".join(blocos)
+
+
+def pagina_cidade(c):
+    nome, slug = c["nome"], c["slug"]
+    url = f"{SITE}/cidades/{slug}"
+    origem = "cidade-" + slug
+    perto = c["grupo"] == "sp"
+    jeito = (f"Atendimento presencial em {nome} e região" if perto
+             else "Atendimento por vídeo e WhatsApp, no seu horário")
+    title = f"Sites, Agente de IA e Automação em {nome} - {c['uf']} | MedCode"
+    desc = (f"Criação de sites, agente de IA para WhatsApp, automação e sistemas para empresas de {nome} ({c['uf']}). "
+            + ("Atendimento presencial na região." if perto else "Atendimento por vídeo e WhatsApp.") + " Diagnóstico gratuito.")
+
+    faq = [
+        (f"Vocês atendem empresas de {nome}?",
+         f"Sim. A MedCode atende pequenas e médias empresas de {nome} e de todo o estado de {c['estado']}, "
+         + ("com diagnóstico e visitas presenciais quando fizer sentido." if perto
+            else "com reuniões por vídeo e acompanhamento pelo WhatsApp.")),
+        (f"Quanto custa um site ou um agente de IA em {nome}?",
+         "Os valores são os mesmos em qualquer cidade: sites a partir de R$ 400 (ou grátis no combo com 6 meses de agente gerenciado), "
+         "agente de IA com plataforma a partir de R$ 147/mês mais a implantação, e sistemas, automação e consultoria com valor definido no diagnóstico gratuito."),
+        c["faq_extra"],
+        ("Quanto tempo leva pra ficar pronto?",
+         "Trabalhamos com entregas em dias, não em meses. O prazo exato depende do projeto e já vem escrito na proposta."),
+        ("Preciso entender de tecnologia?",
+         "Não. Você só precisa conhecer o seu negócio. Toda a parte técnica fica com a gente, e na entrega mostramos como usar no dia a dia."),
+    ]
+
+    jsonld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Service", "@id": url + "#servico",
+             "name": f"Sites, agentes de IA, automação e sistemas em {nome}",
+             "serviceType": "Criação de sites, agentes de IA para WhatsApp, automação e sistemas personalizados",
+             "description": desc, "url": url, "provider": {"@id": SITE + "/#org"},
+             "areaServed": {"@type": "City", "name": nome,
+                            "containedInPlace": {"@type": "State", "name": c["estado"]}}},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Onde atendemos", "item": SITE + "/onde-atendemos"},
+                {"@type": "ListItem", "position": 3, "name": nome, "item": url}]},
+            {"@type": "FAQPage", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
+        ],
+    }
+
+    nomes_serv = {
+        "criacao-de-sites": f"Criação de sites em {nome}",
+        "agente-de-ia-para-whatsapp": f"Agente de IA para WhatsApp em {nome}",
+        "automacao-para-empresas": f"Automação para empresas em {nome}",
+        "sistemas-personalizados": f"Sistemas personalizados em {nome}",
+        "consultoria-de-gestao": f"Consultoria de gestão em {nome}",
+    }
+    oferta = "\n".join(f'          <li><a href="/{s["slug"]}">{html.escape(s["curto"])}</a></li>' for s in SERVICOS)
+    mercado = "\n".join(f'      <p class="sub">{html.escape(p)}</p>' for p in c["mercado"])
+    raiz = ""
+    if c.get("raiz"):
+        raiz = f"""
+    <div class="callout reveal">
+      <img src="/public/quem_sou-avatar.webp" alt="Paulo Nogueira" width="64" height="64" loading="lazy">
+      <p><b>Daqui de Porto Velho</b>{html.escape(c["raiz"])}</p>
+    </div>"""
+    segs = "\n".join(
+        f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in c["segmentos"])
+    servs = "\n".join(
+        f'      <a class="reveal" href="/{s["slug"]}"><b>{html.escape(nomes_serv[s["slug"]])}</b><span>{html.escape(s["resumo"])}</span><em>Saiba mais →</em></a>'
+        for s in SERVICOS)
+    if perto:
+        passos = [("Conversa inicial", "Você chama no WhatsApp e a gente entende o que o seu negócio precisa."),
+                  ("Diagnóstico no seu negócio", f"Vamos até a sua empresa em {nome} (ou fazemos por vídeo, se preferir), sem custo."),
+                  ("Proposta e entrega", "Prazo e valor claros por escrito, e entrega em dias, não em meses."),
+                  ("Acompanhamento de perto", "Seguimos pelo WhatsApp e, quando precisa, presencialmente.")]
+    else:
+        fuso = f" Reuniões no horário de {nome}." if c.get("fuso") else ""
+        passos = [("Conversa inicial", "Você chama no WhatsApp e a gente entende o que o seu negócio precisa."),
+                  ("Diagnóstico por vídeo", "Uma videochamada gratuita pra conhecer a sua empresa e a sua rotina." + fuso),
+                  ("Proposta e entrega", "Prazo e valor claros por escrito, e entrega em dias, não em meses."),
+                  ("Acompanhamento pelo WhatsApp", "Ajustes e suporte por perto, mesmo a quilômetros de distância.")]
+    passos_html = "\n".join(
+        f'      <div class="step reveal"><div class="step-n">{n}</div><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>'
+        for n, (t, p) in enumerate(passos, 1))
+
+    corpo = f"""
+<main id="conteudo">
+<section class="hero">
+  <nav class="wrap crumbs" aria-label="Você está em">
+    <ol><li><a href="/">Início</a></li><li><a href="/onde-atendemos">Onde atendemos</a></li><li aria-current="page">{html.escape(nome)}</li></ol>
+  </nav>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><i aria-hidden="true"></i> {html.escape(nome)} · {c["uf"]}</span>
+      <h1>Sites, agentes de IA e automação para empresas de {html.escape(nome)}</h1>
+      <p class="lead">{html.escape(c["lead"])}</p>
+      <div class="ctas">
+        <a class="btn-primary" {wa(f"Oi! Tenho uma empresa em {nome} e queria conversar.", origem)}>{ICO_CHAT} Falar no WhatsApp</a>
+        <button class="btn-ghost" type="button" data-open-ana>Tirar dúvidas com a Ana</button>
+      </div>
+      <div class="founder">
+        <img src="/public/quem_sou-avatar.webp" alt="" width="44" height="44">
+        <p><b>Fundada por Paulo Nogueira</b>mais de 15 anos dentro de empresas, do atendimento à diretoria</p>
+      </div>
+    </div>
+    <aside class="offer" aria-label="O que fazemos em {attr(nome)}">
+      <p class="offer-title">O que fazemos em {html.escape(nome)}</p>
+      <ul class="check">
+{oferta}
+      </ul>
+      <p class="badge-ok">{ICO_ESCUDO}<span><b>{html.escape(jeito)}</b>. Diagnóstico gratuito e sem compromisso.</span></p>
+      <a class="btn-primary" {wa(f"Oi! Tenho uma empresa em {nome} e quero agendar o diagnóstico gratuito.", origem + "-card")}>Agendar diagnóstico gratuito</a>
+    </aside>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Empresas de {html.escape(nome)}</span>
+      <h2 class="h2">O cliente de {html.escape(nome)} pesquisa no Google e chama no WhatsApp</h2>
+{mercado}
+    </div>{raiz}
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Na prática</span>
+      <h2 class="h2">Como ajudamos os negócios de {html.escape(nome)}</h2>
+    </div>
+    <div class="pains">
+{segs}
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Serviços</span>
+      <h2 class="h2">Tudo o que a sua empresa em {html.escape(nome)} precisa</h2>
+      <p class="sub">O site atrai, o agente atende, a automação e o sistema organizam. Comece pelo que mais dói hoje.</p>
+    </div>
+    <div class="more">
+{servs}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Como atendemos {html.escape(nome)}</span>
+      <h2 class="h2">{html.escape(jeito)}</h2>
+    </div>
+    <div class="steps">
+{passos_html}
+    </div>
+  </div>
+</section>
+{bloco_ana(origem + "-ana")}{faq_html(faq)}
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Onde atendemos</span>
+      <h2 class="h2">Também estamos em</h2>
+      <p class="sub">E em qualquer cidade do Brasil, por vídeo e WhatsApp.</p>
+    </div>
+    <div class="regioes">
+{lista_cidades(slug)}
+    </div>
+  </div>
+</section>
+</main>
+"""
+    return head(title, desc, f"cidades/{slug}", jsonld) + corpo + footer()
+
+
+def pagina_onde_atendemos():
+    url = f"{SITE}/onde-atendemos"
+    title = "Onde Atendemos: Sites, Agentes de IA e Automação | MedCode"
+    desc = ("A MedCode atende pequenas e médias empresas de todo o Brasil, com atendimento presencial na região de Sorocaba "
+            "e por vídeo e WhatsApp nas capitais do Norte e do Nordeste.")
+    jsonld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Onde atendemos", "item": url}]},
+        ],
+    }
+    corpo = f"""
+<main id="conteudo">
+<section class="hero">
+  <nav class="wrap crumbs" aria-label="Você está em">
+    <ol><li><a href="/">Início</a></li><li aria-current="page">Onde atendemos</li></ol>
+  </nav>
+  <div class="wrap hero-grid hero-solo">
+    <div>
+      <span class="eyebrow"><i aria-hidden="true"></i> Todo o Brasil</span>
+      <h1>Onde a MedCode atende</h1>
+      <p class="lead">Atendemos pequenas e médias empresas de <strong>todo o Brasil</strong>. Na região de Sorocaba, dá pra fazer o diagnóstico e as visitas presencialmente. Nas outras cidades, tudo acontece por vídeo e WhatsApp, com a mesma proximidade.</p>
+      <div class="ctas">
+        <a class="btn-primary" {wa("Oi! Queria saber se vocês atendem a minha cidade.", "onde-atendemos")}>{ICO_CHAT} Falar no WhatsApp</a>
+        <button class="btn-ghost" type="button" data-open-ana>Tirar dúvidas com a Ana</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Cidades</span>
+      <h2 class="h2">Escolha a sua cidade</h2>
+      <p class="sub">Não achou a sua? Sem problema: atendemos qualquer cidade do Brasil, por vídeo e WhatsApp.</p>
+    </div>
+    <div class="regioes">
+{lista_cidades()}
+    </div>
+  </div>
+</section>
+{bloco_ana("onde-atendemos-ana")}</main>
+"""
+    return head(title, desc, "onde-atendemos", jsonld) + corpo + footer()
+
+
 def sitemap(caminhos):
     urls = "\n".join(f"  <url><loc>{SITE}/{c}</loc><lastmod>{HOJE}</lastmod></url>" for c in caminhos)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n'
@@ -638,5 +886,12 @@ if __name__ == "__main__":
         (RAIZ / f"{s['slug']}.html").write_text(pagina_servico(s), encoding="utf-8")
         caminhos.append(s["slug"])
         print("ok", s["slug"])
+    (RAIZ / "onde-atendemos.html").write_text(pagina_onde_atendemos(), encoding="utf-8")
+    caminhos.append("onde-atendemos")
+    (RAIZ / "cidades").mkdir(exist_ok=True)
+    for c in CIDADES:
+        (RAIZ / "cidades" / f"{c['slug']}.html").write_text(pagina_cidade(c), encoding="utf-8")
+        caminhos.append(f"cidades/{c['slug']}")
+        print("ok cidades/" + c["slug"])
     (RAIZ / "sitemap.xml").write_text(sitemap(caminhos), encoding="utf-8")
     print("ok sitemap.xml,", len(caminhos), "URLs")
