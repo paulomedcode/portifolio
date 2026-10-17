@@ -111,4 +111,19 @@ A Center Clínica é uma clínica fictícia criada pela MedCode Assessoria para 
 ```
 
 ## Configurações
-Iguais às da Ana: tempo de resposta 5 s, não dividir resposta em partes, agrupar mensagens 10 s, limite de 50 interações, restringir temas, fuso America/Sao_Paulo, sem integração de agenda (o C06 oferece horários de exemplo).
+- **Modelo:** GPT-6 Luna (1 crédito por resposta). Testado em 17/10 e respondeu bem (convênio, preços, preparo e urgência). Se ficar confusa, trocar pro GPT-6.1 Sol (5 créditos), o mesmo da Ana.
+- **Iguais às da Ana:** emojis ligados, restringir temas, não dividir resposta em partes, lembretes, consultar dados, busca inteligente, tempo de resposta 5 s, fuso America/Sao_Paulo.
+- **Limite de interações:** 20 por conversa, com "Bloquear por 5 min" (é demonstração pública, protege os créditos).
+- **Agenda:** sem integração (o C06 oferece horários de exemplo).
+
+## Canal no site (Web Chat "Demo Clínica (Site)")
+- **Token:** 3FAC84C8CBEEC38AC8E4128A6E7E0DD8, acesso Público.
+- **Onde aparece:** dentro do iPhone da seção "Demonstração ao vivo" em medcodedev.com/saude#demonstracao. O chat só carrega quando a pessoa toca em "Toque para conversar".
+- **Mensagem inicial:** "Oi! 😊 Aqui é a Mariana, da recepção da Center Clínica. Como posso te ajudar?"
+- **Perguntas rápidas:** Quero marcar uma consulta · Quanto custa a consulta com ortopedista? · Vocês aceitam Unimed?
+- **Aparência:** título "Mariana · Center Clínica", saudação "Center Clínica / Recepção online, responde na hora", foto da Mariana com crachá, cor de fundo #075E54 e mensagem do paciente #00A884 (verde do WhatsApp).
+
+## Como usar na venda
+- Mandar o link medcodedev.com/saude#demonstracao pro médico ou gestor testar do celular, inclusive com áudio.
+- Na visita, abrir a página e deixar a pessoa conversar com a Mariana.
+- Para uma clínica de verdade: copiar este agente, trocar a ficha e os treinamentos pelos dados reais (modelo em "Agente modelo – Clínicas (base)") e mostrar com o nome da própria clínica.
