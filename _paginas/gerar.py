@@ -375,7 +375,7 @@ def head(title, desc, caminho, jsonld):
 
 
 def footer():
-    servicos = "\n".join(f'        <a href="/{s["slug"]}">{html.escape(s["curto"])}</a>' for s in SERVICOS)
+    servicos = "\n".join(f'        <a href="/{s["slug"]}">{html.escape(s["curto"])}</a>' for s in SERVICOS) + '\n        <a href="/clinicas">Para clínicas e consultórios</a>'
     cidades = " · ".join(f'<a href="/cidades/{c["slug"]}">{html.escape(c["nome"])}</a>' for c in CIDADES)
     return f"""
 <footer class="footer">
@@ -897,6 +897,216 @@ def pagina_onde_atendemos():
     return head(title, desc, "onde-atendemos", jsonld) + corpo + footer()
 
 
+# ---------------------------------------------------------------- página para clínicas
+
+CLINICAS_FAQ = [
+    ("O agente pode dar orientação médica?", "Não. Ele é treinado como recepção: tira dúvidas sobre serviços, convênios, horários e endereço, e agenda. Nunca dá diagnóstico, não interpreta exame e não indica remédio. Quando o paciente pede isso, ele acolhe e oferece o horário com o profissional."),
+    ("E se o paciente relatar uma urgência?", "O agente reconhece os sinais de urgência (dor forte no peito, falta de ar, sangramento que não para, entre outros), orienta na hora a procurar o pronto-socorro ou ligar 192 e passa a conversa para a sua equipe."),
+    ("Integra com o sistema que a clínica já usa?", "Depende do sistema: muitos permitem integração, e aí o agente marca direto na agenda. Quando não dá, o agente faz todo o atendimento e entrega para a recepção um resumo pronto, só para confirmar o horário. Dá para começar assim e integrar depois, sem retrabalho."),
+    ("E a LGPD?", "O agente pede só o necessário para agendar (nome, telefone e convênio) e nunca pede CPF, senha ou dados de cartão. As conversas ficam com a clínica, e a equipe acompanha e assume quando quiser."),
+    ("Paciente mais velho consegue usar?", "Consegue, porque ele conversa como uma pessoa, uma mensagem por vez, e entende áudio. O paciente pode mandar áudio e foto do pedido médico ou da carteirinha, do jeito que já faz hoje."),
+    ("Quanto custa?", "A plataforma do agente custa a partir de R$ 147 por mês, mais a implantação, com valor definido na conversa. Tem garantia de 30 dias: se no primeiro mês não fizer sentido para a clínica, devolvemos o valor da implantação."),
+]
+
+def pagina_clinicas():
+    slug = "clinicas"
+    url = f"{SITE}/{slug}"
+    origem = "pagina-clinicas"
+    title = "Agente de IA para Clínicas e Consultórios | MedCode Assessoria"
+    desc = ("Agente de IA no WhatsApp para clínicas, consultórios e dentistas: agenda, confirma e reduz faltas, "
+            "entende áudio e foto do pedido médico. Feito por quem já foi COO de um grupo médico.")
+    jsonld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Service", "@id": url + "#servico", "name": "Agente de IA e tecnologia para clínicas e consultórios",
+             "serviceType": "Agente de IA para WhatsApp de clínicas", "description": desc, "url": url,
+             "provider": {"@id": SITE + "/#org"}, "areaServed": {"@type": "Country", "name": "Brasil"},
+             "audience": {"@type": "Audience", "audienceType": "Clínicas, consultórios, dentistas e centros de diagnóstico"}},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Para clínicas", "item": url}]},
+            {"@type": "FAQPage", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in CLINICAS_FAQ]},
+        ],
+    }
+    dores = [
+        ("“A mensagem chega às 22h e só é respondida às 9h”", "Nesse intervalo, o paciente marca em outra clínica. Quem procura atendimento de saúde quer resposta rápida, principalmente com dor ou preocupado."),
+        ("“O paciente falta e não avisa”", "Sem confirmação e lembrete na véspera, o horário fica vago e não dá tempo de encaixar outra pessoa."),
+        ("“A recepção não dá conta de tudo”", "Telefone, balcão e WhatsApp ao mesmo tempo. A mensagem fica esperando, e o paciente que está na clínica também."),
+        ("“O paciente repete o pedido três vezes”", "Menu de opções, mensagens automáticas em sequência e informação diferente no site, no Google e no WhatsApp cansam quem só queria marcar."),
+    ]
+    seguro = [
+        ("Nunca dá orientação clínica", "Não dá diagnóstico, não interpreta exame e não indica remédio. Leva o paciente para o profissional."),
+        ("Reconhece urgência", "Diante de sinais de urgência, orienta pronto-socorro ou 192 na hora e chama a sua equipe."),
+        ("Entende áudio e foto", "Lê a foto do pedido médico e da carteirinha, identifica o exame e o convênio e segue para o agendamento."),
+        ("Agenda, confirma e lembra", "Oferece horários livres, confirma com endereço e o que levar, e lembra na véspera para reduzir faltas."),
+        ("Passa para a recepção", "Quando o assunto pede uma pessoa, a recepção assume no mesmo número, com o histórico da conversa."),
+        ("Só o dado necessário", "Pede nome, telefone e convênio. Nunca CPF, senha ou dados de cartão, com atenção à LGPD."),
+    ]
+    nichos = [
+        ("Odontologia", "Avaliação, limpeza, aparelho e implante: o agente agenda, explica que tratamentos maiores dependem da avaliação e prioriza dor e urgência."),
+        ("Clínica médica e consultório", "Consultas por especialidade e convênio, retorno, teleconsulta e orientação do que levar. Receita e atestado, só com o médico."),
+        ("Estética", "Leva para a avaliação sem prometer resultado, responde sobre valores autorizados e não envia fotos de antes e depois."),
+        ("Exames e imagem", "Lê o pedido médico pela foto, avisa quando o convênio pede autorização e envia o preparo de cada exame do jeito da clínica."),
+        ("Psicologia", "Agenda sessões respeitando o sigilo: não pede que a pessoa conte o caso por mensagem e, em crise, orienta o CVV (188) e chama a profissional."),
+        ("Fornecedores da saúde", "OPME e distribuidoras: um número para médicos, secretárias e hospitais, com ficha pronta para o orçamento."),
+    ]
+    dores_html = "\n".join(f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in dores)
+    seguro_html = "\n".join(
+        f'      <div class="feat reveal"><span class="feat-n" aria-hidden="true">{n:02d}</span><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>'
+        for n, (t, p) in enumerate(seguro, 1))
+    nichos_html = "\n".join(f'      <div class="pain reveal"><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>' for t, p in nichos)
+    outros = "\n".join(
+        f'      <a class="reveal" href="/{o["slug"]}"><b>{html.escape(o["curto"])}</b><span>{html.escape(o["resumo"])}</span><em>Saiba mais →</em></a>'
+        for o in SERVICOS if o["slug"] != "agente-de-ia-para-whatsapp")
+    passos = [
+        ("Demonstração com a sua clínica", "Montamos um agente de teste com os serviços, convênios e horários da sua clínica, para você conversar como paciente. Sem custo."),
+        ("Treinamento", "O agente aprende as regras da clínica: agenda, preparos, convênios, valores autorizados e o jeito de falar com o paciente."),
+        ("No ar", "Conectamos ao WhatsApp da clínica e a recepção passa a atender junto, no mesmo número."),
+        ("Ajuste fino", "No primeiro mês acompanhamos as conversas reais e afinamos o que for preciso."),
+    ]
+    passos_html = "\n".join(
+        f'      <div class="step reveal"><div class="step-n">{n}</div><h3>{html.escape(t)}</h3><p>{html.escape(p)}</p></div>'
+        for n, (t, p) in enumerate(passos, 1))
+    vs = {
+        "a": ("Como costuma ser hoje", "Mensagem automática, menu e espera.",
+              ["Sequência de mensagens automáticas antes da primeira pergunta", "“Digite 1 para agendamento…”", "Fora do horário, resposta só no dia seguinte", "Paciente repete o que já tinha dito"]),
+        "b": ("Com o agente da MedCode", "Uma conversa de recepção, a qualquer hora.",
+              ["Uma mensagem por vez, em linguagem simples", "Entende áudio e a foto do pedido médico", "Agenda à noite, no sábado e no feriado", "Confirma e lembra na véspera"]),
+    }
+    def col(c, cls):
+        li = "\n".join(f"          <li>{html.escape(x)}</li>" for x in c[2])
+        return (f'      <div class="vs-col {cls} reveal">\n        <h3>{html.escape(c[0])}</h3>\n        <p>{html.escape(c[1])}</p>\n'
+                f'        <ul>\n{li}\n        </ul>\n      </div>')
+    oferta = ["Agente de IA que agenda, confirma e lembra", "Entende áudio e foto do pedido médico", "Seguro: nunca dá orientação clínica",
+              "A recepção atende junto, no mesmo número", "Demonstração com os dados da sua clínica"]
+    oferta_html = "\n".join(f"          <li>{html.escape(i)}</li>" for i in oferta)
+
+    corpo = f"""
+<main id="conteudo">
+<section class="hero">
+  <nav class="wrap crumbs" aria-label="Você está em">
+    <ol><li><a href="/">Início</a></li><li aria-current="page">Para clínicas</li></ol>
+  </nav>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><i aria-hidden="true"></i> Para clínicas e consultórios</span>
+      <h1>Tecnologia para clínicas, feita por quem já geriu clínica</h1>
+      <p class="lead">Antes de criar a MedCode, Paulo Nogueira foi <strong>COO de um grupo médico</strong>: conduziu a expansão para 5 novos hospitais e clínicas, ajudou a quase triplicar o faturamento e programou o sistema que tirou a operação das planilhas. Hoje ele leva esse conhecimento para a sua clínica, começando pelo WhatsApp.</p>
+      <div class="ctas">
+        <a class="btn-primary" {wa("Oi! Tenho uma clínica e quero ver uma demonstração do agente com os dados da minha clínica.", origem)}>{ICO_CHAT} Quero uma demonstração</a>
+        <button class="btn-ghost" type="button" data-open-ana>Testar a Ana agora</button>
+      </div>
+      <div class="founder">
+        <img src="/public/quem_sou-avatar.webp" alt="" width="44" height="44">
+        <p><b>Paulo Nogueira, fundador</b>do atendimento à diretoria, ex-COO de grupo médico</p>
+      </div>
+    </div>
+    <aside class="offer" aria-label="O que a sua clínica ganha">
+      <p class="offer-title">O que a sua clínica ganha</p>
+      <ul class="check">
+{oferta_html}
+      </ul>
+      <p class="price">plataforma a partir de <b>R$ 147/mês</b><small>+ implantação, com valor definido na conversa</small></p>
+      <p class="badge-ok">{ICO_ESCUDO}<span><b>Garantia de 30 dias:</b> se no primeiro mês não fizer sentido para a clínica, devolvemos o valor da implantação.</span></p>
+      <a class="btn-primary" {wa("Oi! Quero agendar uma demonstração do agente para a minha clínica.", origem + "-card")}>Agendar demonstração gratuita</a>
+    </aside>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Onde a clínica perde paciente</span>
+      <h2 class="h2">Eu via isso todo dia na gestão</h2>
+      <p class="sub">E quase sempre o problema não é o atendimento presencial, é o que acontece antes de o paciente chegar.</p>
+    </div>
+    <div class="pains">
+{dores_html}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Hoje × com o agente</span>
+      <h2 class="h2">Não é chatbot de “digite 1”</h2>
+    </div>
+    <div class="vs">
+{col(vs["a"], "ruim")}
+{col(vs["b"], "bom")}
+    </div>
+    <p class="vs-note reveal"><b>Quer sentir a diferença?</b> Converse com a Ana, a nossa agente, do jeito que um paciente faria. Mande até um áudio.</p>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Seguro para falar com paciente</span>
+      <h2 class="h2">Recepção de verdade, com os limites certos</h2>
+      <p class="sub">O medo de colocar IA falando com paciente é legítimo. Por isso o agente é treinado como recepção, nunca como profissional de saúde.</p>
+    </div>
+    <div class="feats">
+{seguro_html}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Por especialidade</span>
+      <h2 class="h2">Cada área tem as suas regras</h2>
+    </div>
+    <div class="pains">
+{nichos_html}
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap about-row">
+    <img class="reveal" src="/public/quem_sou.webp" alt="Paulo Nogueira, fundador da MedCode Assessoria" width="1000" height="750" loading="lazy">
+    <div class="reveal">
+      <span class="kicker">Quem está por trás</span>
+      <h2 class="h2">Do balcão da recepção à diretoria</h2>
+      <p class="sub">O Paulo começou no atendimento, passou pelo faturamento e pela gerência e chegou a diretor executivo e COO de um grupo médico. Sabe como a recepção trabalha, onde o paciente se perde e o que pesa no caixa. É por isso que a tecnologia da MedCode resolve o problema da clínica, e não só instala uma ferramenta.</p>
+{TRAJETORIA}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Como funciona</span>
+      <h2 class="h2">Comece vendo funcionando na sua clínica</h2>
+    </div>
+    <div class="steps">
+{passos_html}
+    </div>
+  </div>
+</section>
+{bloco_ana(origem + "-ana")}{faq_html(CLINICAS_FAQ)}
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Além do WhatsApp</span>
+      <h2 class="h2">O que mais a MedCode faz pela clínica</h2>
+      <p class="sub">Site e Google para o paciente encontrar, sistema para organizar agenda e financeiro, e consultoria de gestão com quem já foi COO.</p>
+    </div>
+    <div class="more">
+{outros}
+    </div>
+  </div>
+</section>
+</main>
+"""
+    return head(title, desc, slug, jsonld) + corpo + footer()
+
+
 def sitemap(caminhos):
     urls = "\n".join(f"  <url><loc>{SITE}/{c}</loc><lastmod>{HOJE}</lastmod></url>" for c in caminhos)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n'
@@ -908,6 +1118,8 @@ if __name__ == "__main__":
         (RAIZ / f"{s['slug']}.html").write_text(pagina_servico(s), encoding="utf-8")
         caminhos.append(s["slug"])
         print("ok", s["slug"])
+    (RAIZ / "clinicas.html").write_text(pagina_clinicas(), encoding="utf-8")
+    caminhos.append("clinicas")
     (RAIZ / "onde-atendemos.html").write_text(pagina_onde_atendemos(), encoding="utf-8")
     caminhos.append("onde-atendemos")
     (RAIZ / "cidades").mkdir(exist_ok=True)
