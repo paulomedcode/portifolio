@@ -40,9 +40,9 @@
     });
   }
 
-  // Botão flutuante da Ana: fica escondido na primeira tela e quando já há um botão da Ana à vista
+  // Botão flutuante da Ana: fica escondido na primeira tela e quando já há um botão da Ana (ou o chat da demonstração) à vista
   var float = document.querySelector('.wa-float');
-  var watch = document.querySelectorAll('.hero, section.ana, #contato');
+  var watch = document.querySelectorAll('.hero, section.ana, #contato, .iphone');
   if (float && watch.length && 'IntersectionObserver' in window) {
     var visible = new Set();
     var fo = new IntersectionObserver(function (entries) {
