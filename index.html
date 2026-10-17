@@ -282,6 +282,18 @@
   .sys-note b { display: block; font-size: 11px; }
   .sys-note small { display: block; font-size: 10px; color: #c9c2e0; font-weight: 600; }
 
+  /* destaque: área da saúde */
+  .nicho { display: flex; align-items: center; gap: 18px; margin-top: 22px; padding: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, #3b2bb8 0%, #6d4aff 70%); color: #fff; transition: transform .2s, box-shadow .2s; }
+  .nicho:hover { transform: translateY(-2px); box-shadow: 0 24px 50px -30px rgba(81,54,217,.8); }
+  .nicho-ico { flex: none; width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.14); display: flex; align-items: center; justify-content: center; }
+  .nicho-txt { flex: 1; min-width: 0; }
+  .nicho-tag { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #d9d2ff; }
+  .nicho-tag, .nicho-h, .nicho-p { display: block; }
+  .nicho-h { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -.02em; margin: 4px 0 0; }
+  .nicho-p { margin: 4px 0 0; font-size: 15px; line-height: 1.55; color: #e6e0ff; }
+  .nicho-cta { flex: none; display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--roxo-d); font-weight: 800; font-size: 15px; padding: 13px 18px; border-radius: 12px; white-space: nowrap; }
+  @media (max-width: 760px) { .nicho { flex-direction: column; align-items: flex-start; } .nicho-cta { width: 100%; justify-content: center; } }
+
   /* consultoria */
   .consult { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; margin-top: 22px; padding: 28px 32px; border-radius: 22px; border: 1px solid var(--line); background: #fff; position: relative; overflow: hidden; }
   .consult::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(#f59e0b, #b45309); }
@@ -739,6 +751,16 @@
         </div>
       </article>
     </div>
+
+    <a class="nicho reveal" href="/saude">
+      <span class="nicho-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/><path d="M12 9v4M10 11h4"/></svg></span>
+      <span class="nicho-txt">
+        <span class="nicho-tag">Médicos, clínicas e área da saúde</span>
+        <strong class="nicho-h">Tem clínica ou consultório?</strong>
+        <span class="nicho-p">Veja como o agente atende paciente com segurança, feito por quem já foi da recepção à diretoria de clínicas.</span>
+      </span>
+      <span class="nicho-cta">Ver página da saúde <span aria-hidden="true">→</span></span>
+    </a>
 
     <aside class="consult reveal" id="consultoria" aria-labelledby="consult-title">
       <img class="consult-photo" src="public/quem_sou-avatar.webp" alt="Paulo Nogueira" width="96" height="96" loading="lazy">
