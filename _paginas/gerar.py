@@ -375,7 +375,7 @@ def head(title, desc, caminho, jsonld):
 
 
 def footer():
-    servicos = "\n".join(f'        <a href="/{s["slug"]}">{html.escape(s["curto"])}</a>' for s in SERVICOS) + '\n        <a href="/clinicas">Para clínicas e consultórios</a>'
+    servicos = "\n".join(f'        <a href="/{s["slug"]}">{html.escape(s["curto"])}</a>' for s in SERVICOS) + '\n        <a href="/saude">Médicos, clínicas e saúde</a>'
     cidades = " · ".join(f'<a href="/cidades/{c["slug"]}">{html.escape(c["nome"])}</a>' for c in CIDADES)
     return f"""
 <footer class="footer">
@@ -897,7 +897,7 @@ def pagina_onde_atendemos():
     return head(title, desc, "onde-atendemos", jsonld) + corpo + footer()
 
 
-# ---------------------------------------------------------------- página para clínicas
+# ---------------------------------------------------------------- página para médicos, clínicas e área da saúde
 
 CLINICAS_FAQ = [
     ("O agente pode dar orientação médica?", "Não. Ele é treinado como recepção: tira dúvidas sobre serviços, convênios, horários e endereço, e agenda. Nunca dá diagnóstico, não interpreta exame e não indica remédio. Quando o paciente pede isso, ele acolhe e oferece o horário com o profissional."),
@@ -909,31 +909,33 @@ CLINICAS_FAQ = [
 ]
 
 def pagina_clinicas():
-    slug = "clinicas"
+    slug = "saude"
     url = f"{SITE}/{slug}"
-    origem = "pagina-clinicas"
-    title = "Agente de IA para Clínicas e Consultórios | MedCode Assessoria"
-    desc = ("Agente de IA no WhatsApp para clínicas, consultórios e dentistas: agenda, confirma e reduz faltas, "
-            "entende áudio e foto do pedido médico. Feito por quem já foi COO de um grupo médico.")
+    origem = "pagina-saude"
+    title = "Tecnologia para Médicos, Clínicas e Área da Saúde | MedCode"
+    desc = ("Agente de IA no WhatsApp para médicos, clínicas, dentistas e empresas da saúde: agenda, confirma e reduz faltas, "
+            "entende áudio e foto do pedido médico. Feito por quem já foi da recepção à diretoria de clínicas.")
     jsonld = {
         "@context": "https://schema.org",
         "@graph": [
-            {"@type": "Service", "@id": url + "#servico", "name": "Agente de IA e tecnologia para clínicas e consultórios",
+            {"@type": "Service", "@id": url + "#servico", "name": "Agente de IA e tecnologia para médicos, clínicas e área da saúde",
              "serviceType": "Agente de IA para WhatsApp de clínicas", "description": desc, "url": url,
              "provider": {"@id": SITE + "/#org"}, "areaServed": {"@type": "Country", "name": "Brasil"},
-             "audience": {"@type": "Audience", "audienceType": "Clínicas, consultórios, dentistas e centros de diagnóstico"}},
+             "audience": {"@type": "Audience", "audienceType": "Médicos, clínicas, consultórios, dentistas, centros de diagnóstico e empresas da saúde"}},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE + "/"},
-                {"@type": "ListItem", "position": 2, "name": "Para clínicas", "item": url}]},
+                {"@type": "ListItem", "position": 2, "name": "Área da saúde", "item": url}]},
             {"@type": "FAQPage", "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in CLINICAS_FAQ]},
         ],
     }
     dores = [
-        ("“A mensagem chega às 22h e só é respondida às 9h”", "Nesse intervalo, o paciente marca em outra clínica. Quem procura atendimento de saúde quer resposta rápida, principalmente com dor ou preocupado."),
+        ("“O paciente manda mensagem e a recepção demora a responder”", "Quem escreve para uma clínica geralmente está doente, ou cuidando de alguém doente, e tem pressa. Cada minuto sem resposta pesa, e a próxima clínica da lista está a um toque."),
+        ("“A mensagem chega às 22h e só é respondida às 9h”", "Nesse intervalo, o paciente marca em outra clínica. Noite, fim de semana e feriado são justamente quando a dúvida aparece."),
+        ("“Não entendi. Digite 1 para…”", "O robô de menu nem sempre tem a opção que o paciente procura. Se ele escreve de outro jeito, ouve de volta “não entendi, digite 1 para isso, 2 para aquilo”, desiste e fica impaciente."),
         ("“O paciente falta e não avisa”", "Sem confirmação e lembrete na véspera, o horário fica vago e não dá tempo de encaixar outra pessoa."),
         ("“A recepção não dá conta de tudo”", "Telefone, balcão e WhatsApp ao mesmo tempo. A mensagem fica esperando, e o paciente que está na clínica também."),
-        ("“O paciente repete o pedido três vezes”", "Menu de opções, mensagens automáticas em sequência e informação diferente no site, no Google e no WhatsApp cansam quem só queria marcar."),
+        ("“Cada canal fala uma coisa”", "Horário de um jeito no site, de outro no Google e de outro no WhatsApp. O paciente fica sem saber em qual acreditar e repete a pergunta."),
     ]
     seguro = [
         ("Nunca dá orientação clínica", "Não dá diagnóstico, não interpreta exame e não indica remédio. Leva o paciente para o profissional."),
@@ -970,9 +972,9 @@ def pagina_clinicas():
         for n, (t, p) in enumerate(passos, 1))
     vs = {
         "a": ("Como costuma ser hoje", "Mensagem automática, menu e espera.",
-              ["Sequência de mensagens automáticas antes da primeira pergunta", "“Digite 1 para agendamento…”", "Fora do horário, resposta só no dia seguinte", "Paciente repete o que já tinha dito"]),
+              ["“Digite 1 para agendamento, 2 para exames…”", "Escreveu diferente? “Não entendi, digite uma opção”", "Fora do horário, resposta só no dia seguinte", "Paciente desiste no meio e procura outra clínica"]),
         "b": ("Com o agente da MedCode", "Uma conversa de recepção, a qualquer hora.",
-              ["Uma mensagem por vez, em linguagem simples", "Entende áudio e a foto do pedido médico", "Agenda à noite, no sábado e no feriado", "Confirma e lembra na véspera"]),
+              ["Entende o que o paciente escreve, do jeito dele", "Entende áudio e a foto do pedido médico", "Responde e agenda à noite, no sábado e no feriado", "Confirma e lembra na véspera"]),
     }
     def col(c, cls):
         li = "\n".join(f"          <li>{html.escape(x)}</li>" for x in c[2])
@@ -986,20 +988,20 @@ def pagina_clinicas():
 <main id="conteudo">
 <section class="hero">
   <nav class="wrap crumbs" aria-label="Você está em">
-    <ol><li><a href="/">Início</a></li><li aria-current="page">Para clínicas</li></ol>
+    <ol><li><a href="/">Início</a></li><li aria-current="page">Área da saúde</li></ol>
   </nav>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow"><i aria-hidden="true"></i> Para clínicas e consultórios</span>
-      <h1>Tecnologia para clínicas, feita por quem já geriu clínica</h1>
-      <p class="lead">Antes de criar a MedCode, Paulo Nogueira foi <strong>COO de um grupo médico</strong>: conduziu a expansão para 5 novos hospitais e clínicas, ajudou a quase triplicar o faturamento e programou o sistema que tirou a operação das planilhas. Hoje ele leva esse conhecimento para a sua clínica, começando pelo WhatsApp.</p>
+      <span class="eyebrow"><i aria-hidden="true"></i> Médicos, clínicas e área da saúde</span>
+      <h1>Tecnologia para médicos e clínicas, feita por quem entende</h1>
+      <p class="lead">Antes de criar a MedCode, Paulo Nogueira passou por <strong>todas as cadeiras dentro de clínicas e empresas médicas</strong>: foi recepcionista, coordenador de atendimento, faturista, gerente e diretor executivo. Conduziu a expansão para novos contratos, ajudando a mais que dobrar o faturamento das empresas, e usou a tecnologia para tirar a operação do papel e das planilhas e ter dados concretos na hora de decidir. Hoje ele leva todo esse know-how para a sua clínica, começando pelo WhatsApp.</p>
       <div class="ctas">
         <a class="btn-primary" {wa("Oi! Tenho uma clínica e quero ver uma demonstração do agente com os dados da minha clínica.", origem)}>{ICO_CHAT} Quero uma demonstração</a>
         <button class="btn-ghost" type="button" data-open-ana>Testar a Ana agora</button>
       </div>
       <div class="founder">
         <img src="/public/quem_sou-avatar.webp" alt="" width="44" height="44">
-        <p><b>Paulo Nogueira, fundador</b>do atendimento à diretoria, ex-COO de grupo médico</p>
+        <p><b>Paulo Nogueira, fundador</b>da recepção à diretoria de clínicas e empresas médicas</p>
       </div>
     </div>
     <aside class="offer" aria-label="O que a sua clínica ganha">
@@ -1072,7 +1074,7 @@ def pagina_clinicas():
     <div class="reveal">
       <span class="kicker">Quem está por trás</span>
       <h2 class="h2">Do balcão da recepção à diretoria</h2>
-      <p class="sub">O Paulo começou no atendimento, passou pelo faturamento e pela gerência e chegou a diretor executivo e COO de um grupo médico. Sabe como a recepção trabalha, onde o paciente se perde e o que pesa no caixa. É por isso que a tecnologia da MedCode resolve o problema da clínica, e não só instala uma ferramenta.</p>
+      <p class="sub">O Paulo começou como recepcionista, foi coordenador de atendimento, faturista e gerente, e chegou a diretor executivo de clínicas e empresas médicas. Sabe como a recepção trabalha, onde o paciente se perde e o que pesa no caixa. É por isso que a tecnologia da MedCode resolve o problema da clínica, e não só instala uma ferramenta.</p>
 {TRAJETORIA}
     </div>
   </div>
@@ -1095,7 +1097,7 @@ def pagina_clinicas():
     <div class="sec-head reveal">
       <span class="kicker">Além do WhatsApp</span>
       <h2 class="h2">O que mais a MedCode faz pela clínica</h2>
-      <p class="sub">Site e Google para o paciente encontrar, sistema para organizar agenda e financeiro, e consultoria de gestão com quem já foi COO.</p>
+      <p class="sub">Site e Google para o paciente encontrar, sistema para organizar agenda e financeiro, e consultoria de gestão com quem já esteve na diretoria.</p>
     </div>
     <div class="more">
 {outros}
@@ -1118,8 +1120,8 @@ if __name__ == "__main__":
         (RAIZ / f"{s['slug']}.html").write_text(pagina_servico(s), encoding="utf-8")
         caminhos.append(s["slug"])
         print("ok", s["slug"])
-    (RAIZ / "clinicas.html").write_text(pagina_clinicas(), encoding="utf-8")
-    caminhos.append("clinicas")
+    (RAIZ / "saude.html").write_text(pagina_clinicas(), encoding="utf-8")
+    caminhos.append("saude")
     (RAIZ / "onde-atendemos.html").write_text(pagina_onde_atendemos(), encoding="utf-8")
     caminhos.append("onde-atendemos")
     (RAIZ / "cidades").mkdir(exist_ok=True)
