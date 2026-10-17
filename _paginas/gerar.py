@@ -934,7 +934,7 @@ def pagina_clinicas():
         ("“A mensagem chega às 22h e só é respondida às 9h”", "Nesse intervalo, o paciente marca em outra clínica. Noite, fim de semana e feriado são justamente quando a dúvida aparece."),
         ("“Não entendi. Digite 1 para…”", "O robô de menu nem sempre tem a opção que o paciente procura. Se ele escreve de outro jeito, ouve de volta “não entendi, digite 1 para isso, 2 para aquilo”, desiste e fica impaciente."),
         ("“O paciente falta e não avisa”", "Sem confirmação e lembrete na véspera, o horário fica vago e não dá tempo de encaixar outra pessoa."),
-        ("“A recepção não dá conta de tudo”", "Telefone, balcão e WhatsApp ao mesmo tempo. A mensagem fica esperando, e o paciente que está na clínica também."),
+        ("“A recepção não dá conta de tudo”", "Telefone, balcão, WhatsApp, autorização de convênio e fechamento do caixa, tudo ao mesmo tempo. A mensagem fica esperando, e o paciente que está na clínica também."),
         ("“Cada canal fala uma coisa”", "Horário de um jeito no site, de outro no Google e de outro no WhatsApp. O paciente fica sem saber em qual acreditar e repete a pergunta."),
     ]
     seguro = [
