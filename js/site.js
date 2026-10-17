@@ -285,6 +285,43 @@
     });
   }
 
+  // ---------- Demonstração ao vivo (página da saúde) ----------
+  // O chat da clínica fictícia só carrega quando a pessoa toca no celular.
+  document.querySelectorAll('[data-demo-iniciar]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var box = btn.closest('.iphone-chat');
+      var frame = box && box.querySelector('iframe[data-demo-src]');
+      if (!frame) return;
+      if (!frame.src) frame.src = frame.getAttribute('data-demo-src');
+      box.classList.add('ligado');
+      track('demo_clinica_abrir', {});
+    });
+  });
+  // O Web Chat do GPT Maker só aparece depois de receber o contexto do visitante
+  // (mesmo protocolo de postMessage do chat da Ana, mais abaixo).
+  var demoFrame = document.querySelector('iframe[data-demo-src]');
+  if (demoFrame) {
+    var demoId = null;
+    try { demoId = sessionStorage.getItem('demoVisitante'); } catch (e) { /* sem storage */ }
+    if (!demoId) {
+      demoId = 'demo-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      try { sessionStorage.setItem('demoVisitante', demoId); } catch (e) { /* segue */ }
+    }
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'https://app.gptmaker.ai' || e.source !== demoFrame.contentWindow || !e.data) return;
+      if (e.data.type === 'gpt-maker-on-load') {
+        // modo "floating": a janela só abre depois do toggle, como no chat da Ana
+        demoFrame.contentWindow.postMessage({ type: 'gpt-maker-toogle', token: demoFrame.getAttribute('data-demo-token') }, 'https://app.gptmaker.ai');
+      } else if (e.data.type === 'gpt-maker-request-context') {
+        demoFrame.contentWindow.postMessage({
+          type: 'gpt-maker-context-response',
+          userMetadata: { id: demoId, name: 'Visitante da demonstração' },
+          additionalContext: 'Visitante testando a demonstração da Center Clínica (clínica fictícia) no site da MedCode. Atenda como paciente normal.'
+        }, 'https://app.gptmaker.ai');
+      }
+    });
+  }
+
   // ---------- Animações do hero ----------
   if (reduce) return;
 

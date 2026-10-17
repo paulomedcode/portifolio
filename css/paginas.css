@@ -338,3 +338,32 @@ html.ana-open, html.ana-open body { overflow: hidden; }
 .svc-c .ideal b { color: var(--roxo-d); margin-right: 4px; }
 .svc-c p + p { margin-top: 12px; }
 .svc-c .link-arrow { margin-top: auto; padding-top: 18px; }
+
+/* demonstração ao vivo (página da saúde): iPhone com o chat */
+.demo-grid { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center; }
+.demo-dica { margin: 22px 0 0; font-weight: 800; font-size: 15px; }
+.demo-testes { margin-top: 10px; }
+.demo-nota { margin: 18px 0 0; font-size: 14.5px; color: var(--muted); }
+.iphone { justify-self: center; width: 360px; max-width: 100%; aspect-ratio: 9 / 19.2; padding: 12px; border-radius: 56px; background: #121212; box-shadow: 0 0 0 2px #2a2a2a, 0 40px 80px -30px rgba(23,18,43,.55); }
+.iphone-tela { position: relative; height: 100%; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; background: #efeae2; }
+.iphone-status { flex: none; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px 0 30px; background: #075e54; color: #fff; font-size: 13px; font-weight: 700; position: relative; }
+.iphone-ilha { position: absolute; left: 50%; top: 9px; width: 104px; height: 28px; margin-left: -52px; border-radius: 20px; background: #000; }
+.iphone-icones { font-size: 10px; letter-spacing: 1px; }
+.iphone-chat { position: relative; flex: 1; min-height: 0;
+  background-color: #efeae2;
+  background-image: radial-gradient(rgba(7,94,84,.07) 1.2px, transparent 1.3px); background-size: 18px 18px; }
+.iphone-chat iframe { width: 100%; height: 100%; border: 0; display: block; }
+.iphone-capa { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: 0; cursor: pointer; font-family: inherit; color: #111b21; background: transparent; }
+.iphone-capa img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px #fff, 0 12px 30px -10px rgba(0,0,0,.35); margin-bottom: 10px; }
+.iphone-capa b { font-size: 19px; }
+.iphone-capa span { font-size: 13px; color: #54656f; font-weight: 600; }
+.iphone-capa em { margin-top: 18px; font-style: normal; background: #25d366; color: #fff; font-weight: 800; font-size: 15px; padding: 12px 20px; border-radius: 999px; box-shadow: 0 12px 24px -12px rgba(37,211,102,.9); }
+.iphone-capa:hover em { background: #1ebe5a; }
+.iphone-chat.ligado .iphone-capa { display: none; }
+@media (max-width: 900px) {
+  .demo-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 480px) {
+  .iphone { width: 100%; border-radius: 46px; padding: 10px; }
+  .iphone-tela { border-radius: 36px; }
+}
