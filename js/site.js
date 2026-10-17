@@ -310,8 +310,14 @@
     window.addEventListener('message', function (e) {
       if (e.origin !== 'https://app.gptmaker.ai' || e.source !== demoFrame.contentWindow || !e.data) return;
       if (e.data.type === 'gpt-maker-on-load') {
-        // modo "floating": a janela só abre depois do toggle, como no chat da Ana
-        demoFrame.contentWindow.postMessage({ type: 'gpt-maker-toogle', token: demoFrame.getAttribute('data-demo-token') }, 'https://app.gptmaker.ai');
+        // modo "floating": a janela só abre depois do toggle, como no chat da Ana.
+        // Se o toggle chega antes do widget processar o contexto, ele não abre; repetir é
+        // seguro (o widget ignora o toggle quando a conversa já carregou).
+        [0, 700, 1600, 3000, 5000].forEach(function (ms) {
+          setTimeout(function () {
+            if (demoFrame.contentWindow) demoFrame.contentWindow.postMessage({ type: 'gpt-maker-toogle', token: demoFrame.getAttribute('data-demo-token') }, 'https://app.gptmaker.ai');
+          }, ms);
+        });
       } else if (e.data.type === 'gpt-maker-request-context') {
         demoFrame.contentWindow.postMessage({
           type: 'gpt-maker-context-response',
