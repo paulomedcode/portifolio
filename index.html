@@ -350,6 +350,12 @@
     /* Fundo sólido: nada do site aparece atrás do teclado do iPhone */
     .ana-chat.is-chatting::backdrop { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
+  /* Chat em tela cheia no celular (padrão da Ana e da Mariana) */
+  @media (max-width: 760px) {
+    .ana-chat.is-chatting { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; inset: 0 auto auto 0; border-radius: 0; box-shadow: none; }
+    .ana-chat.is-chatting::backdrop { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .ana-chat.is-chatting .ac-privacy { padding: 3px 10px 5px; font-size: 10.5px; }
+  }
 
   /* COMO TRABALHAMOS */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px; }
@@ -1003,7 +1009,7 @@
     <button class="ac-close" type="button" data-close-ana aria-label="Fechar conversa">×</button>
   </div>
   <div class="ac-frame" id="anaFrame" hidden></div>
-  <p class="ac-privacy">Conversa com agente de IA. Ao continuar, você concorda com a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+  <p class="ac-privacy">Conversa com IA · <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <button class="ac-x" type="button" data-close-ana aria-label="Fechar conversa">×</button>
 </dialog>
 

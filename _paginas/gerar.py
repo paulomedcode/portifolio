@@ -326,7 +326,7 @@ def head(title, desc, caminho, jsonld):
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>{attr(title)}</title>
 <meta name="description" content="{attr(desc)}">
 <meta name="theme-color" content="#ffffff">
@@ -417,7 +417,7 @@ def footer():
     <button class="ac-close" type="button" data-close-ana aria-label="Fechar conversa">×</button>
   </div>
   <div class="ac-frame" id="anaFrame" hidden></div>
-  <p class="ac-privacy">Conversa com agente de IA. Ao continuar, você concorda com a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+  <p class="ac-privacy">Conversa com IA · <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <button class="ac-x" type="button" data-close-ana aria-label="Fechar conversa">×</button>
 </dialog>
 
@@ -1072,6 +1072,7 @@ def pagina_clinicas():
           </button>
         </div>
       </div>
+      <button class="demo-x" type="button" data-demo-fechar aria-label="Fechar conversa">×</button>
     </div>
   </div>
 </section>

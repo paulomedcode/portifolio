@@ -177,6 +177,32 @@
     });
   }
 
+  // ---------- Chat em tela cheia no celular (padrão da Ana e da Mariana) ----------
+  // Até 760px o chat ocupa a tela toda: sem moldura, sem barras, só o X em cima pra sair.
+  var CHAT_CELULAR = 760;
+  var chatNoCelular = function () { return window.innerWidth <= CHAT_CELULAR; };
+  // iPhone ignora overflow:hidden no body; prender o body no lugar é o que realmente trava a rolagem
+  var travaY = 0;
+  var travarPagina = function (classe) {
+    travaY = window.scrollY;
+    document.documentElement.classList.add(classe);
+    document.body.style.position = 'fixed';
+    document.body.style.top = -travaY + 'px';
+    document.body.style.width = '100%';
+  };
+  var destravarPagina = function (classe) {
+    document.documentElement.classList.remove(classe);
+    document.body.style.position = document.body.style.top = document.body.style.width = '';
+    window.scrollTo({ top: travaY, behavior: 'instant' });
+  };
+  // Quando o teclado abre, o chat encolhe pro espaço visível e o topo (com o X) não some
+  var vv = window.visualViewport;
+  var encaixarNaTela = function (el, ativo) {
+    if (!vv || !ativo || !chatNoCelular()) { el.style.height = el.style.top = ''; return; }
+    el.style.top = vv.offsetTop + 'px';
+    el.style.height = vv.height + 'px';
+  };
+
   // ---------- Chat com a Ana (Web Chat do GPT Maker num popup) ----------
   // A conversa abre direto, sem formulário: a própria Ana pede nome e WhatsApp quando a conversa
   // engata (instrução no additionalContext e no treinamento A14). O contexto segue pelo mesmo
@@ -212,20 +238,8 @@
         anaPost({ type: 'gpt-maker-toogle', token: ANA_TOKEN });
       }
     };
-    // iPhone ignora overflow:hidden no body; prender o body no lugar é o que realmente trava a rolagem
-    var lockY = 0;
-    var lockPage = function () {
-      lockY = window.scrollY;
-      document.documentElement.classList.add('ana-open');
-      document.body.style.position = 'fixed';
-      document.body.style.top = -lockY + 'px';
-      document.body.style.width = '100%';
-    };
-    var unlockPage = function () {
-      document.documentElement.classList.remove('ana-open');
-      document.body.style.position = document.body.style.top = document.body.style.width = '';
-      window.scrollTo({ top: lockY, behavior: 'instant' });
-    };
+    var lockPage = function () { travarPagina('ana-open'); };
+    var unlockPage = function () { destravarPagina('ana-open'); };
     var openAna = function (e) {
       anaDialog.showModal();
       lockPage();
@@ -243,15 +257,8 @@
     document.querySelectorAll('[data-open-ana]').forEach(function (b) { b.addEventListener('click', openAna); });
     anaDialog.querySelectorAll('[data-close-ana]').forEach(function (b) { b.addEventListener('click', closeAna); });
 
-    // Celular: quando o teclado abre, a janela encolhe pro espaço visível e o topo não some
-    var vv = window.visualViewport;
     var fitAna = function () {
-      if (!vv || !anaDialog.open || window.innerWidth > 480 || !anaDialog.classList.contains('is-chatting')) {
-        anaDialog.style.height = anaDialog.style.top = '';
-        return;
-      }
-      anaDialog.style.top = vv.offsetTop + 'px';
-      anaDialog.style.height = vv.height + 'px';
+      encaixarNaTela(anaDialog, anaDialog.open && anaDialog.classList.contains('is-chatting'));
     };
     if (vv) { vv.addEventListener('resize', fitAna); vv.addEventListener('scroll', fitAna); }
     anaDialog.addEventListener('cancel', function (e) { e.preventDefault(); closeAna(); });
@@ -287,16 +294,39 @@
 
   // ---------- Demonstração ao vivo (página da saúde) ----------
   // O chat da clínica fictícia só carrega quando a pessoa toca no celular.
+  // No celular, o chat abre em tela cheia (mesmo padrão da Ana) e o X volta pro iPhone.
+  var demoCel = document.querySelector('.iphone');
+  var fitDemo = function () {
+    if (demoCel) encaixarNaTela(demoCel, document.documentElement.classList.contains('demo-aberta'));
+  };
+  var fecharDemo = function () {
+    if (!document.documentElement.classList.contains('demo-aberta')) return;
+    destravarPagina('demo-aberta');
+    fitDemo();
+  };
   document.querySelectorAll('[data-demo-iniciar]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var box = btn.closest('.iphone-chat');
       var frame = box && box.querySelector('iframe[data-demo-src]');
       if (!frame) return;
       if (!frame.src) frame.src = frame.getAttribute('data-demo-src');
-      box.classList.add('ligado');
-      track('demo_clinica_abrir', {});
+      if (box.classList.contains('ligado')) {
+        track('demo_clinica_voltar', {});
+      } else {
+        box.classList.add('ligado');
+        track('demo_clinica_abrir', {});
+      }
+      var aviso = btn.querySelector('em');
+      if (aviso) aviso.textContent = 'Continuar conversa';
+      if (chatNoCelular()) {
+        travarPagina('demo-aberta');
+        fitDemo();
+      }
     });
   });
+  document.querySelectorAll('[data-demo-fechar]').forEach(function (b) { b.addEventListener('click', fecharDemo); });
+  if (vv) { vv.addEventListener('resize', fitDemo); vv.addEventListener('scroll', fitDemo); }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fecharDemo(); });
   // O Web Chat do GPT Maker só aparece depois de receber o contexto do visitante
   // (mesmo protocolo de postMessage do chat da Ana, mais abaixo).
   var demoFrame = document.querySelector('iframe[data-demo-src]');

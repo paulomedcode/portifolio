@@ -360,10 +360,30 @@ html.ana-open, html.ana-open body { overflow: hidden; }
 .iphone-capa em { margin-top: 18px; font-style: normal; background: #25d366; color: #fff; font-weight: 800; font-size: 15px; padding: 12px 20px; border-radius: 999px; box-shadow: 0 12px 24px -12px rgba(37,211,102,.9); }
 .iphone-capa:hover em { background: #1ebe5a; }
 .iphone-chat.ligado .iphone-capa { display: none; }
+.demo-x { display: none; position: absolute; top: 12px; right: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; box-shadow: 0 6px 16px -6px rgba(23,18,43,.45); }
 @media (max-width: 900px) {
   .demo-grid { grid-template-columns: 1fr; gap: 36px; }
 }
 @media (max-width: 480px) {
   .iphone { width: 100%; border-radius: 46px; padding: 10px; }
   .iphone-tela { border-radius: 36px; }
+}
+
+/* ---------- Chat em tela cheia no celular (padrão da Ana e da Mariana) ---------- */
+@media (max-width: 760px) {
+  .ana-chat.is-chatting { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; inset: 0 auto auto 0; border-radius: 0; box-shadow: none; }
+  .ana-chat.is-chatting::backdrop { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .ana-chat.is-chatting .ac-privacy { padding: 3px 10px 5px; font-size: 10.5px; }
+}
+
+@media (max-width: 760px) {
+  /* Antes de abrir (ou depois de fechar), o iPhone mostra a capa; a conversa só roda em tela cheia */
+  .iphone-chat.ligado .iphone-capa { display: flex; background: inherit; }
+  html.demo-aberta, html.demo-aberta body { overflow: hidden; }
+  html.demo-aberta .iphone { position: fixed; inset: 0 auto auto 0; z-index: 1000; width: 100vw; max-width: none; height: 100dvh; aspect-ratio: auto; padding: 0; border-radius: 0; box-shadow: none; background: #fff; transform: none; opacity: 1; }
+  html.demo-aberta .iphone-tela { border-radius: 0; }
+  html.demo-aberta .iphone-status { display: none; }
+  html.demo-aberta .iphone-chat.ligado .iphone-capa { display: none; }
+  html.demo-aberta .demo-x { display: block; }
+  html.demo-aberta .wa-float { display: none; }
 }
