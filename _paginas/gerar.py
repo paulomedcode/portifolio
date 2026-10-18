@@ -994,7 +994,7 @@ def pagina_clinicas():
     <div>
       <span class="eyebrow"><i aria-hidden="true"></i> Médicos, clínicas e área da saúde</span>
       <h1>Tecnologia para médicos e clínicas, feita por quem entende</h1>
-      <p class="lead">Antes de criar a MedCode, Paulo Nogueira passou por <strong>todas as cadeiras dentro de clínicas e empresas médicas</strong>: foi recepcionista, coordenador de atendimento, faturista, gerente e diretor executivo. Conduziu a expansão para novos contratos, ajudando a mais que dobrar o faturamento das empresas, e usou a tecnologia para tirar a operação do papel e das planilhas e ter dados concretos na hora de decidir. Hoje ele leva todo esse know-how para a sua clínica, começando pelo WhatsApp.</p>
+      <p class="lead">Antes de criar a MedCode, Paulo Nogueira passou por <strong>todas as cadeiras dentro de clínicas e empresas médicas</strong>: foi recepcionista, coordenador de atendimento, faturista, gerente e diretor executivo. Conduziu a expansão para novos contratos, que fez o faturamento das empresas mais que dobrar. Também usou a tecnologia para tirar a operação do papel e das planilhas, passando a ter dados concretos na hora de decidir. Hoje ele leva todo esse know-how para a sua clínica, começando pelo WhatsApp.</p>
       <div class="ctas">
         <a class="btn-primary" {wa("Oi! Tenho uma clínica e quero ver uma demonstração do agente com os dados da minha clínica.", origem)}>{ICO_CHAT} Quero uma demonstração</a>
         <button class="btn-ghost" type="button" data-open-ana>Testar a Ana agora</button>
