@@ -120,7 +120,7 @@ A Center Clínica é uma clínica fictícia criada pela MedCode Assessoria para 
 - **Token:** 3FAC84C8CBEEC38AC8E4128A6E7E0DD8, acesso Público.
 - **Onde aparece:** dentro do iPhone da seção "Demonstração ao vivo" em medcodedev.com/saude#demonstracao. O chat só carrega quando a pessoa toca em "Toque para conversar".
 - **Mensagem inicial:** "Oi! 😊 Aqui é a Mariana, da recepção da Center Clínica. Como posso te ajudar?"
-- **Perguntas rápidas:** Quero marcar uma consulta · Quanto custa a consulta com ortopedista? · Vocês aceitam Unimed?
+- **Perguntas rápidas:** nenhuma, de propósito (botão pronto lembra chatbot de "digite 1", que é o que não vendemos).
 - **Aparência:** título "Mariana · Center Clínica", saudação "Center Clínica / Recepção online, responde na hora", foto da Mariana com crachá, cor de fundo #075E54 e mensagem do paciente #00A884 (verde do WhatsApp).
 
 ## Como usar na venda
