@@ -285,7 +285,9 @@
   /* destaque: área da saúde */
   .nicho { display: flex; align-items: center; gap: 18px; margin-top: 22px; padding: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, #3b2bb8 0%, #6d4aff 70%); color: #fff; transition: transform .2s, box-shadow .2s; }
   .nicho:hover { transform: translateY(-2px); box-shadow: 0 24px 50px -30px rgba(81,54,217,.8); }
-  .nicho-ico { flex: none; width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.14); display: flex; align-items: center; justify-content: center; }
+  .nicho-foto { flex: none; position: relative; width: 64px; height: 64px; }
+  .nicho-foto img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.85); display: block; }
+  .nicho-foto i { position: absolute; right: 2px; bottom: 2px; width: 15px; height: 15px; border-radius: 50%; background: #25d366; border: 2px solid #4a35d0; }
   .nicho-txt { flex: 1; min-width: 0; }
   .nicho-tag { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #d9d2ff; }
   .nicho-tag, .nicho-h, .nicho-p { display: block; }
@@ -752,14 +754,14 @@
       </article>
     </div>
 
-    <a class="nicho reveal" href="/saude">
-      <span class="nicho-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/><path d="M12 9v4M10 11h4"/></svg></span>
+    <a class="nicho reveal" href="/saude#demonstracao">
+      <span class="nicho-foto"><img src="/public/mariana-center-clinica.jpg" alt="" width="64" height="64" loading="lazy"><i aria-hidden="true"></i></span>
       <span class="nicho-txt">
-        <span class="nicho-tag">Médicos, clínicas e área da saúde</span>
-        <strong class="nicho-h">Tem clínica ou consultório?</strong>
-        <span class="nicho-p">Veja como o agente atende paciente com segurança, feito por quem já foi da recepção à diretoria de clínicas.</span>
+        <span class="nicho-tag">Para médicos, clínicas e consultórios</span>
+        <strong class="nicho-h">Converse agora com a Mariana, recepcionista de IA</strong>
+        <span class="nicho-p">Pergunte se aceita convênio, quanto custa um exame ou mande um áudio, do jeito que o paciente faz. Montada por quem já foi da recepção à diretoria de clínicas.</span>
       </span>
-      <span class="nicho-cta">Ver página da saúde <span aria-hidden="true">→</span></span>
+      <span class="nicho-cta">Testar agora <span aria-hidden="true">→</span></span>
     </a>
 
     <aside class="consult reveal" id="consultoria" aria-labelledby="consult-title">
