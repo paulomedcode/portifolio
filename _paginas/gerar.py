@@ -904,7 +904,7 @@ CLINICAS_FAQ = [
     ("E se o paciente relatar uma urgência?", "O agente reconhece os sinais de urgência (dor forte no peito, falta de ar, sangramento que não para, entre outros), orienta na hora a procurar o pronto-socorro ou ligar 192 e passa a conversa para a sua equipe."),
     ("Integra com o sistema que a clínica já usa?", "Depende do sistema: muitos permitem integração, e aí o agente marca direto na agenda. Quando não dá, o agente faz todo o atendimento e entrega para a recepção um resumo pronto, só para confirmar o horário. Dá para começar assim e integrar depois, sem retrabalho."),
     ("E a LGPD?", "O agente pede só o necessário para agendar (nome, telefone e convênio) e nunca pede CPF, senha ou dados de cartão. As conversas ficam com a clínica, e a equipe acompanha e assume quando quiser."),
-    ("Paciente mais velho consegue usar?", "Consegue, porque ele conversa como uma pessoa, uma mensagem por vez, e entende áudio. O paciente pode mandar áudio e foto do pedido médico ou da carteirinha, do jeito que já faz hoje."),
+    ("Paciente com mais idade consegue usar?", "Consegue. É o mesmo WhatsApp que ele já usa, sem baixar nada nem apertar número. O agente conversa como uma pessoa, uma mensagem por vez, com linguagem simples, e entende áudio. O paciente pode mandar áudio e foto do pedido médico ou da carteirinha, do jeito que já faz hoje."),
     ("Quanto custa?", "A plataforma do agente custa a partir de R$ 147 por mês, mais a implantação, com valor definido na conversa. Tem garantia de 30 dias: se no primeiro mês não fizer sentido para a clínica, devolvemos o valor da implantação."),
 ]
 
