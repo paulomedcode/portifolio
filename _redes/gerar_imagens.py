@@ -54,11 +54,11 @@ render("perfil-a-simbolo", 1080, 1080, f"""
 </div>""")
 
 render("perfil-b-nome", 1080, 1080, f"""
-<div style="width:1080px;height:1080px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px">
-  <div class="grad" style="width:330px;height:330px;border-radius:92px;display:flex;align-items:center;justify-content:center;box-shadow:0 40px 80px -40px rgba(81,54,217,.7)">
-    {svg(CODIGO, 230, traco=2.4)}
+<div style="width:1080px;height:1080px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding-bottom:10px">
+  <div class="grad" style="width:400px;height:400px;border-radius:112px;display:flex;align-items:center;justify-content:center;box-shadow:0 40px 80px -40px rgba(81,54,217,.7)">
+    {svg(CODIGO, 290, traco=2.5)}
   </div>
-  <div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:178px;letter-spacing:-6px;line-height:1;color:#14112e">Med<span style="background:linear-gradient(90deg,#6d4aff,#3b82f6);-webkit-background-clip:text;color:transparent">Code</span></div>
+  <div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:200px;letter-spacing:-7px;line-height:.9;color:#14112e">Med<span style="background:linear-gradient(90deg,#6d4aff,#3b82f6);-webkit-background-clip:text;color:transparent">Code</span></div>
 </div>""")
 
 render("perfil-c-ana", 1080, 1080, f"""
