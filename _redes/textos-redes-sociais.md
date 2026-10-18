@@ -12,13 +12,13 @@
 
 **Bio (até 150 caracteres):**
 ```
-Agentes de IA no WhatsApp, sites e sistemas
-Atende 24h, agenda e entende áudio
-Especialistas em clínicas e consultórios 🩺
+Seu WhatsApp respondendo na hora, até de madrugada 🌙
+Agentes de IA, sites e sistemas
+Especialistas em clínicas 🩺
 👇 Converse com a nossa IA
 ```
 
-**Link:** https://medcodedev.com
+**Link:** https://medcodedev.com (título: "Converse com a nossa IA")
 
 **Foto de perfil:** escolher uma das três em `imagens/` (perfil-a-simbolo, perfil-b-nome ou perfil-c-ana).
 
