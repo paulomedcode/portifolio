@@ -38,6 +38,7 @@ NICHOS = [
             "[SERVIÇOS]": "avaliação, limpeza, restauração, canal, extração, clareamento, implantes, prótese, lentes de contato dental e aparelho ortodôntico",
             "[PROFISSIONAIS]": "Dra. Ana Lima (clínica geral e estética), Dr. Pedro Reis (implantes e prótese) e Dra. Carla Souza (ortodontia)",
             "[CONVÊNIOS]": "Uniodonto e OdontoPrev",
+            "[NÃO_FAZ]": "atendimento de urgência 24h, sedação com anestesista, harmonização facial e exames de imagem como tomografia (a clínica indica onde fazer, sem citar nomes)",
             "[VALORES]": "avaliação gratuita; limpeza particular a partir de R$ 150; clareamento a partir de R$ 600; demais tratamentos só depois da avaliação",
             "[PAGAMENTO]": "Pix, débito e cartão de crédito em até 10x",
             "[ESTACIONAMENTO]": "vagas na rua e estacionamento conveniado ao lado",
@@ -57,6 +58,7 @@ NICHOS = [
             "[SERVIÇOS]": "consultas de clínica geral, cardiologia, ortopedia, ginecologia, pediatria e dermatologia, eletrocardiograma e pequenas cirurgias de pele",
             "[PROFISSIONAIS]": "Dr. Ricardo Alves (cardiologia), Dra. Fernanda Melo (ginecologia), Dr. Paulo Henrique (ortopedia), Dra. Luiza Campos (pediatria) e Dra. Bianca Prado (dermatologia)",
             "[CONVÊNIOS]": "Unimed, Bradesco Saúde, SulAmérica e Cabesp",
+            "[NÃO_FAZ]": "pronto-socorro, internação, cirurgias de grande porte, ressonância, tomografia, endoscopia e especialidades fora das que a clínica tem (como psiquiatria, oftalmologia e neurologia)",
             "[VALORES]": "consulta particular a partir de R$ 280; eletrocardiograma particular R$ 120",
             "[PAGAMENTO]": "Pix, débito e cartão de crédito em até 3x",
             "[ESTACIONAMENTO]": "estacionamento do prédio, com a primeira hora grátis",
@@ -76,6 +78,7 @@ NICHOS = [
             "[SERVIÇOS]": "avaliação facial, limpeza de pele, peeling, toxina botulínica, preenchimento, bioestimulador de colágeno, microagulhamento e depilação a laser",
             "[PROFISSIONAIS]": "Dra. Camila Torres (biomédica esteta) e Dra. Renata Dias (dermatologista)",
             "[CONVÊNIOS]": "nenhum convênio: atendimento só particular",
+            "[NÃO_FAZ]": "cirurgia plástica, tratamentos que só médico faz em hospital, tatuagem e remoção de tatuagem, e qualquer procedimento sem avaliação antes",
             "[VALORES]": "limpeza de pele R$ 180; sessão de depilação a laser a partir de R$ 90 por área; demais procedimentos só depois da avaliação",
             "[PAGAMENTO]": "Pix e cartão de crédito em até 6x",
             "[ESTACIONAMENTO]": "vagas na rua",
@@ -94,6 +97,7 @@ NICHOS = [
             "[SERVIÇOS]": "ultrassom, raio-X, mamografia, densitometria óssea, tomografia e ressonância magnética",
             "[PROFISSIONAIS]": "equipe de médicos radiologistas",
             "[CONVÊNIOS]": "Unimed, Bradesco Saúde, Amil, Cabesp e Iamspe",
+            "[NÃO_FAZ]": "consultas médicas, exames de sangue e laboratório, endoscopia, colonoscopia, ecocardiograma e exames com sedação geral",
             "[VALORES]": "valores particulares variam por exame: a recepção informa",
             "[PAGAMENTO]": "Pix, débito e cartão de crédito",
             "[ESTACIONAMENTO]": "estacionamento próprio",
@@ -115,6 +119,7 @@ NICHOS = [
             "[SERVIÇOS]": "psicoterapia individual para adultos e adolescentes, presencial e online",
             "[PROFISSIONAIS]": "Paula Nunes, psicóloga (terapia cognitivo-comportamental)",
             "[CONVÊNIOS]": "não atende convênio, mas emite recibo para reembolso",
+            "[NÃO_FAZ]": "atendimento psiquiátrico e receita de remédio (só médico psiquiatra), atendimento de crise ou emergência, terapia de casal, atendimento infantil abaixo de 12 anos e laudos para processos judiciais",
             "[VALORES]": "sessão de R$ 150, com 50 minutos",
             "[PAGAMENTO]": "Pix ou cartão, por sessão ou pacote mensal",
             "[ESTACIONAMENTO]": "vagas na rua",
@@ -149,7 +154,7 @@ for n in NICHOS:
     partes.append("## Trabalho\n")
     partes.append("```\n" + troca(trabalho) + "\n```\n")
     partes.append("## Treinamentos → Texto\n")
-    blocos = [f"C{i:02d}" for i in range(1, 12)]
+    blocos = [f"C{i:02d}" for i in range(1, 13)]
     for b in blocos + [n["nicho"]]:
         if b == "N5":
             titulo, texto = N5

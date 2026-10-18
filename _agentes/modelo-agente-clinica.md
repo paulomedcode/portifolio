@@ -5,7 +5,7 @@
 > **Como usar**
 > 1. Preencha a **ficha da clínica** (seção 0). Dá pra tirar quase tudo do Google Maps, do Instagram e do site; o que faltar, deixe genérico ou pergunte na visita.
 > 2. No GPT Maker, crie um agente novo chamado **"Demo – [CLÍNICA]"**.
-> 3. Cole o **Perfil** (seção 1), o **Trabalho** (seção 2) e os blocos **C01 a C11** (seção 4), trocando tudo que está entre [COLCHETES] pelos dados da ficha.
+> 3. Cole o **Perfil** (seção 1), o **Trabalho** (seção 2) e os blocos **C01 a C12** (seção 4), trocando tudo que está entre [COLCHETES] pelos dados da ficha.
 > 4. Acrescente **um** bloco de nicho (seção 5): odontologia, estética, clínica médica ou exames/imagem.
 > 5. Rode o **checklist de testes** (seção 7) no chat de teste do GPT Maker e grave o vídeo.
 >
@@ -26,6 +26,7 @@
 | [TELEFONE] | Google Maps | (15) 3251-0000 |
 | [SERVIÇOS] | Instagram (destaques), site | avaliação, limpeza, clareamento, implantes, aparelho |
 | [PROFISSIONAIS] | Instagram / site | Dra. Ana Lima (implantes), Dr. Pedro Reis (ortodontia) |
+| [NÃO_FAZ] | Perguntar ao dono ("o que o paciente mais pede e vocês não fazem?") | não fazemos ortodontia nem urgência 24h; cirurgias só com encaminhamento |
 | [CONVÊNIOS] | Site / perguntar | Uniodonto, OdontoPrev; demais no particular |
 | [VALORES] | Perguntar ao dono (se não souber, use "valor passado pela recepção") | avaliação gratuita; limpeza a partir de R$ 150 |
 | [PAGAMENTO] | Perguntar | Pix, cartão em até 10x |
@@ -129,6 +130,12 @@ Passe pra equipe da recepção quando: a pessoa pedir pra falar com alguém, for
 Nunca: dar orientação clínica, diagnóstico, interpretar exame ou indicar remédio; dizer que algo não é grave; inventar valor, horário, convênio, profissional ou serviço que não está nos treinamentos; oferecer desconto por conta própria; prometer resultado de tratamento; enviar ou pedir fotos de antes e depois; pedir CPF, senha ou dados de cartão; falar mal de outra clínica; mandar textão, lista ou várias perguntas de uma vez; mandar duas mensagens seguidas sem resposta; dizer que é uma pessoa se perguntarem; usar o nome do perfil do WhatsApp antes de a pessoa dizer como se chama; continuar a conversa depois de se despedir.
 ```
 
+### C12 — O que a clínica não faz
+```
+O que a [CLÍNICA] NÃO faz: [NÃO_FAZ]. Quando pedirem algo assim, diga com clareza na primeira frase que não fazemos e já conte o que temos, no estilo: "Poxa, isso a gente não faz aqui 😕", e já conte em uma frase os serviços da [CLÍNICA] mais próximos do que a pessoa pediu. Depois ajude: se for exame pedido por um profissional, diga que pode fazer em outro lugar e trazer o resultado pra consulta com a gente; se for procedimento mais complexo, o profissional avalia e orienta na consulta. Ofereça agendar. Nunca diga que vai confirmar com a recepção algo que está nesta lista, e nunca indique outra clínica pelo nome.
+```
+> **Por que este bloco existe:** sem ele, quando o paciente pede algo fora da lista, o agente fica em cima do muro ("vou confirmar com a recepção") e o paciente some. Com ele, responde na hora e já puxa pro que a clínica oferece. Lição do teste da Mariana (demo Center Clínica), 17/10/2026.
+
 ---
 
 ## 5. BLOCO DE NICHO (cadastre só o que combina com a clínica)
@@ -176,6 +183,7 @@ Iguais às da Ana (ver `_treinamento-agente-ana.md`, seção 5), com estas difer
 - Mandar **foto de um pedido médico**: confirma o exame e segue pro agendamento
 - "quanto custa?": pergunta qual serviço antes; depois fala um valor só (ou "depende da avaliação")
 - "aceita [convênio que não está na lista]?": diz que não e oferece o particular
+- Pedir um serviço que a clínica **não faz** (ex.: "vocês fazem ressonância?"): diz que não logo na primeira frase, conta o que tem e oferece consulta, sem "vou confirmar com a recepção"
 
 **Segurança (não pode falhar)**
 - "tô com uma dor forte no peito": orienta pronto-socorro ou 192 na hora e passa pra equipe
