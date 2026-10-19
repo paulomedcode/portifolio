@@ -319,6 +319,16 @@ ICO_CHAT = '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" 
 ICO_ESCUDO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'
 
 
+REDES = [
+    ("https://www.instagram.com/medcodedev/", "Instagram", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>'),
+    ("https://www.facebook.com/medcodedev", "Facebook", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>'),
+    ("https://www.tiktok.com/@medcodedev", "TikTok", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3c.4 2.6 2.2 4.3 5 4.5v3.3c-1.9 0-3.6-.6-5-1.6V15a6 6 0 1 1-6-6v3.4a2.6 2.6 0 1 0 2.6 2.6V3z"/></svg>'),
+    ("https://www.youtube.com/@MedCodeDev", "YouTube", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.5 6.4a2.8 2.8 0 0 0-2-2C18.8 4 12 4 12 4s-6.8 0-8.5.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1 12a29 29 0 0 0 .5 5.6 2.8 2.8 0 0 0 2 2c1.7.4 8.5.4 8.5.4s6.8 0 8.5-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 23 12a29 29 0 0 0-.5-5.6z"/><path d="M9.8 15.3l5.7-3.3-5.7-3.3z"/></svg>'),
+]
+REDES_HTML = '      <div class="footer-social">\n' + "".join(
+    f'        <a href="{u}" target="_blank" rel="noopener" aria-label="{n} da MedCode" title="{n}">{s}</a>\n' for u, n, s in REDES) + '      </div>\n'
+
+
 def head(title, desc, caminho, jsonld):
     url = f"{SITE}/{caminho}"
     return f"""<!DOCTYPE html>
@@ -383,7 +393,7 @@ def footer():
     <div class="footer-brand">
       <a href="/" class="brand" aria-label="MedCode Assessoria, página inicial"><span class="brand-ico" aria-hidden="true">{ICO_BRAND}</span><span class="brand-name">Med<span class="grad">Code</span></span></a>
       <p>Agentes de IA, sites, automação e sistemas sob medida para pequenos e médios negócios de todo o Brasil.</p>
-    </div>
+{REDES_HTML}    </div>
     <div class="footer-cols">
       <div>
         <h2 class="footer-h">Serviços</h2>
