@@ -17,7 +17,7 @@ from cidades import CIDADES
 
 RAIZ = Path(__file__).resolve().parent.parent
 SITE = "https://medcodedev.com"
-WHATS = "5511991649612"
+WHATS = "5515991153174"
 HOJE = date.today().isoformat()
 
 
@@ -407,7 +407,7 @@ def footer():
       </div>
       <div>
         <h2 class="footer-h">Contato</h2>
-        <a {wa("Oi! Vi o site da MedCode e queria conversar.", "rodape")}>WhatsApp (11) 99164-9612</a>
+        <a {wa("Oi! Vi o site da MedCode e queria conversar.", "rodape")}>WhatsApp (15) 99115-3174</a>
         <a href="mailto:contato@medcodedev.com">contato@medcodedev.com</a>
       </div>
     </div>

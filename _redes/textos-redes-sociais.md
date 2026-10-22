@@ -6,7 +6,7 @@
 
 ## 1. Instagram (@medcodedev)
 
-**Tipo de conta:** profissional → Empresa. Categoria: "Desenvolvedor de software" ou "Serviço de consultoria". Ligar contato: WhatsApp (11) 99164-9612 e e-mail.
+**Tipo de conta:** profissional → Empresa. Categoria: "Desenvolvedor de software" ou "Serviço de consultoria". Ligar contato: WhatsApp (15) 99115-3174 e e-mail.
 
 **Nome (aparece na busca):** MedCode · IA, Sites e Sistemas
 
